@@ -15,8 +15,8 @@ return array(
     'doctrine_config' => array(
         'driver' => 'pdo_mysql',
         'user' => 'root',
-        'password' => '12345',
-        'dbname' => 'estec2',
+        'password' => '#InoVacao@2014#',
+        'dbname' => 'estec',
         'charset' => 'utf8',
         'driverOptions' => array(
             1002 => 'SET NAMES utf8'

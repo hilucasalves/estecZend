@@ -112,6 +112,8 @@ class UsuarioController extends AbstractCrudController {
         return $ip;
     }
     public function indexAction() {
+        
+        echo "Usuário";
 
         $em = $GLOBALS['entityManager'];
         
@@ -180,10 +182,10 @@ class UsuarioController extends AbstractCrudController {
                         ->innerJoin('ul.usuario', 'u');
 
 
-                if ($orgaoLotacao) {
+                /*if ($orgaoLotacao) {
                     $sql->andWhere('u.orgaoLotacao = :orgaoLotacao');
                     $sql->setParameter('orgaoLotacao', $orgaoLotacao);
-                }
+                }*/
 
                 if ($cpf) {
 

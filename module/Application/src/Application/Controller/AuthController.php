@@ -12,55 +12,6 @@ use Application\Entity\Usuario;
 
 class AuthController extends AbstractActionController {
 
-    public function validarDocumentoAction() {
-
-        $form = new \Application\Form\ValidarDocumentoForm();
-
-        $em = $GLOBALS['entityManager'];
-        $resquest = $this->getRequest();
-        $param_get = $resquest->getQuery()->toArray();
-
-        if ($resquest->isPost()) {
-
-            $form->setData($resquest->getPost());
-
-            if ($form->isValid()) {
-
-                $em = $GLOBALS['entityManager'];
-                $codVerificador = $form->getData()['codVerificador'];
-                $documento = $em->getRepository('Usuario\Entity\Documento')->findOneBy(array('codVerificador' => $codVerificador));
-                $assinaturas = $em->getRepository('Usuario\Entity\AssinaturasDocumento')->findBy(array('documento' => $documento->idDocumento));
-            }
-        } else if ($param_get['codVerif']) {
-            $codVerificador = $param_get['codVerif'];
-        }
-
-        return array(
-            'form' => $form,
-            'documento' => $documento,
-            'assinaturas' => $assinaturas,
-            'codVerificador' => $codVerificador
-        );
-    }
-
-    public function documentoAction() {
-
-        $em = $GLOBALS['entityManager'];
-        $resquest = $this->getRequest();
-        $idDocumento = $resquest->getPost()['idDocumento'];
-
-        if ($resquest->isPost()) {
-            $em = $GLOBALS['entityManager'];
-            $documento = $em->getRepository('Usuario\Entity\Documento')->find($idDocumento);
-            $assinaturas = $em->getRepository('Usuario\Entity\AssinaturasDocumento')->findBy(array('documento' => $documento->idDocumento));
-        }
-
-        return array(
-            'documento' => $documento,
-            'assinaturas' => $assinaturas
-        );
-    }
-
     public function indexAction() {
         $form = new LoginForm();
 
@@ -152,85 +103,6 @@ class AuthController extends AbstractActionController {
             'form' => $form,
             'messages' => $messages
         ));
-    }
-
-    public function wsInserirDocumentoAction() {
-
-        $recebendo = $this->request->getPost()->toArray();
-
-        if ($recebendo['authLogin'] != 'SGERPs') {
-            return $this->getResponse()->setContent('Error: Autenticação Inválida');
-        }
-        if ($recebendo['authSenha'] != 'PREGS@2017') {
-            return $this->getResponse()->setContent('Error: Autenticação Inválida');
-        }
-
-        $recebendo['usuarios'] = explode("|", $recebendo['usuarios']);
-        $em = $GLOBALS['entityManager'];
-
-        if (!$recebendo['usuarios']) {
-            return $this->getResponse()->setContent('Error: Usuários inválidos');
-            //echo 'Error: Usuários inválidos';die;
-        } else if (!$recebendo['hash']) {
-            return $this->getResponse()->setContent('Error: Hash inválida');
-            //echo 'Error: Hash inválida';die;
-        } else if (!$recebendo['documento']) {
-            return $this->getResponse()->setContent('Error: Documento inválido');
-            //echo 'Error: Documento inválido';die;
-        } else if (!$recebendo['documentoTipo']) {
-            return $this->getResponse()->setContent('Error: Documento tipo inválido');
-            //echo 'Error: Documento inválido';die;
-        }
-
-        //Criando o Documento
-        $documento = $em->getRepository('Usuario\Entity\Documento')->findOneBy(array('hashAuth' => $recebendo['hash']));
-
-        //Verifica se já existe aquele documento salvo, se não existir, salva o doc.
-        if (!$documento) {
-
-            $documento = new \Usuario\Entity\Documento();
-
-            $codigoVerificador = (new \DateTime())->format('YmdHis');
-            $documentoTipo = $em->getRepository('Usuario\Entity\DocumentoTipo')->find($recebendo['documentoTipo']);
-
-            $documento->__set('codVerificador', $codigoVerificador);
-            $documento->__set('hashAuth', $recebendo['hash']);
-            $documento->__set('documentoHtml', $recebendo['documento']);
-            $documento->__set('documentoTipo', $documentoTipo);
-
-            $em->persist($documento);
-            $em->flush();
-
-            $status = "true";
-        } else {
-            $codigoVerificador = $documento->codVerificador;
-            $status = "false";
-        }
-
-        foreach ($recebendo['usuarios'] as $key => $cpf) {
-            $login = $em->getRepository('Usuario\Entity\UsuarioLogin')->findOneBy(array('cpf' => $cpf));
-
-            if ($login) {
-
-                $assinatura = $em->getRepository('Usuario\Entity\AssinaturasDocumento')->findOneBy(array('usuario' => $login->usuario, 'documento' => $documento));
-
-                //Verifica se já existe aquela assinatura salva, se não existir, salva o ass.
-                if (!$assinatura) {
-
-                    $assinatura = new \Usuario\Entity\AssinaturasDocumento();
-
-                    $assinatura->__set('usuario', $login->usuario);
-                    $assinatura->__set('documento', $documento);
-
-                    $em->persist($assinatura);
-                    $em->flush();
-                }
-            } else {
-                return $this->getResponse()->setContent('Error: Usuário de CPF ' . $cpf . ' inválido!');
-            }
-        }
-
-        return $this->getResponse()->setContent($codigoVerificador . " | " . $status);
     }
 
     public function cadastrarLoginAction() {
@@ -392,7 +264,6 @@ class AuthController extends AbstractActionController {
     }
 
     public function logoutAction() {
-
         $auth = new AuthenticationService;
         $auth->setStorage(new Session('login'));
         $auth->clearIdentity();
@@ -583,56 +454,6 @@ class AuthController extends AbstractActionController {
         } else {
             return false;
         }
-    }
-
-    public function wsArquivosEmMassaAction() {
-
-        $recebendo = $this->request->getPost()->toArray();
-
-        if ($recebendo['1'] != 'SGERPs') {
-            return $this->getResponse()->setContent('Error: Autenticação Inválida');
-        }
-        if ($recebendo['2'] != 'PREGS@2017') {
-            return $this->getResponse()->setContent('Error: Autenticação Inválida');
-        }
-
-        if (!($recebendo['inicio'])) {
-            return $this->getResponse()->setContent('Error: Data Inválida');
-        }
-        if (!$recebendo['fim']) {
-            return $this->getResponse()->setContent('Error: Data Inválida');
-        }
-        
-        $em = $GLOBALS['entityManager'];
-        
-        $sql = $em->createQueryBuilder();
-        $sql->select('d')
-                ->from('Usuario\Entity\Documento', 'd')
-                ->innerJoin('d.documentoTipo', 'dt');
-        
-        /*$sql->andWhere('d.dataInsercao between :dataInicio and :dataFim');
-        $sql->setParameter('dataInicio', $recebendo['inicio']);
-        $sql->setParameter('dataFim', $recebendo['fim']);*/
-        
-        $sql->andWhere("d.documentoHtml like '%".$recebendo['inicio']." a ".$recebendo['fim']."%' ");
-        
-        $sql->andWhere('dt.idDocumentoTipo = 1');
-        
-        $documentos = $sql->getQuery()->getResult();
-        
-        foreach($documentos as $key =>$documento){
-            $assinaturas[$key] = $em->getRepository('Usuario\Entity\AssinaturasDocumento')->findBy(array('documento' => $documento->idDocumento));
-        }
-        
-        if(!$documentos){
-            echo 'Não foram encontrados documentos neste período!';die;
-        }
-        
-        return array(
-            'documentos' => $documentos,
-            'assinaturas' => $assinaturas,
-        );
-        
     }
 
 }

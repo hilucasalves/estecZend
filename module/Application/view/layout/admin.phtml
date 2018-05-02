@@ -3,7 +3,7 @@
 <html lang="pt-BR">
     <head>
         <meta charset="utf-8">
-        <?php echo $this->headTitle('SEADMD - Sistema Eletrônico de Assinatura Digital ' . $this->translate(' - SEDECTES '))->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?php echo $this->headTitle('ESTEC - Estética Tecnologia ' . $this->translate(' - UNA '))->setSeparator(' - ')->setAutoEscape(false) ?>
 
         <?php
         echo $this->headMeta()
@@ -13,7 +13,7 @@
 
         <!-- Le styles -->
         <?php
-        echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/x-icon', 'href' => $this->basePath() . '/img/favicon.PNG'))
+        echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/x-icon', 'href' => $this->basePath() . '/img/logo-estec.png'))
                 ->prependStylesheet($this->basePath() . '/css/style.css')
                 ->prependStylesheet($this->basePath() . '/css/bootstrap-theme.min.css')
                 ->prependStylesheet($this->basePath() . '/css/bootstrap.icon-large.min.css')
@@ -34,8 +34,6 @@
                 ->prependFile($this->basePath() . '/js/jquery.min.js')
                 ->prependFile($this->basePath() . '/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
                 ->prependFile($this->basePath() . '/js/html5shiv.js', 'text/javascript', array('conditional' => 'lt IE 9',))
-
-
         ;
         ?>
         <script>
@@ -47,10 +45,8 @@
                 }, 3000);
                 $('#tabs').tab();
                 $('.carousel').carousel();
-
             });
         </script>
-
     </head>
     <body>
         <nav class="navbar navbar-inverse navbar-fixed-top bg" role="navigation">
@@ -69,7 +65,7 @@
 
                     <ul class="nav navbar-nav pull-right" style="margin-top: 30px;">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
+                            <a href="<?php echo $this->url('usuario/default', array('action' => 'localizar-usuario')) ?>" class="dropdown-toggle">
                                 <p style="color:#fff">Aluno</p>
                             </a>
                         </li>
@@ -102,19 +98,56 @@
                             <a class="dropdown-toggle" data-toggle="dropdown" >
                                 <p style="color:#fff">Logado como: <?php echo $this->usuarioAutenticado()['usuario']->nome; ?><b class="caret"></b></p>
                             </a>
-                            <ul class="dropdown-menu">                                                                
-                                <li> <a href="/usuario/usuario/alterar-senha">Dados pessoais</a></li>
-                                <li> <a href="/usuario/usuario/alterar-senha">Alterar Senha</a></li>
+                            <ul class="dropdown-menu">
+                                <li> <a href="<?php echo $this->url('usuario/default', array('controller' => 'usuario', 'action' => 'view')) ?>">Dados pessoais</a></li>
+                                <li> <a href="<?php echo $this->url('usuario/default', array('action' => 'alterar-senha')) ?>">Alterar Senha</a></li>
                             </ul>
                         </li>
-                        <li><a style="color: #FF0000 !important" href="/application/auth/logout">Sair</a></li>
+                        <li><a style="color: #FF0000 !important" href="<?php echo $this->url('application/auth', array('action' => 'logout')) ?>">Sair</a></li>
                     </ul> 
                 </div>
             </div>
         </nav>
 
         <div class="container geral" style="margin-top: 110px;">         
-            <div class="row" style="margin-top: 20px;min-height: 350px;"> 
+            <div class="row" style="margin-top: 20px;min-height: 350px;">
+
+                <nav class="navbar navbar-static-top">
+                    <div class="collapse navbar-collapse">
+                        <ul class="menu-dois nav navbar-nav">
+                            <li><a href="/usuario" class="text-center">
+                                    <img src="<?php echo $this->basePath('img/menu/inicio.png') ?>" class="img-responsive center-block" ><br>
+                                    <b>ALUNO</b>
+                                </a>
+                            </li>
+                            <li><a href="/usuario" class="text-center">
+                                    <img src="<?php echo $this->basePath('img/menu/inicio.png') ?>" class="img-responsive center-block" ><br>
+                                    <b>TURMA</b>
+                                </a>
+                            </li>
+                            <li><a href="/usuario" class="text-center">
+                                    <img src="<?php echo $this->basePath('img/menu/inicio.png') ?>" class="img-responsive center-block" ><br>
+                                    <b>CLIENTE</b>
+                                </a>
+                            </li>
+                            <li><a href="/usuario" class="text-center">
+                                    <img src="<?php echo $this->basePath('img/menu/inicio.png') ?>" class="img-responsive center-block" ><br>
+                                    <b>TRIAGEM</b>
+                                </a>
+                            </li>
+                            <li><a href="/usuario" class="text-center">
+                                    <img src="<?php echo $this->basePath('img/menu/inicio.png') ?>" class="img-responsive center-block" ><br>
+                                    <b>FEEDBACK</b>
+                                </a>
+                            </li>
+                            <li><a href="/usuario" class="text-center">
+                                    <img src="<?php echo $this->basePath('img/menu/inicio.png') ?>" class="img-responsive center-block" ><br>
+                                    <b>CALENDÁRIO</b>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
                 <div class="col-lg-12"> 
                     <!-- Inicio Mensagem -->
                     <?php foreach ($this->flashMessages() as $namespace => $messages) : ?>
