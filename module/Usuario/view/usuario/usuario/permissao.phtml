@@ -1,0 +1,394 @@
+<div class="row">
+    <div class="col-md-12">
+        <ol class="breadcrumb">
+            <li><a href="/usuario/usuario/inicio">Página Inicial</a></li>
+            <li class="active"><?php echo $this->escapeHtml('Permissão'); ?></li>
+        </ol>
+    </div>
+</div>
+
+<div class="topo-table">
+    <legend class="titulo-legenda"><?php echo $this->escapeHtml('Controle de Permissões'); ?></legend>
+</div>
+<br>
+
+<?php
+$form = $this->form;
+$form->prepare();
+echo $this->form()->openTag($form);
+$dominio = $_SERVER['HTTP_HOST'];
+$form->get('perfilAcaoNome')->setAttributes(array('maxlength' => 45));
+$form->get('perfilAcaoApelido')->setAttributes(array('maxlength' => 45));
+?>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h2 class="modal-title text-primary" id="myModalLabel">Permissões não atualizadas</h2>
+            </div>
+            <div class="modal-body">
+                <?php if ($retorno) { ?>
+
+                    <table class="table table-striped" id="permissaoAtt">
+                        <div class="clearfix"></div>
+                        <thead>                           
+                        <th style="width: 5%">
+                            #
+                        </th>
+                        <th style="width: 30%">
+                            Perfil Ação
+                        </th>
+                        <th style="width: 30%">
+                            Perfil Ação
+                        </th>
+                        <th style="width: 20%">
+                            Perfil Controle 
+                        </th>
+                        <th style="width: 15%">  
+                            Usuário Tipo
+                        </th>                                                      
+                        </thead>
+
+                        <tbody>
+                            <?php foreach ($retorno as $key => $retorn) { ?>
+                            <input type="hidden" name="apelido[]" value="<?php echo $retorn['Apelido']; ?>">
+                            <input type="hidden" name="endereco[]" value="<?php echo $retorn['Endereco']; ?>">
+                            <input type="hidden" name="controle[]" value="<?php echo $retorn['Controle']; ?>">
+                            <input type="hidden" name="idControle[]" value="<?php echo $retorn['idControle']; ?>">
+                            <input type="hidden" name="usuarioTipoAtualizar[]" value="<?php echo $retorn['usuarioTipo']; ?>">
+                            <tr>
+                                <td style="width: 5%">
+                                    <?php echo $key + 1; ?>
+                                </td>
+                                <td style="width: 30%">
+                                    <?php echo $retorn['Apelido']; ?>
+                                </td>
+                                <td style="width: 30%">
+                                    <?php echo $retorn['Endereco']; ?>
+                                </td>
+                                <td style="width: 20%">
+                                    <?php echo $retorn['Controle']; ?>
+                                </td>
+                                <td style="width: 15%">  
+                                    <?php
+                                    if ($retorn['usuarioTipo'] == 1) {
+                                        echo 'Administrador';
+                                    } elseif ($retorn['usuarioTipo'] == 3) {
+                                        echo 'Sectes';
+                                    } elseif ($retorn['usuarioTipo'] == 4) {
+                                        echo 'Coordenador';
+                                    } elseif ($retorn['usuarioTipo'] == 6) {
+                                        echo 'Aluno';
+                                    } elseif ($retorn['usuarioTipo'] == 7) {
+                                        echo 'Comunicação';
+                                    } elseif ($retorn['usuarioTipo'] == 8) {
+                                        echo 'Conexão';
+                                    }
+                                    ?>
+                                </td>
+                            </tr>
+                        <?php } ?>                           
+                        </tbody>
+                    </table>
+                   <!-- <input type="hidden" name="atualizar" value="<?php echo '1'; ?>">-->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-primary" >Atualizar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+<?php } else { ?>
+    <div  class='alert alert-info'><h4>O banco está atualizado em relação ao de Produção</h4></div>
+    <!--<input type="hidden" name="atualizar" value="<?php echo '1'; ?>">-->
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+        <button type="submit" class="btn btn-primary" disabled >Atualizar</button>
+    </div>
+    </div>
+
+    </div>
+    </div>
+<?php } ?>
+
+<div class="container" >
+    <div class="row ">
+        <div class="col-md-12 col-lg-12 ">
+            <div class="col-md-8 col-lg-8 ">
+                <div class="col-md-12 col-lg-12 ">
+                    <div class="col-md-6 col-lg-6 ">
+                        <div class="form-group">
+                            <label><?php echo $this->formLabel($form->get('perfilAcaoNome')); ?><span class="aguardando"></span></label>
+                            <?php
+                            echo $this->formText($form->get('perfilAcaoNome'));
+                            echo $this->formElementErrors()
+                                    ->setMessageOpenFormat('<smal class="text-danger"')
+                                    ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                                    ->setMessageCloseString('</small>')
+                                    ->render($form->get('perfilAcaoNome'));
+                            ?>
+                        </div> 
+
+                        <div class="form-group">
+                            <label><?php echo $this->formLabel($form->get('perfilAcaoApelido')); ?><span class="aguardando"></span></label>
+                            <?php
+                            echo $this->formText($form->get('perfilAcaoApelido'));
+                            echo $this->formElementErrors()
+                                    ->setMessageOpenFormat('<smal class="text-danger"')
+                                    ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                                    ->setMessageCloseString('</small>')
+                                    ->render($form->get('perfilAcaoApelido'));
+                            ?>
+                        </div>
+                        <div>
+                            <?php echo $this->formSubmit($form->get('enviar')); ?>&nbsp;
+                            <?php if ($dominio == 'uaitec') { ?>  
+                                <?php echo $this->formSubmit($form->get('atualizar')); ?>
+                                <!--<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">
+                                    Atualizar Banco
+                                </button>-->
+                            <?php } ?>
+                        </div>  
+
+
+
+                    </div>
+
+                    <div class="col-md-6 col-lg-6 ">
+                        <div class="form-group">
+                            <label><?php echo $this->formLabel($form->get('perfilControle')); ?><span class="aguardando"></span></label>
+                            <?php
+                            echo $this->formText($form->get('perfilControle'));
+                            echo $this->formElementErrors()
+                                    ->setMessageOpenFormat('<smal class="text-danger"')
+                                    ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                                    ->setMessageCloseString('</small>')
+                                    ->render($form->get('perfilControle'));
+                            ?>
+                        </div>
+                        <div class="form-group">
+                            <label><?php echo $this->formLabel($form->get('usuarioTipo')); ?><span class="aguardando"></span></label>
+                            <?php
+                            echo $this->formSelect($form->get('usuarioTipo'));
+                            echo $this->formElementErrors()
+                                    ->setMessageOpenFormat('<smal class="text-danger"')
+                                    ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                                    ->setMessageCloseString('</small>')
+                                    ->render($form->get('usuarioTipo'));
+                            ?>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="col-md-3 col-lg-3 ">
+                <div class="form-group">
+                    <div class="panel panel-default" >
+                        <div class="panel-heading"><label for="banco">Bancos:</label></div>
+                        <div class="panel-body"> 
+                            <?php if ($dominio == 'uaitec') { ?>
+
+                                <input type="checkbox" name="banco[]" id="idlocal" value="local" > Banco Local <br>
+
+                            <?php } ?>
+                            <?php if ($dominio == 'uaitec' or $dominio == 'homologacao.uaitec.mg.gov.br') { ?>
+                                <input type="checkbox" name="banco[]" id="idHomolo" value="homologacao" onclick="
+                                            var x = document.getElementById('idHomolo').checked;
+                                            if (x) {
+                                                if (!confirm('Atenção! Você está prestes a inserir dados no banco de HOMOLOGAÇÃO')) {
+                                                    return false;
+                                                }
+                                            }"> Banco Homologação <br>
+                                   <?php } ?>
+                                   <?php if ($dominio == 'uaitec' or $dominio == 'uaitec.mg.gov.br') { ?>
+                                <input type="checkbox" name="banco[]" id="idProd" value="producao" onclick="
+                                            var x = document.getElementById('idProd').checked;
+                                            if (x) {
+                                                if (!confirm('Atenção! Você está prestes a inserir dados no banco de PRODUÇÂO')) {
+                                                    return false;
+                                                }
+                                            }"> Banco Produção  <br>
+                                   <?php } ?>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<hr>
+<?php
+if ($dominio == 'uaitec') {
+    ?>    
+
+    <div class="topo-table">
+        <legend class="titulo-legenda"><?php echo $this->escapeHtml('Banco Local'); ?></legend>
+    </div>
+
+<?php } elseif ($dominio == 'homologacao.uaitec.mg.gov.br') { ?>  
+
+    <div class="topo-table">
+        <legend class="titulo-legenda"><?php echo $this->escapeHtml('Banco em Homologação'); ?></legend>
+    </div>
+
+<?php } elseif ($dominio == 'uaitec.mg.gov.br') { ?>
+
+    <div class="topo-table">
+        <legend class="titulo-legenda"><?php echo $this->escapeHtml('Banco em Produção'); ?></legend>
+    </div>
+
+<?php } ?>
+
+<div class="row">
+
+    <div class="col-md-12">
+        <table id="tablepermissao" class="display" cellspacing="0" width="100%" >                                    
+            <thead>
+                <tr>
+                    <th style="width: 5%">
+                        #
+                    </th>
+                    <th style="width: 23%">
+                        Perfil Ação (Apelido)
+                    </th>
+                    <th style="width: 23%">
+                        Perfil Ação (Endereço)
+                    </th>
+                    <th style="width: 14%">
+                        Perfil Controle
+                    </th>
+                    <th style="width: 15%">  
+                        Usuário Tipo
+                    </th>
+                    <th style="width: 5%">  
+                        Perfil Permissão
+                    </th>
+                    <?php if ($dominio == 'uaitec') { ?>
+                        <th style="width: 8%">  
+                            Ação
+                        </th>
+                    <?php } ?>
+                </tr>
+            </thead>
+            <tbody id="permissoes">
+            </tbody>
+        </table>                      
+    </div>
+</div>
+
+<?php echo $this->headScript()->prependFile($this->basePath() . '/js/plugins/datatables/jquery.dataTables.min.js'); ?>
+<?php echo $this->headLink()->prependStylesheet($this->basePath('/js/plugins/datatables/jquery.dataTables.css')); ?>
+<script>
+    $(document).ready(function () {
+        var table = $('#tablepermissao').DataTable({
+            "language": {
+                lengthMenu: "Mostrar _MENU_ por página",
+                zeroRecords: "Não há registros disponíveis",
+                info: "Mostrando página _PAGE_ de _PAGES_",
+                infoEmpty: "Não há registros disponíveis",
+                infoFiltered: "(filtrada a partir de _MAX_ registos totais)",
+                "search": "Procurar:",
+                "paginate": {
+                    "first": "Primeira",
+                    "last": "Última",
+                    "next": "Próximo",
+                    "previous": "Anterior"
+                }
+            }
+        });
+
+        var url = "<?php echo $this->url('usuario/default', array('action' => 'buscar-permissoes-cadastradas')); ?>";
+        $.ajax({
+            type: 'POST',
+            url: url,
+            cache: false,
+            data: '',
+            async: true,
+            dataType: 'json',
+            error: function (a, b, c) {
+                alert("Ocorreu um erro. Tente novamente");
+            },
+            success: function (json) {
+                $.each(json, function (key, value) {
+
+                    var dados = value.split("/-/");
+                    if (dados[6] === 'uaitec') {
+                        table.row.add([
+                            dados[5],
+                            dados[0],
+                            dados[1],
+                            dados[2],
+                            dados[3],
+                            dados[4],
+                            "<a class='btn btn-danger btn-xs btnRemover' id='" + dados[4] + "' onclick='alert(dados[6])'><span class='glyphicon glyphicon-trash'></span> Remover</button>"
+
+                        ]).draw();
+                    } else {
+                        table.row.add([
+                            dados[5],
+                            dados[0],
+                            dados[1],
+                            dados[2],
+                            dados[3],
+                            dados[4]
+                        ]).draw();
+                    }
+                });
+            },
+        });
+
+        $("tbody").delegate(".btnRemover", "click", function () {
+
+            var btn = this;
+            var idPermissao = btn.id;
+            var continua;
+            var url = "<?php echo $this->url('usuario/default', array('action' => 'desativa-permissao')); ?>";
+
+            continua = confirm("Deseja realmente remover a permissão?");
+
+            if (continua) {
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    cache: false,
+                    data: 'idPermissao=' + idPermissao,
+                    async: true,
+                    dataType: 'json',
+                    error: function (a, b, c) {
+                        alert("Ocorreu um erro. Tente novamente");
+                    },
+                    success: function (json) {
+                        if (json['deletado'] === 'S') {
+
+                            table.row($(btn).parents('tr')).remove().draw();
+                            alert('Deletado com sucesso!');
+
+                        } else {
+                            alert('Ocorreu um erro. Não foi possível remover a permissão');
+                        }
+                    }
+                });
+            }
+        });
+
+    });
+    $(function () {
+        $("#idPerfilControle").autocomplete({
+            source: <?php echo $arrayPerfilControle; ?>
+        });
+    });
+
+
+</script>

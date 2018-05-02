@@ -1,0 +1,18 @@
+
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+Você tem certeza que deseja excluir "<?php echo $this->model->__get('nome');?>"?
+
+
+<?php 
+
+$form = $this->form;
+
+$form->setAttribute('action', $this->urlAction);
+
+$form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formCollection($this->form);
+echo $this->form()->closeTag();
+?>

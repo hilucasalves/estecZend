@@ -1,0 +1,59 @@
+<nav>
+<ul class="pagination pagination-sm">
+    <?php if ($this->pageCount): ?>
+        <!-- First page link -->
+        <?php if (isset($this->previous)): ?>
+            <li class=""><a href="<?php echo $this->url($this->route, array('controller' => $this->controller, 'page' => $this->first)) . $this->methodGet; ?>">
+                    Primeira página
+                </a> 
+            </li>
+        <?php else: ?>
+            <li class="disabled"><a href="<?php echo $this->url($this->route, array('controller' => $this->controller, 'page' => $this->first)). $this->methodGet; ?>">Primeira página</a></li> 
+            
+        <?php endif; ?>
+
+        <!-- Previous page link -->
+        <?php if (isset($this->previous)): ?>
+            <li class=""><a href="<?php echo $this->url($this->route, array('controller' => $this->controller, 'page' => $this->previous)). $this->methodGet; ?>">
+                    Anterior
+                </a> </li>
+        <?php else: ?>
+            <li class="disabled"><a href="<?php echo $this->url($this->route, array('controller' => $this->controller, 'page' => $this->previous)). $this->methodGet; ?>">
+                    Anterior
+                </a> </li>
+        <?php endif; ?>
+
+        <?php foreach ($this->pagesInRange as $item): ?>
+            <?php if ($this->current == $item): ?>
+                <li class="active"><a href="<?php echo $this->url($this->route, array('controller' => $this->controller, 'page' => $item)).$this->methodGet; ?>"><?php echo $item; ?></a></li>
+            <?php else: ?>
+                <li class=""><a href="<?php echo $this->url($this->route, array('controller' => $this->controller, 'page' => $item)). $this->methodGet; ?>"><?php echo $item; ?></a></li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+
+        <!-- Next page link -->
+        <?php if (isset($this->next)): ?>
+            <li class=""><a href="<?php echo $this->url($this->route, array('controller' => $this->controller, 'page' => $this->next)). $this->methodGet; ?>">
+                    Próximo
+                </a> </li>
+        <?php else: ?>
+            <li class="disabled"><a href="<?php echo $this->url($this->route, array('controller' => $this->controller, 'page' => $this->next)). $this->methodGet; ?>">
+                    Próximo
+                </a> </li>
+        <?php endif; ?>
+
+        <!-- Last page link -->
+        <?php if (isset($this->next)): ?>
+        <li class=""> <a href="<?php echo $this->url($this->route, array('controller' => $this->controller, 'page' => $this->last)). $this->methodGet; ?>">
+                Última
+            </a> </li>
+        <?php else: ?>
+            <li class="disabled"> <a href="<?php echo $this->url($this->route, array('controller' => $this->controller, 'page' => $this->last)). $this->methodGet; ?>">
+                Última
+            </a> </li>
+        <?php endif; ?>
+
+  
+<?php endif; ?>
+</ul>
+</nav>

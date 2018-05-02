@@ -1,0 +1,18 @@
+<h1><?php echo $model->usuarioTipo->nome . " - " . $model->recurso->nome . " " . $model->recurso->controle->nome; ?></h1>
+
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->urlAction);
+$form->prepare();
+?>
+<?php echo $this->form()->openTag($form); ?> <br>
+<?php echo $this->formHidden($form->get('idPerfilPermissao')); ?> 
+<?php echo $this->formHidden($form->get('usuarioTipo')); ?>
+<?php echo $this->formHidden($form->get('recurso')); ?> 
+<?php echo $this->formRow($form->get('permitido')); ?> <br>
+
+<?php echo $this->formSubmit($form->get('enviar')); ?>
+
+<?php echo $this->form()->closeTag(); ?>
+<br>
+<a class="btn alert-info" href= "<?php echo $this->url('usuarioPerfil', array('controller' => 'usuarioPerfil', 'action' => 'edit', 'key' => $model->usuarioTipo->idUsuarioTipo )) ?>">Voltar</a>

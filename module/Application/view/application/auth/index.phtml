@@ -1,0 +1,75 @@
+<?php
+if ($messages) {
+    ?>
+    <div class="alert alert-info" role="alert"><?php echo $messages ?></div>
+
+<?php } ?>   
+<style>
+    .navbar{display: none;} 
+</style>
+<div class="row">
+    <div class="col-lg-6 col-lg-offset-3">
+        <div class="col-lg-12 text-center">   
+            <a class="" href="<?php echo $this->url('usuario') ?>">
+                <img src="<?php echo $this->basePath('img/logo-estec.png') ?>" alt="ESTEC" style="width: 100%;"/> 
+                
+            </a>  
+        </div>
+        <div class="clearfix"></div>
+        <div class="alert alert-info text-center"><legend>ESTEC</legend>          
+
+            <small><b class="">versão:</b> 1.0.0a</small>
+        </div>
+        <div class="panel panel-default">
+
+            <div class="panel-heading "><h3 class="text-info">LOGIN <span class=" glyphicon glyphicon-lock pull-right"></span></h3></div>
+            <div class="panel-body">
+                <?php
+                $form = $this->form;
+                $form->setAttribute('action', $this->url('application/auth', array('action' => 'index')));
+                $form->prepare();
+
+                echo $this->form()->openTag($form);
+                ?>
+                
+                <span for="CPF">CPF:</span>
+                <?php
+                // renderiza html input
+                echo $this->formInput($form->get('cpf'));
+
+                // renderiza elemento de erro
+                echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<small class="text-danger">')
+                        ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                        ->setMessageCloseString('</small>')
+                        ->render($form->get('cpf'));
+                ?>
+                <BR>
+
+                <span for="senha">Senha:</span>
+                <?php
+                // renderiza html input
+                echo $this->formInput($form->get('senha'));
+
+                // renderiza elemento de erro
+                echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<small class="text-danger">')
+                        ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                        ->setMessageCloseString('</small>')
+                        ->render($form->get('senha'));
+                ?>
+
+
+
+            </div>
+            <div class="panel-footer text-right">
+                <?php echo $this->formRow($form->get('enviar')); ?> 
+                <?php echo $this->form()->closeTag(); ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- <span><a class="link-vermelho" href="#">Problemas ao se conectar?</a></span>
+<!-- <?php echo $this->inlineScript()->prependFile($this->basePath('js/plugins/maskedinput/init-maskedinput.js')); ?> -->

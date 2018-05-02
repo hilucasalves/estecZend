@@ -1,0 +1,161 @@
+<style>
+    body {
+        font-size: 12pt;
+        font-family: Calibri; 
+        word-wrap: normal;
+        text-indent: 0;
+    }
+    nav:first-child.navbar{display: none;}
+    .logado-como{display: none;}
+    .navegacao-preto{display: none;}
+    .menu-ususario{display: none;}
+    .container{ margin-top: 0px !important;width: 100%;}
+    .rodape-geral{display: none;}
+    .img-qrcod {
+        position: relative;
+        left: -22px;
+    }
+
+    @media print {
+        .botao-print{display: none;}
+        nav:first-child.navbar{display: none;}
+        .logado-como{display: none;}
+        .navegacao-preto{display: none;}
+        .menu-ususario{display: none;}
+        .botoes-css{display: none;}
+        .container{ margin-top: 0px !important;}
+        .rodape-geral{display: none;}
+
+        th {
+            font: bold 12px sans-serif;
+            border: 1px solid;
+            background-color: #000;
+
+        }
+        td {
+
+            border: 1px solid;           
+        }
+        tr {
+            font: 12px sans-serif;
+            border: 1px solid;
+        }
+
+        table{width: 100%;}  
+        p.hora{
+            text-align: center;
+        }   
+
+        table.assinaturas-tabela tr td{
+            border: 0 !important;
+        }
+    .img-qrcod {
+       width:90% ;
+    }
+
+        .texto-qrcod{
+            top: 0px;
+            position: relative;
+        }
+
+    }
+    .texto-qrcod{
+        margin-top: 10px;
+    }
+    legend{color: #000;}
+
+    .texto-superior-assinatura {
+        font-size: 15pt;   
+        text-align: center;
+        word-wrap: normal; 
+        font-weight: bold;
+    }
+
+
+
+
+
+</style>
+<div class="row botao-print" style="margin-bottom: 0px;">
+    <div class="botoes-css pull-right" style="margin-bottom: 10px;">
+        <a class="btn btn-sm btn-default" href='javascript:window.print()' target="_blank" name="print" id="print"><span class="glyphicon glyphicon-print" aria-hidden="true"></span>  Imprimir</a>
+    </div>
+</div>
+<div class="clear"></div>
+
+<div class="row" style="margin-bottom: 20px;">
+    <div class="col-lg-12">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+            <p class="texto-superior-assinatura">Secretaria de Desenvolvimento Econômico, Ciência, Tecnologia e Ensino Superior.</p>
+        </div>
+        <div class="col-lg-2"></div>        
+    </div>
+    <div class="col-lg-12">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+            <p class="texto-superior-assinatura">  Documento: <?php echo $documento->documentoTipo->documentoTipo; ?> | Sistema:            
+                <?php echo $documento->documentoTipo->sistema; ?> 
+            </p>
+        </div>
+        <div class="col-lg-2"></div>        
+    </div>
+</div>
+
+
+<?php echo $documento->documentoHtml; ?>   
+<table class="assinaturas-tabela" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-top: 20px;"> 
+    <?php foreach ($assinaturas as $assinatura) { ?>
+        <tr style="margin-top: 5px;border-top: 1px solid #000;border-bottom: 1px solid #000;padding: 3px;">
+            <td style="padding: 3px;">
+                <img class="" src="/img/assinatura-logo.png" />
+            </td>
+            <td style="padding: 3px;">  
+                <div style="padding: 10px;">
+                    Documento assinado eletronicamente por <b><?php echo $assinatura->usuario->nome; ?></b>, pertencente ao orgão de lotação: <b><?php echo $assinatura->usuario->orgaoLotacao->orgaoLotacao; ?></b>, 
+                    em <b><?php echo $assinatura->dataInsercao->format('d/m/Y'); ?></b>, às <b><?php echo $assinatura->dataInsercao->format('H:i'); ?></b>, 
+                    conforme horário oficial de Brasília, com fundamento no <a href="https://www.almg.gov.br/consulte/legislacao/completa/completa.html?tipo=DEC&num=47222&comp=&ano=2017" target="_blank">art. 6º, § 1º, do Decreto nº 47.222, de 26 de julho de 2017</a>.
+                </div>
+            </td>
+        </tr> 
+
+    <?php } ?>
+
+    <tr style="margin-top: 5px;border-top: 1px solid #000;border-bottom: 1px solid #000;padding: 3px;">
+        <td style="padding: 3px;">
+            <img style="position: relative;left: -7px;" class="img-qrcod" src="https://chart.googleapis.com/chart?chs=135x135&cht=qr&chl=<?php echo $_SERVER['SERVER_NAME']; ?>/application/auth/validar-documento?codVerificador=<?php echo $assinatura->documento->codVerificador; ?>"/>
+        </td>
+        <td style="padding: 3px;">  
+            A autenticidade deste documento pode ser conferida no site <a href="/application/auth/validar-documento" target="_blank">http://sead.mg.gov.br/application/auth/validar-documento</a>, 
+            informando o código verificador <b><?php echo $assinatura->documento->codVerificador; ?></b>.
+
+        </td>
+    </tr> 
+</table>
+<hr>
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+    <tbody>
+        <tr>
+            <td align="left" style="font-family:Calibri;font-size:9pt;border:0;" width="50%"><strong>Ano referência:</strong> <?php echo $assinatura->documento->dataInsercao->format('Y'); ?> </td>
+            <td align="right" style="font-family:Calibri;font-size:9pt;border:0;" width="50%">SEAD nº: <?php echo $assinatura->documento->idDocumento; ?></td>
+        </tr>
+    </tbody>
+</table>
+<hr>
+
+<footer>        
+    <div class="col-md-12 text-center" style="margin-bottom: 10px;">
+        <div style="margin: 0 auto; width: 500px;">
+
+            <?php /*
+
+              setlocale(LC_TIME, 'portuguese');
+              date_default_timezone_set('America/Sao_Paulo');
+
+              $date = date('Y-m-d');
+              echo '<br><br><br>Belo Horizonte, ' . date('H:i:s') . ', ' . strftime("%A, %d de %B de %Y", strtotime($date)) . '.';
+             */ ?>
+
+        </div>
+    </div>           
+</footer>

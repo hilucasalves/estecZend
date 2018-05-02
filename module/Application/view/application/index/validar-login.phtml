@@ -1,0 +1,39 @@
+<h1><?php echo $this->escapeHtml($this->title); ?></h1>
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('application/default', array('action' => 'cadastrar-usuario')));
+$form->prepare();
+echo $this->form()->openTag($form);
+?>
+
+<?php echo $this->formHidden($form->get('idUsuario')); ?>
+<?php echo $this->formHidden($form->get('login')); ?>
+<?php echo $this->formRow($form->get('sexo')); ?><br>
+<?php echo $this->formRow($form->get('rg')); ?><br>
+<?php echo $this->formRow($form->get('nomeMae')); ?><br>
+<?php echo $this->formRow($form->get('nomePai')); ?><br>
+<?php /* echo $this->formRow($form->get('dataNascimento')); ?><br>
+<?php echo $this->formRow($form->get('naturalidade')); ?><br>
+<?php echo $this->formRow($form->get('nacionalidade')); ?><br>
+<?php echo $this->formRow($form->get('masp')); ?><br>
+<?php echo $this->formRow($form->get('telefoneResidencial')); ?><br>
+<?php echo $this->formRow($form->get('telefoneCelular')); ?><br>
+<?php echo $this->formRow($form->get('estadoCivil')); ?><br>
+<?php echo $this->formRow($form->get('cor')); ?><br>
+<?php echo $this->formRow($form->get('redeEnsino')); ?><br>
+<?php echo $this->formRow($form->get('universidade')); ?><br>
+<?php echo $this->formRow($form->get('programaCienciaTecnologia')); ?><br>
+<?php echo $this->formRow($form->get('periodo')); ?><br>
+<?php echo $this->formRow($form->get('informativo')); ?><br>
+
+<?php// echo $this->formRow($form->get('necessidadeEspecial')); ?><br>
+
+<?php// echo $this->formRow($form->get('escolaridade')); ?><br>
+<?php echo $this->formRow($form->get('funcao')); */?><br>
+
+<?php
+echo $this->formSubmit($form->get('enviar'));
+echo $this->form()->closeTag();
+?>
+
+<a class="btn alert-info" href= "<?php echo $this->urlView ?>">Voltar</a>

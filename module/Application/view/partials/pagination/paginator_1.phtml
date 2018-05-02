@@ -1,0 +1,56 @@
+<ul class="pagination">
+    <?php if ($this->pageCount): ?>
+        <!-- First page link -->
+        <?php if (isset($this->previous)): ?>
+            <li class=""><a href="<?php echo $this->url($this->route, array('controller' => $this->controller, 'page' => $this->first)); ?>">
+                    Primeira página
+                </a> </li>
+        <?php else: ?>
+            <li class=""><a href="<?php echo $this->url($this->route, array('controller' => $this->controller, 'page' => $this->first)); ?>">Primeira página</a></li> 
+            
+        <?php endif; ?>
+
+        <!-- Previous page link -->
+        <?php if (isset($this->previous)): ?>
+            <li class=""><a href="<?php echo $this->url($this->route, array('controller' => $this->controller, 'page' => $this->previous)); ?>">
+                    Anterior
+                </a> </li>
+        <?php else: ?>
+            <li class=""><a href="<?php echo $this->url($this->route, array('controller' => $this->controller, 'page' => $this->previous)); ?>">
+                    Anterior
+                </a> </li>
+        <?php endif; ?>
+
+        <?php foreach ($this->pagesInRange as $item): ?>
+            <?php if ($this->current == $item): ?>
+                <li class="active"><a href="<?php echo $this->url($this->route, array('controller' => $this->controller, 'page' => $item)); ?>"><?php echo $item; ?></a></li>
+            <?php else: ?>
+                <li class=""><a href="<?php echo $this->url($this->route, array('controller' => $this->controller, 'page' => $item)); ?>"><?php echo $item; ?></a></li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+
+        <!-- Next page link -->
+        <?php if (isset($this->next)): ?>
+            <li class=""><a href="<?php echo $this->url($this->route, array('controller' => $this->controller, 'page' => $this->next)); ?>">
+                    Próximo
+                </a> </li>
+        <?php else: ?>
+            <li class=""><a href="<?php echo $this->url($this->route, array('controller' => $this->controller, 'page' => $this->next)); ?>">
+                    Próximo
+                </a> </li>
+        <?php endif; ?>
+
+        <!-- Last page link -->
+        <?php if (isset($this->next)): ?>
+        <li class=""> <a href="<?php echo $this->url($this->route, array('controller' => $this->controller, 'page' => $this->last)); ?>">
+                Última
+            </a> </li>
+        <?php else: ?>
+            <li class=""> <a href="<?php echo $this->url($this->route, array('controller' => $this->controller, 'page' => $this->last)); ?>">
+                Última
+            </a> </li>
+        <?php endif; ?>
+
+  
+<?php endif; ?>
+</ul>

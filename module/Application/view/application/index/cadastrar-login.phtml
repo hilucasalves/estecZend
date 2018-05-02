@@ -1,0 +1,20 @@
+<h1><?php echo $this->escapeHtml($this->title); ?></h1>
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('application/default', array('action' => 'cadastrar-login')));
+$form->prepare();
+?>
+
+<?php echo $this->form()->openTag($form); ?> <br>
+<?php echo $this->formHidden($form->get('idLogin')); ?> <br>
+<?php echo $this->formRow($form->get('nome')); ?> <br>
+<?php echo $this->formRow($form->get('cpf')); ?> <br>
+<?php echo $this->formRow($form->get('email')); ?> <br>
+<?php echo $this->formRow($form->get('emailConfirmacao')); ?> <br>
+<?php echo $this->formRow($form->get('senha')); ?> <br>
+<?php echo $this->formRow($form->get('senhaConfirmacao')); ?> <br>
+<?php echo $this->formHidden($form->get('status')); ?> <br>
+<?php echo $this->formSubmit($form->get('enviar')); ?>
+<?php echo $this->form()->closeTag(); ?>
+
+<a class="btn alert-info" href= "<?php echo $this->urlView ?>">Voltar</a>

@@ -1,0 +1,45 @@
+<div class="topo-table">
+    <h1><?php echo $this->escapeHtml($this->title); ?></h1>
+
+    <a class="btn btn-success" href="<?php echo $this->placeholder('url')->add; ?>" style="margin-left: 4px;">Novo Login</a> <!-- Criar nova categoria -->
+
+
+</div>
+<div class="corpo-table">
+    <table  class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Nome</th>
+                <th>Status</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($this->paginator as $model) : ?>
+                <tr>
+                    <td><a href="<?php //echo $this->url('post/default', array('action' => 'view', 'id' => $post->id));      ?>"><?php echo $model->__get('idLogin') ?></a></td>
+
+                    <td><?php echo $model->__get('nome'); ?></td> <!-- pegando o registro do banco -->
+                    <td><?php echo $model->__get('status')->__get('nome'); ?></td>
+                    <td>
+                        <a class="btn btn-info" href="<?php echo $this->placeholder('url')->view . '/' . $model->__get('idLogin') ?>">Ver</a>
+                        <a class="btn btn-warning" href="<?php echo $this->placeholder('url')->edit . '/' . $model->__get('idLogin') ?>">Editar</a>
+                        <a class="btn btn-danger" href="<?php echo $this->placeholder('url')->delete . '/' . $model->__get('idLogin') ?>">Excluir</a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+
+    <?php
+    /* add at the end of the file after the table */
+    echo $this->paginationControl(
+            $this->paginator, 'sliding', array('partials/pagination/paginator.phtml', 'UsuarioFuncao'), 
+            array('controller' => 'UsuarioFuncao', 'route' => 'usuario/pagina')
+    );
+    ?>
+
+</div>
+
+

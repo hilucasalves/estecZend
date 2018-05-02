@@ -1,0 +1,52 @@
+<legend class="titulo-legenda"><?php echo $this->escapeHtml($this->title); ?></legend>
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('application/default', array('controller' => 'auth', 'action' => 'cadastrar-usuario')));
+$form->prepare();
+echo $this->form()->openTag($form);
+
+
+echo $this->formHidden($form->get('idUsuario'));
+echo $this->formHidden($form->get('usuarioTipo'));
+echo $this->formHidden($form->get('login'));
+$this->formRadio()->setSeparator('</div><div class="radio">');
+?>
+
+<div class="well well-sm">
+    <h3>Dados Pessoais</h3>
+</div>
+
+<div class="form-group">
+    <label for="inputNome">Nome Completo*:</label>
+    <?php
+    // renderiza html input
+    echo $this->formInput($form->get('nome'));
+
+    // renderiza elemento de erro
+    echo $this->formElementErrors()
+            ->setMessageOpenFormat('<small class="text-danger">')
+            ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+            ->setMessageCloseString('</small>')
+            ->render($form->get('nome'));
+    ?>
+</div>
+<div class="form-group">
+    <label for="inputTelefoneCelular">Celular*:</label>
+    <?php
+    // renderiza html input
+    echo $this->formInput($form->get('telefoneCelular'));
+
+    // renderiza elemento de erro
+    echo $this->formElementErrors()
+            ->setMessageOpenFormat('<small class="text-danger">')
+            ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+            ->setMessageCloseString('</small>')
+            ->render($form->get('telefoneCelular'));
+    ?>
+</div>
+
+
+<?php
+echo $this->formSubmit($form->get('enviar'));
+echo $this->form()->closeTag();
+?>

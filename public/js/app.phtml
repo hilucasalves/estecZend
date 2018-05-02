@@ -1,0 +1,335 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="pt-BR">
+    <head>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle('SECTES ' . $this->translate('SECRETARIA DE ESTADO DE CIENCIA, TECNOLOGIA E ENSINO SUPERIOR '))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php
+        echo $this->headMeta()
+                ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+                ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <!-- Le styles -->
+        <?php
+        echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favcon.png'))
+                ->prependStylesheet($this->basePath() . '/css/style_publico.css')
+                ->prependStylesheet($this->basePath() . '/css/bootstrap-theme.min.css')
+                ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')
+        ?>
+
+        <!-- Scripts -->
+        <?php
+        echo $this->headScript()
+                ->prependFile($this->basePath() . '/js/plugins/maskedinput/jquery.maskedinput.min.js')
+                ->prependFile($this->basePath() . '/js/bootstrap.min.js')
+                ->prependFile($this->basePath() . '/js/jquery.min.js')
+                ->prependFile($this->basePath() . '/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+                ->prependFile($this->basePath() . '/js/html5shiv.js', 'text/javascript', array('conditional' => 'lt IE 9',));
+        ?>
+        <style>
+            nav.navbar-inverse .dropdown-menu>li>a:hover{background: #fff !important;color: #000 !important;}
+            nav.navbar-inverse>div>div>div>ul.nav>li>a{color: #fff !important;}
+            nav.navbar-inverse .open>a{background:#fff !important; color: #000 !important;}
+            nav.navbar-inverse>div>div>div>ul.nav>li>a:hover{background:#fff !important; color: #000 !important;}
+            nav.navbar-inverse>div>div>div>ul.nav>li>a:active{background:#fff !important; color: #000 !important;}
+            .black { color: #fff !important;background: #000 !important; }
+            .black2 { color: #fff !important;background: #111 !important; }
+            .topo-none{background: #000 !important;}
+            ul.black>li>a{color: #fff !important;}
+            ul.black>li>a:hover{color: #000 !important;background: fff !important;}
+            ul.black .navbar-nav>.open>a{background:#fff !important; color: #000 !important;}
+            .text-branco{color: #fff !important;}
+            .link-branco{color: #fff !important;}
+            .panel-body .black a{color: #fff !important;}
+            ul.acessibilidade li{  min-width: 20px; text-align: center;}
+            .fb_iframe_widget {
+                display: inline-block;
+                position: relative;
+                top: -3px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <!-- Static navbar -->
+        <div id="menuSecundario" class="visible-md visible-lg menu-acessibilidade">
+
+            <div class="container">
+
+                <!-- accessibility -->
+                <ul class="pull-left acessibilidade">
+                    <li><a href="#">Ajuda</a></li>
+                    <li>|</li>
+                    <li><a href="#">Menu</a></li>
+                    <li>|</li>
+                    <li><a href="#">Conteúdo</a></li>
+                    <li>|</li>
+                    <!--<li><a href="<?php echo $this->url('application/default', array('controller' => 'duvidas-frequentes')); ?>">Dúvidas frequentes</a></li>-->
+                    <!--<li>|</li>-->
+                    <li><a href="#">Mapa do Sítio</a></li>
+                    <li>|</li>
+                    <li><a href="<?php echo $this->url('application/default', array('controller' => 'fale-conosco')); ?>">Fale conosco</a></li>
+                    <li>|</li>
+                    <li><a href="<?php echo $this->url('application/default', array('controller' => 'acessibilidade')); ?>">Acessibilidade</a></li>
+                    <li>|</li>
+                    <li><a href="<?php echo $this->url('application/default', array('controller' => 'transparencia')); ?>">Transparência</a></li>
+                    <li>|</li>
+                    <!--<li><a href="#">RSS</a></li> -->
+                </ul>
+                <!-- -->
+                <ul class="pull-right acessibilidade">
+                    <li class="font-white">Fonte: </li>
+                    <li><b><a class="inc-font" href="#" title="Aumentar fonte"><span class="glyphicon glyphicon-plus"></span></a></b></li>                 
+                    <li><b><a class="dec-font" href="#" title="Diminuir fonte"><span class="glyphicon glyphicon-minus"></span></a></b></li>
+                    <li style="margin-left: 10px;" class="font-white"> Contraste: </li>
+                    <li><b><a href="#" class="altoContraste"><span class="glyphicon glyphicon-adjust" aria-hidden="true"></span></a></b></li>
+                </ul>
+            </div>        
+        </div>
+
+        <header class="topo">
+            <div style="background: #f2dede;height: 6px;"></div>
+            <div id="topo-geral" class="container topo-geral">
+                <div class="row">                
+                    <div class="col-lg-12">                
+
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 pull-left" style="">                    
+                            <a href="http://www.tecnologia.mg.gov.br">  <img class="pull-left logo-topo-governo img-responsive" src="/img/marca-sec-preto.png" style="max-width:440px;"/> </a> 
+                        </div>     
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 visible-lg text-left" style="margin-top: 39px;">
+                            <div class="pull-right">
+                                <b>Siga-nos:</b>
+                                <div class="clearfix"></div>
+                                <a href="https://www.facebook.com/Sectes?fref=ts" target="_blank"><img src="/img/facebook.png" class="img-responsive pull-left"/></a>                
+
+                                <a href="https://www.youtube.com/channel/UCX9hj1nHjnbRRTUt9PypnoQ" target="_blank"><img src="/img/youtube.png" class="img-responsive pull-left" /></a>              
+                                <a href="http://www.flickr.com/sectes" target="_blank"><img src="/img/flicker.png" class="img-responsive pull-left" /></a>              
+                                <!--<a><img src="/img/rss.png" class="img-responsive pull-left" /></a>                
+                                -->
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-xs-12 col-sm-12" style="margin-top: 45px;">
+
+                            <form action="<?php echo $this->url('application/default', array('controller' => 'index', 'action' => 'pesquisa')); ?>" class="navbar-form navbar-right" role="search" id="cse-search-box">
+                                <input type="hidden" name="cx" value="005454748898768633280:e3_88afxgmi" />
+                                <input type="hidden" name="cof" value="FORID:10" />
+                                <input type="hidden" name="ie" value="utf-8" />
+                                <div class="col-lg-10 col-xs-10 col-sm-10 col-md-10">
+                                    <input accesskey="9" type="text" class="form-control" name="q" placeholder="Buscar">
+                                </div>
+                                <div class="col-lg-2 col-xs-2 col-sm-2 col-md-2">
+                                    <button type="submit" name="sa" class="btn bg-default" style="position: relative;
+                                    left: -50px;"><span class="glyphicon glyphicon-search"></span></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>                  
+            <nav class="navbar navbar-link navbar-default" role="navigation">
+                <div class="container">
+                    <div class="row">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header ">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                <span class="sr-only">Toggle</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>                      
+                        </div>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav menu-geral">
+                                <li><a href="<?php echo $this->url('home'); ?>">Início</a></li>  
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" role="button" aria-expanded="false">Institucional <span class="caret"></span></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="<?php echo $this->url('application/paginas', array('controller' => 'paginas', 'action' => 'pagina', 'key' => '46', 'slug' => 'missao-e-valores')) ?>" >Missão e Valores</a></li>
+                                        <li><a href="<?php echo $this->url('application/paginas', array('controller' => 'paginas', 'action' => 'pagina', 'key' => '47', 'slug' => 'historico')) ?>" >Histórico</a></li>
+                                        <li><a href="<?php echo $this->url('application/paginas', array('controller' => 'paginas', 'action' => 'pagina', 'key' => '48', 'slug' => 'competencias-legais')) ?>" >Competências Legais</a></li>
+                                        <!--<li><a href="<?php echo $this->url('application/paginas', array('controller' => 'paginas', 'action' => 'pagina', 'key' => '47', 'slug' => 'integracao-institucional')) ?>" >Integração Institucional</a></li>-->
+                                        <li><a href="<?php echo $this->url('application/paginas', array('controller' => 'paginas', 'action' => 'pagina', 'key' => '49', 'slug' => 'conselhos')) ?>" >Conselhos</a></li>
+                                        <li><a href="<?php echo $this->url('application/paginas', array('controller' => 'paginas', 'action' => 'pagina', 'key' => '50', 'slug' => 'organograma')) ?>" >Organograma</a></li>
+                                        <li><a href="<?php echo $this->url('application/paginas', array('controller' => 'paginas', 'action' => 'pagina', 'key' => '51', 'slug' => 'quem-e-quem')) ?>" >Quem é Quem</a></li>
+                                        <li><a href="https://www.mg.gov.br/governomg/portal/s/governomg/8717-secretarias-de-estado/1221-1221/5794/5040" target="_blank">Horários de Atendimento</a></li>
+                                        <li><a href="<?php echo $this->url('application/paginas', array('controller' => 'paginas', 'action' => 'pagina', 'key' => '55', 'slug' => 'conselho-de-etica')) ?>" >Conselho de Ética</a></li>
+                                        <li><a href="<?php echo $this->url('application/paginas', array('controller' => 'paginas', 'action' => 'pagina', 'key' => '56', 'slug' => 'acordo-de-resultados')) ?>" >Acordo de Resultados</a></li>
+
+                                    </ul>
+                                </li> 
+                                <!--<li class="dropdown">
+                                   <a href="#" class="dropdown-toggle"  data-hover="dropdown" data-toggle="dropdown" role="button" aria-expanded="false">Usuário <span class="caret"></span></a>
+                                   <ul class="dropdown-menu" role="menu"> 
+                                       
+                                       <li><a href="<?php echo $this->url('usuario/default', array('action' => 'usuario')); ?>">Localizar usuários</a></li> 
+                                  
+                                   </ul>
+                               </li> -->
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle"  data-hover="dropdown" data-toggle="dropdown" role="button" aria-expanded="false">Serviços <span class="caret"></span></a>
+                                    <ul class="dropdown-menu" role="menu">                                    
+                                        <li><a href="<?php echo $this->url('application/default', array('controller' => 'uaitec')); ?>">Uaitec</a></li>                                                                
+                                    </ul>
+                                </li> 
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle"  data-hover="dropdown" data-toggle="dropdown" role="button" aria-expanded="false">Programas e Ações do Governo<span class="caret"></span></a>
+                                    <ul class="dropdown-menu" role="menu" style="width: 100%;">
+                                        <li><a  href="<?php echo $this->url('application/default', array('controller' => 'projetos')); ?>" >Projetos Estratégicos</a></li>                                                                
+                                    </ul>
+                                </li> 
+                                <li><a href="<?php echo $this->url('application/default', array('controller' => 'eventos')); ?>">Eventos</a></li>                                
+                                <li><a href="<?php echo $this->url('application/default', array('controller' => 'noticias')); ?>">Notícias</a></li>                            
+                                <li><a href="<?php echo $this->url('application/default', array('controller' => 'fale-conosco')); ?>">Fale conosco</a></li>
+                            </ul>                        
+                        </div><!-- /.navbar-collapse -->
+                    </div><!-- /.container-fluid -->
+                </div>    
+            </nav>    
+        </header>
+        <div class="container" style="min-height: 400px;">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Inicio Mensagem -->
+                    <?php foreach ($this->flashMessages() as $namespace => $messages) : ?>
+                        <?php if (count($messages)) : ?>
+                            <?php foreach ($messages as $message) : ?>
+                                <div class="alert alert-<?php $namespace == 'error' ? print 'danger' : print $namespace ?>">
+                                    <?php echo $message; ?>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                    <!-- Fim Mensagem -->
+                    <?php echo $this->content; ?>              
+                </div>
+            </div>
+
+        </div> <!-- /container -->
+        <div id="footer"  class="visible-md visible-lg" style="margin-top: 30px; ">
+            <div class="container">
+                <div class="row" style="margin-top: 10px;">            
+
+                    <div class="col-lg-4 col-md-4">                    
+                        <div class="col-lg-6 col-md-6 logo-topo-div">                    
+                            <a href="<?php echo $this->url('home'); ?>">
+
+                            </a>
+                        </div>
+                        <div class="col-lg-6 col-md-6 logo-topo-div" style="position:absolute; left:0px; right: 20px; margin-top: -30px;">  
+                            <a href="http://www.mg.gov.br" target="_blank">
+                                <img class="pull-left logo-topo-governo img-responsive" src="/img/marca-sec-branco.png" style="max-width:390px; width: auto; height: auto;">
+                            </a> 
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-lg-5" style="margin-top: 10px;color: #dbdbdb;">
+                        Rod.Pref Américo Gianetti, 4.001<br> Prédio GERAIS, 8° and. - Serra Verde - 31630-901<br> Belo Horizonte - MG <br><br><small class="font-white text-center">Todos direitos reservados.</small>
+
+                    </div>
+                    <div id="rodape-menu" class="col-lg-3 col-md-3 pull-right" style="margin-top: 2px;border-left: 1px solid #ccc; right: 80px;"> 
+                        <a class="font-white" href="/">Início</a><br>
+                        <a class="font-white" href="/application/paginas/pagina/61/projetos-estrategicos">Projetos Estratégicos</a><br>
+                        <a class="font-white" href="/application/eventos">Eventos</a><br>                          
+                        <a class="font-white" href="/application/noticias">Notícias</a><br>                           
+                        <a class="font-white" href="/application/fale-conosco">Fale conosco</a><br>
+                        <a class="font-white" href="#menuSecundario">Voltar ao Topo</a>                       
+                    </div>
+
+
+                </div>         
+
+            </div>
+        </div>
+        <script>
+            $(document).ready(function () {
+                $("a.altoContraste").click(function () {
+                    $("body").toggleClass("black");
+                    $("nav.navbar").toggleClass("navbar-inverse");
+                    $("#topo-geral").toggleClass("topo-none");
+                    $("li.dropdown>ul.dropdown-menu").toggleClass("black");
+                    $(".panel-body").toggleClass("black");
+                    $(".panel-heading").toggleClass("black2");
+                    $(".text-danger").toggleClass("text-branco");
+                    $(".font-cinza").toggleClass("text-branco");
+                    $(".titulo-legenda").toggleClass("link-branco");
+                    $(".row .col-sm-12").toggleClass("black");
+                    $("#footer").toggleClass("black");
+                    $("header div:first-child").toggleClass("black");
+                });
+
+            });
+        </script>
+        <script>
+
+            $(document).ready(function() {
+                
+                
+                $('p img').attr('src', function (index, attr) {
+                    return attr.replace('../../', '/');
+                });
+                $('img').attr('src', function (index, attr) {
+                    return attr.replace('../../', '/');
+                });
+                $('a').attr('href', function (index, attr) {
+                    return attr.replace('../../', '/');
+                });
+
+                $('p a').attr('href', function (index, attr) {
+                    return attr.replace('http://tecnologia../', '/');
+                });
+
+
+                $('.carousel').carousel({
+                    interval: 4000
+                });
+
+                $('.carousel').carousel('cycle');
+
+                // aumentando a fonte
+                $(".inc-font").click(function () {
+                    var size = $("body").css('font-size');
+
+                    size = size.replace('px', '');
+                    size = parseInt(size) + 1.4;
+
+                    $("body").animate({'font-size': size + 'px'});
+                });
+
+                //diminuindo a fonte
+                $(".dec-font").click(function () {
+                    var size = $("body").css('font-size');
+
+                    size = size.replace('px', '');
+                    size = parseInt(size) - 1.4;
+
+                    $("body").animate({'font-size': size + 'px'});
+                });
+
+                // resetando a fonte
+                $(".res-font").click(function () {
+                    $("body").animate({'font-size': '12px'});
+                });
+            });</script>
+        <?php echo $this->inlineScript() ?>
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-70338959-1', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+    </body>
+</html>

@@ -1,0 +1,148 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="pt-BR">
+    <head>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle('SEADMD - Sistema Eletrônico de Assinatura Digital ' . $this->translate(' - SEDECTES '))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php
+        echo $this->headMeta()
+                ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+                ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <!-- Le styles -->
+        <?php
+        echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/x-icon', 'href' => $this->basePath() . '/img/favicon.PNG'))
+                ->prependStylesheet($this->basePath() . '/css/style.css')
+                ->prependStylesheet($this->basePath() . '/css/bootstrap-theme.min.css')
+                ->prependStylesheet($this->basePath() . '/css/bootstrap.icon-large.min.css')
+                ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')
+                ->prependStylesheet($this->basePath() . '/css/jquery-ui.css')
+        ?>
+
+        <!-- Scripts -->
+        <?php
+        echo $this->headScript()
+                ->prependFile($this->basePath() . '/js/plugins/maskedinput/jquery.maskedinput.min.js')
+                ->prependFile($this->basePath() . '/js/plugins/tinymce/tinymce-init.js')
+                ->prependFile($this->basePath() . '/js/plugins/tinymce/tinymce.min.js')
+                ->prependFile($this->basePath() . '/js/plugins/tinymce/jquery.tinymce.min.js')
+                ->prependFile($this->basePath() . '/js/scripts.js')
+                ->prependFile($this->basePath() . '/js/jquery-ui.js')
+                ->prependFile($this->basePath() . '/js/bootstrap.min.js')
+                ->prependFile($this->basePath() . '/js/jquery.min.js')
+                ->prependFile($this->basePath() . '/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+                ->prependFile($this->basePath() . '/js/html5shiv.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+
+
+        ;
+        ?>
+        <script>
+            $(document).ready(function ($) {
+                //efeito de sumir a msg
+                //efeito de sumir a msg
+                $("div#remover-auto").length == 0 || setTimeout(function () {
+                    $("div#remover-auto").fadeOut(1000);
+                }, 3000);
+                $('#tabs').tab();
+                $('.carousel').carousel();
+
+            });
+        </script>
+
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top bg" role="navigation">
+            <div class="container">
+                <div class="navbar-header" style="min-height: 80px;">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand link-white" href="<?php echo $this->url('usuario') ?>">
+                        <img src="<?php echo $this->basePath('img/logo-estec.png') ?>" alt="ESTEC" style="width:80px; height: 50px;"/>                      
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                    <ul class="nav navbar-nav pull-right" style="margin-top: 30px;">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
+                                <p style="color:#fff">Aluno</p>
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
+                                <p style="color:#fff">Turma</p>
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
+                                <p style="color:#fff">Cliente</p>
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
+                                <p style="color:#fff">Triagem</p>
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
+                                <p style="color:#fff">Feedback</p>
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
+                                <p style="color:#fff">Calendário</p>
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" >
+                                <p style="color:#fff">Logado como: <?php echo $this->usuarioAutenticado()['usuario']->nome; ?><b class="caret"></b></p>
+                            </a>
+                            <ul class="dropdown-menu">                                                                
+                                <li> <a href="/usuario/usuario/alterar-senha">Dados pessoais</a></li>
+                                <li> <a href="/usuario/usuario/alterar-senha">Alterar Senha</a></li>
+                            </ul>
+                        </li>
+                        <li><a style="color: #FF0000 !important" href="/application/auth/logout">Sair</a></li>
+                    </ul> 
+                </div>
+            </div>
+        </nav>
+
+        <div class="container geral" style="margin-top: 110px;">         
+            <div class="row" style="margin-top: 20px;min-height: 350px;"> 
+                <div class="col-lg-12"> 
+                    <!-- Inicio Mensagem -->
+                    <?php foreach ($this->flashMessages() as $namespace => $messages) : ?>
+                        <?php if (count($messages)) : ?>
+                            <?php foreach ($messages as $message) : ?>
+                                <div id="remover-auto" class="alert alert-<?php $namespace == 'error' ? print 'danger' : print $namespace ?>">
+
+                                    <?php
+                                    if ($this->usuarioAutenticado()['usuario']->usuarioTipo->idUsuarioTipo == '1') {
+                                        echo $message;
+                                    }
+                                    ?>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    <?php endforeach; ?> 
+                    <?php echo $this->content; ?>                 
+                </div>
+            </div>
+            <footer class="rodape-geral">        
+                <div class="col-md-12 text-center">
+                    <div style="margin: 0 auto; width: 500px;">
+                        <img src="<?php echo $this->basePath('img/logo-estec.png') ?>" class="img-responsive pull-left" alt="Zend Framework 2" style="width:30px;position: relative; top:-5px;right:-20px;"/>                      
+                        © ESTEC - <?php echo date('Y') ?> | by: Una-Sistemas de Informação.
+                    </div>
+                </div>           
+            </footer>
+        </div>
+        <?php echo $this->inlineScript() ?>
+    </body>
+</html>

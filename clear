@@ -1,0 +1,227 @@
+[33mcommit 3715bd769396849cdc4911b68a968be5727d163d[m
+Merge: 8bb8b14 1895787
+Author: Roberto <roberto.almeida@tecnologia.mg.gov.br>
+Date:   Fri May 2 10:05:06 2014 -0300
+
+    Merge branch 'master' of 200.198.6.4:/repo/uaitec
+
+[33mcommit 8bb8b143bbf357c3b5b735acb5f6c9cb1cd28e8e[m
+Author: unknown <m13287501@D28G8008LLLLLLL.ca.intra>
+Date:   Fri May 2 10:03:16 2014 -0300
+
+    crudContato
+
+[33mcommit 1895787be6c366c49565b8eeadd85c16487682fe[m
+Author: vitor.silva <vitor.vinicius@tecnologia.mg.gov.br>
+Date:   Fri May 2 09:50:38 2014 -0300
+
+    alteracoes
+
+[33mcommit 10238c4e95431ee0de9a37fa705ddac5864eec1c[m
+Author: unknown <m13287501@D28G8008LLLLLLL.ca.intra>
+Date:   Wed Apr 30 16:38:12 2014 -0300
+
+    Cruds atualizando
+
+[33mcommit a94658cc078e17c97b3f2dbfd9fc98f35ea82371[m
+Merge: 6bdef10 4406c7a
+Author: unknown <m13287501@D28G8008LLLLLLL.ca.intra>
+Date:   Wed Apr 30 15:12:17 2014 -0300
+
+    Merge branch 'master' of 200.198.6.4:/repo/uaitec
+
+[33mcommit 6bdef107b7731155c214cd35741494940fd9f8a8[m
+Author: unknown <m13287501@D28G8008LLLLLLL.ca.intra>
+Date:   Wed Apr 30 15:09:59 2014 -0300
+
+    Cruds atualizando
+
+[33mcommit 2a85e148f03fa536b991222f87104aa01a1500f0[m
+Author: unknown <m13287501@D28G8008LLLLLLL.ca.intra>
+Date:   Wed Apr 30 15:09:38 2014 -0300
+
+    Cruds atualizando
+
+[33mcommit 4406c7a6200cb28e6363fc7556b8836eff13562c[m
+Author: vitor.silva <vitor.vinicius@tecnologia.mg.gov.br>
+Date:   Wed Apr 30 15:08:14 2014 -0300
+
+    alteracao
+
+[33mcommit 0c5321210f0a677116603d1858a088ed613e4b74[m
+Author: vitor.silva <vitor.vinicius@tecnologia.mg.gov.br>
+Date:   Wed Apr 30 14:40:09 2014 -0300
+
+    alteracoes
+
+[33mcommit 0912870c5b9c73764a537b777a3e53bd221baa3f[m
+Author: vitor.silva <vitor.vinicius@tecnologia.mg.gov.br>
+Date:   Wed Apr 30 10:35:50 2014 -0300
+
+    alteracoes
+
+[33mcommit 7c40a82ae42e8e29b69ae4b3b5ad7d22b9e8b385[m
+Merge: 28fe700 0912870
+Author: unknown <m13287501@D28G8008LLLLLLL.ca.intra>
+Date:   Wed Apr 30 10:35:47 2014 -0300
+
+    Merge branch 'master' of 200.198.6.4:/repo/uaitec
+
+[33mcommit 28fe7000665a8754437fa760945c15855b693633[m
+Merge: bcdfbf5 a24f648
+Author: unknown <m13287501@D28G8008LLLLLLL.ca.intra>
+Date:   Tue Apr 29 10:38:46 2014 -0300
+
+    Merge branch 'master' of 200.198.6.4:/repo/uaitec
+
+[33mcommit a24f648316aadaaa4b529fd379d0594ed440ecd9[m
+Author: vitor.silva <vitor.vinicius@tecnologia.mg.gov.br>
+Date:   Tue Apr 29 10:38:04 2014 -0300
+
+    alteracoes
+
+[33mcommit bcdfbf5bc6cdd8d136fca17b6902d27d8ffc7233[m
+Author: unknown <m13287501@D28G8008LLLLLLL.ca.intra>
+Date:   Tue Apr 29 10:24:38 2014 -0300
+
+    Cruds atualizando
+
+[33mcommit 1012114e7b4754a7a571dac23a227cfae6b38173[m
+Author: unknown <m13287501@D28G8008LLLLLLL.ca.intra>
+Date:   Mon Apr 28 16:10:28 2014 -0300
+
+    Entidade
+
+[33mcommit df89507b480565a8590bcc94ab285828094b115a[m
+Author: unknown <m13287501@D28G8008LLLLLLL.ca.intra>
+Date:   Mon Apr 28 14:19:34 2014 -0300
+
+    Cruds
+
+[33mcommit b6069da41221ce27555a2202a32a434e45a6a1d0[m
+Author: vitor.silva <vitor.vinicius@tecnologia.mg.gov.br>
+Date:   Mon Apr 28 14:07:38 2014 -0300
+
+    atualizacao
+
+[33mcommit c00fbfc457b2c3543ccd9a120bd947b78d3dfc0e[m
+Author: unknown <m13287501@D28G8008LLLLLLL.ca.intra>
+Date:   Mon Apr 28 09:19:28 2014 -0300
+
+    Crud EntidadeGestora
+
+[33mcommit f8a864c4ac7f823c7c5078edcac540595f4d4e87[m
+Author: unknown <m13287501@D28G8008LLLLLLL.ca.intra>
+Date:   Mon Apr 28 09:13:49 2014 -0300
+
+    Crud EntidadeGestora
+
+[33mcommit 8b2bf9537a90e3c65a082b34ea06f9d1daf02324[m
+Author: unknown <m13287501@D28G8008LLLLLLL.ca.intra>
+Date:   Thu Apr 24 16:43:40 2014 -0300
+
+    teste
+
+[33mcommit c8654031593718b5261c3bc5696f89d20035331d[m
+Author: vitor.silva <vitor.vinicius@tecnologia.mg.gov.br>
+Date:   Thu Apr 24 15:23:29 2014 -0300
+
+    subCategoria
+
+[33mcommit e07559a685579d23f55c466f818d22a7f3b2e1fd[m
+Author: unknown <m13287501@D28G8008LLLLLLL.ca.intra>
+Date:   Thu Apr 24 14:20:31 2014 -0300
+
+    crud Universidade
+
+[33mcommit f2b96f37fed2586f5be90c5b53238d70f439125e[m
+Author: vitor.silva <vitor.vinicius@tecnologia.mg.gov.br>
+Date:   Thu Apr 24 13:59:43 2014 -0300
+
+    teste
+
+[33mcommit 10e9b3ec5d92150dfc2f3e764e6580ea984786f5[m
+Merge: fed4cb8 403732a
+Author: vitor.silva <vitor.vinicius@tecnologia.mg.gov.br>
+Date:   Thu Apr 24 11:29:26 2014 -0300
+
+    teste
+
+[33mcommit fed4cb8361afd0994614c942548144018c489026[m
+Author: vitor.silva <vitor.vinicius@tecnologia.mg.gov.br>
+Date:   Thu Apr 24 10:58:01 2014 -0300
+
+    teter
+
+[33mcommit 403732aa1294a8fe0ae4914da9e72e97631a86ca[m
+Author: unknown <m13287501@D28G8008LLLLLLL.ca.intra>
+Date:   Thu Apr 24 10:45:44 2014 -0300
+
+    criacao de crud universidade e categoria
+
+[33mcommit b7f4697d2f2f897b74617dcda32017cdccbbf906[m
+Author: vitor.silva <vitor.vinicius@tecnologia.mg.gov.br>
+Date:   Wed Apr 23 11:29:10 2014 -0300
+
+    bd
+
+[33mcommit e1dfee0e5c0a0f3af22a28f1d6f206e0d077aec1[m
+Author: vitor.silva <vitor.vinicius@tecnologia.mg.gov.br>
+Date:   Wed Apr 23 11:27:03 2014 -0300
+
+    senha banco
+
+[33mcommit 9418e58fc07382a46353344804fb250f7276fa2d[m
+Author: vitor.silva <vitor.vinicius@tecnologia.mg.gov.br>
+Date:   Wed Apr 23 11:02:24 2014 -0300
+
+    senha banco
+
+[33mcommit b92f1928ee4ea9820aa769b1a3b0e801abd35bad[m
+Author: vitor.silva <vitor.vinicius@tecnologia.mg.gov.br>
+Date:   Wed Apr 23 10:58:32 2014 -0300
+
+    senha banco
+
+[33mcommit 7288205eedc2a7297cfc007549a2e32f142d2d96[m
+Author: vitor.silva <vitor.vinicius@tecnologia.mg.gov.br>
+Date:   Wed Apr 23 10:56:44 2014 -0300
+
+    senha banco
+
+[33mcommit cd7c94218fd96307a0c1d613f564ee0898189ae3[m
+Author: vitor.silva <vitor.vinicius@tecnologia.mg.gov.br>
+Date:   Wed Apr 23 10:53:36 2014 -0300
+
+    teste
+
+[33mcommit 016748be507c0b7f2cc9daee6e20c30321f1ed32[m
+Merge: 177fc3b c299fa4
+Author: vitor.silva <vitor.vinicius@tecnologia.mg.gov.br>
+Date:   Wed Apr 23 10:53:02 2014 -0300
+
+    teste
+
+[33mcommit 177fc3b2637058d73d19c322889e74d333c9a706[m
+Author: vitor.silva <vitor.vinicius@tecnologia.mg.gov.br>
+Date:   Wed Apr 23 10:26:33 2014 -0300
+
+    ajuste paginator
+
+[33mcommit c299fa443f5d4672b178a27de357a396eef26e57[m
+Author: unknown <m13287501@D28G8008LLLLLLL.ca.intra>
+Date:   Tue Apr 22 16:37:43 2014 -0300
+
+    first commit
+
+[33mcommit fb802645aa006c36210020162c8e707eaf248b88[m
+Author: vitor.silva <vitor.vinicius@tecnologia.mg.gov.br>
+Date:   Tue Apr 22 11:28:46 2014 -0300
+
+    teste
+
+[33mcommit 9aae734ba1c52d55d581797409fb5d29e1d96b48[m
+Author: vitor.silva <vitor.vinicius@tecnologia.mg.gov.br>
+Date:   Mon Apr 14 16:57:54 2014 -0300
+
+    Projeto

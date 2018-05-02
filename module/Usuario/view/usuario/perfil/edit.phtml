@@ -1,0 +1,43 @@
+<legend>Perfil: <?php echo $this->nomeUsuarioTipo;        ?></legend>
+
+<div id="accordion">
+
+    <?php
+    foreach ($perfis as $key => $controle)
+    {
+        ?>
+        <div class="panel-heading">
+            <legend class="font-red"><?php echo $key; ?></legend>
+        </div>
+        <div class="panel-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                <th>Ação</th>
+                <th>Permitido</th>
+                <th>Alterar</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <?php
+                foreach ($controle as $permissoes)
+                {
+                    ?>
+                    
+                    <tr>
+                        <td><?php echo $permissoes['acao'] ?></td>
+                        <td><?php echo $permissoes['permissao'] ?></td>
+                        <td><a href="<?php echo $this->url("usuarioPermissao", array("action" => "edit", "key" => $permissoes['idPerfilPermissao'])) ?>" class="btn btn-warning">Alterar </a></td>
+                    </tr>
+             
+                <?php } ?>
+                    <tbody>
+            </table>
+        </div>
+    <?php } ?>
+</div>
+
+<?php echo $this->inlineScript()->prependFile($this->basePath('js/accordion.js')); ?> 
+
+
+

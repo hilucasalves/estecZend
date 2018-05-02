@@ -1,0 +1,115 @@
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('usuario/default', array('action' => 'localizar-usuario')));
+$form->prepare();
+echo $this->form()->openTag($form);
+?>
+<style>
+    #select{width:350px !important; 
+    }
+    .primeiro{width:390px ; 
+    }
+</style>
+<div class="row"> 
+    <legend><h3><span class="glyphicon glyphicon-user"></span>GERENCIAMENTO DE BOLSISTAS</h3></legend>
+
+    <div class="panel panel-info" style="margin-top: 20px;"> 
+        <div class="panel-heading"><b>Localização de pesquisadores </b></div>
+        <div class="panel-body">         
+            <div class="form-group primeiro">
+                <label><?php echo $this->formLabel($form->get('usuario')); ?></label><br>
+                <?php
+                // renderiza html input
+                echo $this->formSelect($form->get('usuario'));
+
+                // renderiza elemento de erro
+                echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<small class="text-danger">')
+                        ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                        ->setMessageCloseString('</small>')
+                        ->render($form->get('usuario'));
+                ?>
+            </div>
+            <div class="form-group">
+                <label for="inputCpf"><?php echo $this->formLabel($form->get('cpf')); ?></label><br>
+                <?php
+                // renderiza html input
+                echo $this->formInput($form->get('cpf'));
+
+                // renderiza elemento de erro
+                echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<small class="text-danger">')
+                        ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                        ->setMessageCloseString('</small>')
+                        ->render($form->get('cpf'));
+                ?>
+            </div>  
+            <div class="form-group">
+                <label for="inputOrgaoLotacao"><?php echo $this->formLabel($form->get('orgaoLotacao')); ?></label><br>
+                <?php
+                echo $this->formSelect($form->get('orgaoLotacao'));
+
+// renderiza elemento de erro
+                echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<small class="text-danger">')
+                        ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                        ->setMessageCloseString('</small>')
+                        ->render($form->get('orgaoLotacao'));
+                ?>
+            </div>      
+        </div>
+        <div class="panel-footer text-right">
+            <?php echo $this->formSubmit($form->get('enviar')); ?>
+
+        </div>
+    </div>
+</div>
+<?php if ($_GET) { ?>
+    <div class="row">   
+        <table  class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>Email</th>
+                    <th>Orgao Lotação</th>
+                    <th colspan="2">Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($paginator as $model) { ?>
+
+                    <tr>
+                        <td><?php echo $model->usuario->nome; ?></td> 
+                        <td><?php echo $model->cpf; ?></td>
+                        <td><?php echo $model->email; ?></td>
+                        <td><?php echo $model->usuario->orgaoLotacao->orgaoLotacao; ?></td>
+                        <td>
+                            <a class="btn btn-sm btn-info" href="<?php echo $this->url('usuario/default', array('action' => 'view', 'key' => $model->__get('usuario')->__get('idUsuario'))); ?>">Ver</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-warning" href="<?php echo $this->url('usuario/default', array('action' => 'edit', 'key' => $model->__get('usuario')->__get('idUsuario'))); ?>">Editar</a>
+                        </td>
+                    </tr>
+
+                <?php } ?>        
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-12">
+        <?php
+        /* add at the end of the file after the table */
+        $methodGet = "?" . $_SERVER['QUERY_STRING'];
+        echo $this->paginationControl(
+                $this->paginator, 'sliding', array('partials/pagination/paginatorRelatorio.phtml', 'Usuario/default'), array('controller' => 'usuario', 'action' => 'localizar-usuario', 'route' => 'usuario/default', 'methodGet' => $methodGet)
+        );
+        ?>
+    </div>
+<?php } ?>
+<?php echo $this->inlineScript()->prependFile($this->basePath('js/plugins/maskedinput/init-maskedinput.js')); ?> 
+
+<?php
+echo $this->inlineScript()->prependFile($this->basePath('js/jquery-ui.js'));
+echo $this->inlineScript()->prependFile($this->basePath('js/autocomplete.js'));
+echo $this->headLink()->prependStylesheet($this->basePath('css/smoothness/jquery-ui.css'));
+?>
