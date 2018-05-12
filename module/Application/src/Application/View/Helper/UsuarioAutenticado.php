@@ -6,35 +6,28 @@ use Zend\View\Helper\AbstractHelper;
 use Zend\Authentication\AuthenticationService;
 use Zend\Authentication\Storage\Session;
 
-class UsuarioAutenticado extends AbstractHelper
-{
+class UsuarioAutenticado extends AbstractHelper {
 
     protected $authService;
 
-    public function getAuthService()
-    {
+    public function getAuthService() {
 
         return $this->authService;
     }
 
-    public function __invoke($namespace = null)
-    {
-        $sessionStorage = new Session('login');
+    public function __invoke($namespace = null) {
+        $sessionStorage = new Session('usuario');
         $this->authService = new AuthenticationService;
         $this->authService->setStorage($sessionStorage);
 
-        if ($this->getAuthService()->hasIdentity())
-        {
+        if ($this->getAuthService()->hasIdentity()) {
             $em = $GLOBALS['entityManager'];
-            $usuario = $em->getRepository('Usuario\Entity\Usuario')->findOneBy(array('login' => $this->getAuthService()->getIdentity()->idLogin));
+            $usuario = $em->getRepository('Application\Entity\Usuario')->findOneBy(array('email' => $this->getAuthService()->getIdentity()->email));
 
             return array(
-                'nome' => $this->getAuthService()->getIdentity()->nome,
-                'idLogin' => $this->getAuthService()->getIdentity()->idLogin,
                 'usuario' => $usuario
             );
-        } else
-        {
+        } else {
             return false;
         }
     }

@@ -1,0 +1,89 @@
+<div class="pull-right">
+    <a class="btn alert-info" href= "<?php echo $_SERVER['HTTP_REFERER']; ?>">Voltar</a>
+</div>
+<legend>
+    <h3>
+        <?php echo $this->escapeHtml('Editar Turma'); ?>
+    </h3>
+</legend>
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('turma', array('action' => 'edit', 'key' => $form->get('turma')->get("idTurma")->getValue())));
+$form->prepare();
+echo $this->form()->openTag($form);
+$turma = $form->get('turma');
+echo $this->formHidden($turma->get("idTurma"));
+?>
+<div class="row">
+    <div class="col-md-3">
+        <div class="form-group">
+            <?php
+            echo $this->formLabel($turma->get('nome'));
+            echo $this->formInput($turma->get('nome'));
+            echo $this->formElementErrors()
+                    ->setMessageOpenFormat('<small class="text-danger">')
+                    ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                    ->setMessageCloseString('</small>')
+                    ->render($turma->get('nome'));
+            ?>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <?php
+            echo $this->formLabel($turma->get('professor'));
+            echo $this->formSelect($turma->get('professor'));
+            echo $this->formElementErrors()
+                    ->setMessageOpenFormat('<small class="text-danger">')
+                    ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                    ->setMessageCloseString('</small>')
+                    ->render($turma->get('professor'));
+            ?>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <?php
+            echo $this->formLabel($turma->get('dataInicio'));
+            echo $this->formInput($turma->get('dataInicio'));
+            echo $this->formElementErrors()
+                    ->setMessageOpenFormat('<small class="text-danger">')
+                    ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                    ->setMessageCloseString('</small>')
+                    ->render($turma->get('dataInicio'));
+            ?>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <?php
+            echo $this->formLabel($turma->get('dataFim'));
+            echo $this->formInput($turma->get('dataFim'));
+            echo $this->formElementErrors()
+                    ->setMessageOpenFormat('<small class="text-danger">')
+                    ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                    ->setMessageCloseString('</small>')
+                    ->render($turma->get('dataFim'));
+            ?>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <div class="form-group">
+            <?php
+            echo $this->formLabel($turma->get('statusTurma'));
+            echo $this->formSelect($turma->get('statusTurma'));
+            echo $this->formElementErrors()
+                    ->setMessageOpenFormat('<small class="text-danger">')
+                    ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                    ->setMessageCloseString('</small>')
+                    ->render($turma->get('statusTurma'));
+            ?>   
+        </div>
+    </div>
+</div>
+<?php
+echo $this->formSubmit($form->get('enviar'));
+echo $this->form()->closeTag();
+?>

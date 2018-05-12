@@ -10,8 +10,8 @@ return array(
                     'host' => 'localhost',
                     'port' => '3306',
                     'user' => 'root',
-                    'password' => '#InoVacao@2014#',
-                    'dbname' => 'estec',
+                    'password' => 'estec2',
+                    'dbname' => 'estec2',
                     'charset' => 'utf8',
                     'driverOptions' => array(
                         1002 => 'SET NAMES utf8'

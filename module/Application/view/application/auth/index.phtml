@@ -12,7 +12,7 @@ if ($messages) {
         <div class="col-lg-12 text-center">   
             <a class="" href="<?php echo $this->url('usuario') ?>">
                 <img src="<?php echo $this->basePath('img/logo-estec.png') ?>" alt="ESTEC" style="width: 100%;"/> 
-                
+
             </a>  
         </div>
         <div class="clearfix"></div>
@@ -31,18 +31,18 @@ if ($messages) {
 
                 echo $this->form()->openTag($form);
                 ?>
-                
-                <span for="CPF">CPF:</span>
+
+                <span for="CPF">Email:</span>
                 <?php
                 // renderiza html input
-                echo $this->formInput($form->get('cpf'));
+                echo $this->formInput($form->get('email'));
 
                 // renderiza elemento de erro
                 echo $this->formElementErrors()
                         ->setMessageOpenFormat('<small class="text-danger">')
                         ->setMessageSeparatorString('</small><br/><small class="text-danger">')
                         ->setMessageCloseString('</small>')
-                        ->render($form->get('cpf'));
+                        ->render($form->get('email'));
                 ?>
                 <BR>
 
@@ -58,9 +58,6 @@ if ($messages) {
                         ->setMessageCloseString('</small>')
                         ->render($form->get('senha'));
                 ?>
-
-
-
             </div>
             <div class="panel-footer text-right">
                 <?php echo $this->formRow($form->get('enviar')); ?> 
@@ -69,7 +66,3 @@ if ($messages) {
         </div>
     </div>
 </div>
-
-
-<!-- <span><a class="link-vermelho" href="#">Problemas ao se conectar?</a></span>
-<!-- <?php echo $this->inlineScript()->prependFile($this->basePath('js/plugins/maskedinput/init-maskedinput.js')); ?> -->

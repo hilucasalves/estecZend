@@ -4,14 +4,10 @@ namespace Application\Form;
 
 use Uaitec\Form\AbstractForm;
 
-class LoginForm extends AbstractForm
-{
+class LoginForm extends AbstractForm {
 
-    public function __construct($name = null)
-    {
-
-        $this->setInputFilter(new Filter\LoginFilter());
-
+    public function __construct($name = null) {
+        
         parent::__construct('login');
         $this->setAttribute('method', 'post');
         $this->setAttribute('role', 'form');
@@ -19,11 +15,11 @@ class LoginForm extends AbstractForm
 
         $this->add(array(
             'type' => 'Text',
-            'name' => 'cpf',
+            'name' => 'email',
             'attributes' => array(
                 'class' => 'form-control',
-                'id' => 'cpf',
-                'placeholder' => 'CPF',
+                'id' => 'email',
+                'placeholder' => 'Email',
             ),
         ));
 

@@ -22,6 +22,24 @@ return array(
                     ),
                 ),
             ),
+            'turma' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/turma[/:action[/pagina/:page][/:key][/:slug]]',
+                    'constraints' => array(
+                        'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'page' => '[0-9]*',
+                        'key' => '[0-9]*',
+                    ),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Turma',
+                        'action' => 'index',
+                        'page' => '1',
+                    ),
+                ),
+            ),
             'application' => array(
                 'type' => 'Literal',
                 'options' => array(
@@ -130,7 +148,7 @@ return array(
             'Application\Controller\Index' => 'Application\Controller\AuthController',
             'Application\Controller\Cron' => 'Application\Controller\CronController',
             'Application\Controller\Auth' => 'Application\Controller\AuthController',
-            'Application\Controller\Usuario' => 'Application\Controller\UsuarioController',
+            'Application\Controller\Turma' => 'Application\Controller\TurmaController',
         ),
     ),
     'module_layouts' => array(

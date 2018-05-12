@@ -64,7 +64,7 @@ class Module
         $di = $event->getTarget()->getServiceLocator();
 
         $auth = new AuthenticationService;
-        $auth->setStorage(new Session('login'));
+        $auth->setStorage(new Session('usuario'));
 
         $routeMatch = $event->getRouteMatch();
 
@@ -84,7 +84,7 @@ class Module
                 return $event->getTarget()->redirect()->toRoute('application/auth');
             } else
             {
-                $perfis = $em->getRepository('Application\Entity\Usuario')->findOneBy(array('login' => $auth->getIdentity()->__get('idLogin')));
+                $perfis = $em->getRepository('Application\Entity\Usuario')->findOneBy(array('email' => $auth->getIdentity()->__get('email')));
                 $acl = $di->get('Usuario\Permissoes\Acl');
                 $permitido = $acl->isAllowed($perfis->usuarioTipo->nome, $controller, $action) ? 1 : 0;
 

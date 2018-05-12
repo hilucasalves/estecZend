@@ -4,12 +4,12 @@ namespace Application\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Uaitec\Model\AbstractModel;
+
 /**
  * @ORM\Entity
  * @ORM\Table(name="usuario")
  */
-class Usuario extends AbstractModel
-{
+class Usuario extends AbstractModel {
 
     /**
      * @ORM\Id
@@ -19,35 +19,54 @@ class Usuario extends AbstractModel
     protected $idUsuario;
 
     /**
-     * @ORM\OneToOne(targetEntity="Application\Entity\Login", inversedBy="usuario", cascade={"persist"})
-     * @ORM\JoinColumn(name="idLogin", referencedColumnName="idLogin")
-     * */
-    protected $login;
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    protected $nome;
-    
-    /**
-     * @ORM\Column(type="string")
-     */
-    protected $telefoneCelular;
-    
-    /**
-     * @ORM\Column(type="string")
-     */
-    protected $dataAtualizacao;
-    /**
-     * @ORM\Column(type="string")
-     */
-    protected $dataInsercao;
-    
-     /**
      * @ORM\ManyToOne(targetEntity="Usuario\Entity\UsuarioTipo", cascade={"persist"})
      * @ORM\JoinColumn(name="idUsuarioTipo", referencedColumnName="idUsuarioTipo")
      */
     protected $usuarioTipo;
 
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $nome;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    protected $dataNascimento;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $email;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $telefoneFixo;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $telefoneCelular;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $senha;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $statusUsuario;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    protected $dataInsercao;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    protected $dataAtualizacao;
 
 }

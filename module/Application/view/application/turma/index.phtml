@@ -1,0 +1,81 @@
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('turma', array('action' => 'index')));
+$form->prepare();
+echo $this->form()->openTag($form);
+?>
+<div class="row">
+    <legend>
+        <h3>
+            <span class="glyphicon glyphicon-th-list"></span> <?php echo $this->title; ?>
+        </h3>
+    </legend>
+    <div class="panel panel-info"> 
+        <div class="panel-heading"><b>Localizar Turmas</b></div>
+        <div class="panel-body">         
+            <div class="form-group">
+                <label><?php echo $this->formLabel($form->get('turma')); ?></label>
+                <?php
+                echo $this->formSelect($form->get('turma'));
+                echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<small class="text-danger">')
+                        ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                        ->setMessageCloseString('</small>')
+                        ->render($form->get('turma'));
+                ?>
+            </div>
+            <div class="form-group">
+                <label><?php echo $this->formLabel($form->get('statusTurma')); ?></label>
+                <?php
+                echo $this->formSelect($form->get('statusTurma'));
+                echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<small class="text-danger">')
+                        ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                        ->setMessageCloseString('</small>')
+                        ->render($form->get('statusTurma'));
+                ?>
+            </div>
+        </div>
+        <div class="panel-footer text-right">
+            <?php echo $this->formSubmit($form->get('enviar')); ?>
+            <a class="btn btn-success" href="<?php echo $this->url('turma', array('controller' => 'turma', 'action' => 'add')) ?>">Nova Turma</a>
+        </div>
+    </div>
+</div>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Status</th>
+            <th>Data Criação</th>
+            <th>Data Atualização</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($this->paginator as $model) : ?>
+            <tr>
+                <td><?php echo $model->__get('nome'); ?></td>
+                <td><?php
+                    if ($model->__get('statusTurma') == 'A') {
+                        echo "Ativo";
+                    } else {
+                        echo "Inativo";
+                    }
+                    ?></td>
+                <td><?php echo $model->__get('dataInsercao')->format('d/m/Y h:i:s'); ?></td>
+                <td><?php if ($model->__get('dataAtualizacao')) echo $model->__get('dataAtualizacao')->format('d/m/Y h:i:s'); ?></td>
+                <td>
+                    <a class="btn btn-info" href="<?php echo $this->url('turma', array('controller' => 'turma', 'action' => 'view', 'key' => $model->__get('idTurma'))) ?>">Ver</a>
+                    <a class="btn btn-warning" href="<?php echo $this->url('turma', array('controller' => 'turma', 'action' => 'edit', 'key' => $model->__get('idTurma'))) ?>">Editar</a>
+                </td>
+            </tr>
+<?php endforeach; ?>
+    </tbody>
+</table>
+<?php
+$methodGet = "?" . $_SERVER['QUERY_STRING'];
+echo $this->paginationControl(
+        $this->paginator, 'sliding', array('partials/pagination/paginatorRelatorio.phtml', 'Turma'), array('controller' => 'Turma', 'action' => 'index', 'route' => 'turma', 'methodGet' => $methodGet)
+);
+?>

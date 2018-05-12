@@ -27,6 +27,11 @@ class UsuarioController extends AbstractCrudController
     }
 
     
+    public function indexAction()
+    {
+        echo "S";die;
+    }
+    
 public function editAction()
     {
         

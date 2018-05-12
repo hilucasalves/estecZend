@@ -19,12 +19,6 @@ class Usuario extends AbstractModel
     protected $idUsuario;
 
     /**
-     * @ORM\OneToOne(targetEntity="Usuario\Entity\UsuarioLogin", inversedBy="usuario", cascade={"persist"})
-     * @ORM\JoinColumn(name="idLogin", referencedColumnName="idLogin")
-     * */
-    protected $login;     
-    
-    /**
      * @ORM\ManyToOne(targetEntity="Usuario\Entity\UsuarioTipo", cascade={"persist"})
      * @ORM\JoinColumn(name="idUsuarioTipo", referencedColumnName="idUsuarioTipo")
      */
@@ -36,31 +30,44 @@ class Usuario extends AbstractModel
     protected $nome;
 
     /**
+     * @ORM\Column(type="date")
+     */
+    protected $dataNascimento;
+
+    /**
      * @ORM\Column(type="string")
      */
-    protected $statusUsuario;
+    protected $email;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $telefoneFixo;
+
     /**
      * @ORM\Column(type="string")
      */
     protected $telefoneCelular;
+
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="string")
      */
-    protected $dataNascimento;
-    
+    protected $senha;
+
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="string")
      */
-    protected $dataAtualizacao;
+    protected $statusUsuario;
+
     /**
      * @ORM\Column(type="datetime")
      */
     protected $dataInsercao;
-    
+
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="datetime")
      */
-    protected $rg;
+    protected $dataAtualizacao;
     
     public function __construct() {
         $this->dataInsercao = new  \DateTime();

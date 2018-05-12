@@ -13,6 +13,7 @@ use Application\Entity\Usuario;
 class AuthController extends AbstractActionController {
 
     public function indexAction() {
+
         $form = new LoginForm();
 
         $resquest = $this->getRequest();
@@ -23,77 +24,38 @@ class AuthController extends AbstractActionController {
 
             $form->setData($resquest->getPost());
 
-
             if ($form->isValid()) {
                 $data = $resquest->getPost()->toArray();
+                
+                
 
                 //Criando o armazem para gravar sessão da autenticação
-                $sessionStorage = new Session("login");
+                $sessionStorage = new Session("usuario");
                 $auth = new AuthenticationService;
                 $auth->setStorage($sessionStorage);
 
                 $authAdpter = $this->getServiceLocator()->get('Application\Auth\DoctrineAdpter');
-                $authAdpter->setCpf($form->getData()['cpf']);
+                $authAdpter->setEmail($form->getData()['email']);
                 $authAdpter->setSenha($form->getData()['senha']);
 
                 $em = $GLOBALS['entityManager'];
-                $verificaFlg = $em->getRepository('Usuario\Entity\UsuarioLogin')->findOneBy(array('cpf' => $form->getData()['cpf']));
-
-
-                if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-                    $ip = $_SERVER['HTTP_CLIENT_IP'];
-                } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-                    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-                } else {
-                    $ip = $_SERVER['REMOTE_ADDR'];
-                }
-
-                $ipTratado = explode('.', $ip);
-                $ipOctetoAluno = $ipTratado[0] . '.' . $ipTratado[1];
 
                 $result = $auth->authenticate($authAdpter);
-
-
-                if ($verificaFlg->status->idLoginStatus != 2) {
-                    if ($verificaFlg->flgExterno == 'I') {
-                        if ($ipOctetoAluno == '10.3' || $ipOctetoAluno == '10.181' || $ipOctetoAluno == '127.0') {
-
-                            if ($result->isValid()) {
-                                $login = $auth->getIdentity();
-                                $login = $login['login'];
-
-                                $sessionStorage->write($login, null);
-                                $time = 7200;
-                                $sessionManager = new \Zend\Session\SessionManager();
-                                $sessionManager->rememberMe($time);
-
-                                return $this->redirect()->toRoute('usuario', array('controller' => 'index'));
-                            } else {
-                                $messages = "CPF ou SENHA ínválido(s)!";
-                            }
-                        } else {
-                            $messages = "Você não pode acessar essa aplicação de fora da CA.";
-                        }
-                    } else {
-
-                        if ($result->isValid()) {
-
-                            $login = $auth->getIdentity();
-                            $login = $login['login'];
-
-                            $sessionStorage->write($login, null);
-                            $time = 7200;
-                            $sessionManager = new \Zend\Session\SessionManager();
-                            $sessionManager->rememberMe($time);
-
-                            return $this->redirect()->toRoute('usuario', array('controller' => 'index'));
-                        } else {
-                            $messages = "CPF ou SENHA ínválido(s)!";
-                        }
-                    }
+                
+                if ($result->isValid()) {
+                    $login = $auth->getIdentity();
+                    $login = $login['usuario'];
+                    $sessionStorage->write($login, null);
+                    $time = 7200;
+                    $sessionManager = new \Zend\Session\SessionManager();
+                    $sessionManager->rememberMe($time);
+                    
+                    return $this->redirect()->toRoute('turma', array('controller' => 'index'));
                 } else {
-                    $messages = "Usuario Inativo";
+                    $messages = "Email ou Senha ínválido(s).";
                 }
+            } else {
+                $messages = "Você não pode acessar essa aplicação de fora da CA.";
             }
         }
 
@@ -438,17 +400,15 @@ class AuthController extends AbstractActionController {
     }
 
     public function usuarioAutenticado() {
-        $sessionStorage = new Session('login');
+        $sessionStorage = new Session('usuario');
         $this->authService = new AuthenticationService;
         $this->authService->setStorage($sessionStorage);
 
         if ($this->getAuthService()->hasIdentity()) {
             $em = $GLOBALS['entityManager'];
-            $usuario = $em->getRepository('Usuario\Entity\Usuario')->findOneBy(array('login' => $this->getAuthService()->getIdentity()->idLogin));
+            $usuario = $em->getRepository('Application\Entity\Usuario')->findOneBy(array('email' => $this->getAuthService()->getIdentity()->email));
 
             return array(
-                'nome' => $this->getAuthService()->getIdentity()->nome,
-                'idLogin' => $this->getAuthService()->getIdentity()->idLogin,
                 'usuario' => $usuario
             );
         } else {
