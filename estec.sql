@@ -3,11 +3,10 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 12-Maio-2018 às 18:56
+-- Generation Time: 14-Maio-2018 às 12:07
 -- Versão do servidor: 10.1.31-MariaDB
 -- PHP Version: 5.6.35
 
-SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
@@ -22,8 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `estec2`
 --
-CREATE DATABASE IF NOT EXISTS `estec2` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `estec2`;
 
 -- --------------------------------------------------------
 
@@ -33,10 +30,11 @@ USE `estec2`;
 
 CREATE TABLE `atendimento` (
   `idAtendimento` int(10) UNSIGNED NOT NULL,
-  `turma_idTurma` int(10) UNSIGNED DEFAULT NULL,
+  `idUsuario` int(10) UNSIGNED NOT NULL,
+  `idTurma` int(10) UNSIGNED DEFAULT NULL,
   `descricao` varchar(255) DEFAULT NULL,
-  `tiposervico_idTipoServico` int(10) UNSIGNED NOT NULL,
-  `matricula_idMatricula` int(10) UNSIGNED DEFAULT NULL,
+  `idTipoServico` int(10) UNSIGNED NOT NULL,
+  `idMatricula` int(10) UNSIGNED DEFAULT NULL,
   `statusAtendimento` char(1) NOT NULL,
   `dataPrevisao` date NOT NULL,
   `dataFim` datetime DEFAULT NULL,
@@ -55,8 +53,8 @@ CREATE TABLE `atendimento` (
 
 CREATE TABLE `matricula` (
   `idMatricula` int(10) UNSIGNED NOT NULL,
-  `usuario_idUsuario` int(10) UNSIGNED NOT NULL,
-  `turma_idTurma` int(10) UNSIGNED NOT NULL,
+  `idUsuario` int(10) UNSIGNED NOT NULL,
+  `idTurma` int(10) UNSIGNED NOT NULL,
   `statusMatricula` char(1) NOT NULL,
   `dataInsercao` datetime NOT NULL,
   `dataAtualizacao` datetime DEFAULT NULL
@@ -70,7 +68,7 @@ CREATE TABLE `matricula` (
 
 CREATE TABLE `movimentacao` (
   `idMovimentacao` int(10) UNSIGNED NOT NULL,
-  `produto_idProduto` int(10) UNSIGNED NOT NULL,
+  `idProduto` int(10) UNSIGNED NOT NULL,
   `qtd` int(10) UNSIGNED NOT NULL,
   `tipoMovimentacao` char(1) NOT NULL,
   `dataValidade` date DEFAULT NULL,
@@ -304,9 +302,7 @@ CREATE TABLE `turma` (
 --
 
 INSERT INTO `turma` (`idTurma`, `idUsuario`, `nome`, `dataInicio`, `dataFim`, `statusTurma`, `dataInsercao`, `dataAtualizacao`) VALUES
-(1, 1, 'Turma 1', '2018-05-11', '2018-06-30', 'A', '0000-00-00 00:00:00', NULL),
-(2, 2, 't2', '2018-05-12', '2018-05-30', 'I', '2018-05-12 12:39:16', NULL),
-(3, 1, 't5', '2018-05-01', '2018-05-30', 'A', '2018-05-12 13:22:53', NULL);
+(1, 1, 'Turma 1', '2018-05-13', '2018-05-30', 'A', '2018-05-13 08:22:38', NULL);
 
 -- --------------------------------------------------------
 
@@ -315,14 +311,14 @@ INSERT INTO `turma` (`idTurma`, `idUsuario`, `nome`, `dataInicio`, `dataFim`, `s
 --
 
 CREATE TABLE `usuario` (
-  `idUsuario` int(11) UNSIGNED NOT NULL,
+  `idUsuario` int(10) UNSIGNED NOT NULL,
   `idUsuarioTipo` int(11) NOT NULL,
   `nome` varchar(100) NOT NULL,
   `dataNascimento` date NOT NULL,
   `email` varchar(50) NOT NULL,
   `telefoneFixo` varchar(15) DEFAULT NULL,
   `telefoneCelular` varchar(15) DEFAULT NULL,
-  `senha` varchar(100) DEFAULT NULL,
+  `senha` varchar(80) DEFAULT NULL,
   `statusUsuario` char(1) NOT NULL,
   `dataInsercao` datetime NOT NULL,
   `dataAtualizacao` datetime DEFAULT NULL
@@ -333,8 +329,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`idUsuario`, `idUsuarioTipo`, `nome`, `dataNascimento`, `email`, `telefoneFixo`, `telefoneCelular`, `senha`, `statusUsuario`, `dataInsercao`, `dataAtualizacao`) VALUES
-(1, 1, 'teste', '1992-04-24', 'teste@teste.com', '31983231019', '31983231019', '$2y$10$SdsU6EEEDPNuP9SnWNJNtuv.K8KDJlLXXO/c6zHjAAyVNGapf5Q/e', 'A', '0000-00-00 00:00:00', NULL),
-(2, 1, 'Teste 2', '2018-01-01', 'teste2@teste.com', '1111111111', '1111111111', NULL, 'A', '0000-00-00 00:00:00', NULL);
+(1, 1, 'Administrador', '2018-05-13', 'teste@teste.com', '(31)34032919', '(31)983231019', '$2y$10$1EdehByZ7CmQ.ppLPp1YTu64aj7N8uAo1otiH/JQyJT2DyUmn6Vgq', 'A', '2018-05-13 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -367,24 +362,25 @@ INSERT INTO `usuariotipo` (`idUsuarioTipo`, `nome`, `dataAtualizacao`) VALUES
 --
 ALTER TABLE `atendimento`
   ADD PRIMARY KEY (`idAtendimento`),
-  ADD KEY `atendimento_FKIndex1` (`tiposervico_idTipoServico`),
-  ADD KEY `atendimento_FKIndex2` (`matricula_idMatricula`),
-  ADD KEY `atendimento_FKIndex3` (`turma_idTurma`);
+  ADD KEY `atendimento_FKIndex1` (`idTipoServico`),
+  ADD KEY `atendimento_FKIndex2` (`idMatricula`),
+  ADD KEY `atendimento_FKIndex3` (`idTurma`),
+  ADD KEY `atendimento_FKIndex4` (`idUsuario`);
 
 --
 -- Indexes for table `matricula`
 --
 ALTER TABLE `matricula`
   ADD PRIMARY KEY (`idMatricula`),
-  ADD KEY `matricula_FKIndex1` (`turma_idTurma`),
-  ADD KEY `matricula_FKIndex2` (`usuario_idUsuario`);
+  ADD KEY `matricula_FKIndex1` (`idTurma`),
+  ADD KEY `matricula_FKIndex2` (`idUsuario`);
 
 --
 -- Indexes for table `movimentacao`
 --
 ALTER TABLE `movimentacao`
   ADD PRIMARY KEY (`idMovimentacao`),
-  ADD KEY `movimentacao_FKIndex1` (`produto_idProduto`);
+  ADD KEY `movimentacao_FKIndex1` (`idProduto`);
 
 --
 -- Indexes for table `perfilacao`
@@ -508,7 +504,13 @@ ALTER TABLE `tiposervico`
 -- AUTO_INCREMENT for table `turma`
 --
 ALTER TABLE `turma`
-  MODIFY `idTurma` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idTurma` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `idUsuario` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `usuariotipo`
@@ -519,6 +521,28 @@ ALTER TABLE `usuariotipo`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Limitadores para a tabela `atendimento`
+--
+ALTER TABLE `atendimento`
+  ADD CONSTRAINT `atendimento_ibfk_1` FOREIGN KEY (`idTipoServico`) REFERENCES `tiposervico` (`idTipoServico`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `atendimento_ibfk_2` FOREIGN KEY (`idMatricula`) REFERENCES `matricula` (`idMatricula`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `atendimento_ibfk_3` FOREIGN KEY (`idTurma`) REFERENCES `turma` (`idTurma`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `atendimento_ibfk_4` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Limitadores para a tabela `matricula`
+--
+ALTER TABLE `matricula`
+  ADD CONSTRAINT `matricula_ibfk_1` FOREIGN KEY (`idTurma`) REFERENCES `turma` (`idTurma`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `matricula_ibfk_2` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Limitadores para a tabela `movimentacao`
+--
+ALTER TABLE `movimentacao`
+  ADD CONSTRAINT `movimentacao_ibfk_1` FOREIGN KEY (`idProduto`) REFERENCES `produto` (`idProduto`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Limitadores para a tabela `perfilpermissao`
@@ -535,11 +559,16 @@ ALTER TABLE `perfilrecurso`
   ADD CONSTRAINT `fk_perfilRecurso_perfilControle1` FOREIGN KEY (`idPerfilControle`) REFERENCES `perfilcontrole` (`idPerfilControle`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Limitadores para a tabela `turma`
+--
+ALTER TABLE `turma`
+  ADD CONSTRAINT `turma_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Limitadores para a tabela `usuario`
 --
 ALTER TABLE `usuario`
   ADD CONSTRAINT `idUsuarioTipo` FOREIGN KEY (`idUsuarioTipo`) REFERENCES `usuariotipo` (`idUsuarioTipo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
