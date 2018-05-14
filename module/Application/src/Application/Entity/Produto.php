@@ -7,16 +7,16 @@ use Uaitec\Model\AbstractModel;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="tiposervico")
+ * @ORM\Table(name="produto")
  */
-class TipoServico extends AbstractModel {
+class Produto extends AbstractModel {
 
     /**
      * @ORM\Id
      * @ORM\Column(type="integer");
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $idTipoServico;
+    protected $idProduto;
 
     /**
      * @ORM\Column(type="string")
@@ -24,14 +24,14 @@ class TipoServico extends AbstractModel {
     protected $nome;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="integer")
      */
-    protected $descricao;
+    protected $qtd;
 
     /**
      * @ORM\Column(type="string")
      */
-    protected $statusTipoServico;
+    protected $statusProduto;
 
     /**
      * @ORM\Column(type="datetime")
@@ -47,20 +47,20 @@ class TipoServico extends AbstractModel {
         $this->dataInsercao = new \DateTime();
     }
 
-    public function getIdTipoServico() {
-        return $this->idTipoServico;
+    public function getIdProduto() {
+        return $this->idProduto;
     }
 
     public function getNome() {
         return $this->nome;
     }
 
-    public function getDescricao() {
-        return $this->descricao;
+    public function getQtd() {
+        return $this->qtd;
     }
 
-    public function getStatusTipoServico() {
-        return $this->statusTipoServico;
+    public function getStatusProduto() {
+        return $this->statusProduto;
     }
 
     public function getDataInsercao() {
@@ -71,20 +71,20 @@ class TipoServico extends AbstractModel {
         return $this->dataAtualizacao;
     }
 
-    public function setIdTipoServico($idTipoServico) {
-        $this->idTipoServico = $idTipoServico;
+    public function setIdProduto($idProduto) {
+        $this->idProduto = $idProduto;
     }
 
     public function setNome($nome) {
         $this->nome = $nome;
     }
 
-    public function setDescricao($descricao) {
-        $this->descricao = $descricao;
+    public function setQtd($qtd) {
+        $this->qtd = $qtd;
     }
 
-    public function setStatusTipoServico($statusTipoServico) {
-        $this->statusTipoServico = $statusTipoServico;
+    public function setStatusProduto($statusProduto) {
+        $this->statusProduto = $statusProduto;
     }
 
     public function setDataInsercao($dataInsercao) {
