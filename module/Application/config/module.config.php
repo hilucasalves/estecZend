@@ -22,6 +22,24 @@ return array(
                     ),
                 ),
             ),
+            'produto' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/produto[/:action[/pagina/:page][/:key][/:slug]]',
+                    'constraints' => array(
+                        'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'page' => '[0-9]*',
+                        'key' => '[0-9]*',
+                    ),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Produto',
+                        'action' => 'index',
+                        'page' => '1',
+                    ),
+                ),
+            ),
             'turma' => array(
                 'type' => 'Segment',
                 'options' => array(
@@ -40,7 +58,7 @@ return array(
                     ),
                 ),
             ),
-                        'tipoServico' => array(
+            'tipoServico' => array(
                 'type' => 'Segment',
                 'options' => array(
                     'route' => '/tipoServico[/:action[/pagina/:page][/:key][/:slug]]',
@@ -168,6 +186,7 @@ return array(
             'Application\Controller\Auth' => 'Application\Controller\AuthController',
             'Application\Controller\Turma' => 'Application\Controller\TurmaController',
             'Application\Controller\TipoServico' => 'Application\Controller\TipoServicoController',
+            'Application\Controller\Produto' => 'Application\Controller\ProdutoController',
         ),
     ),
     'module_layouts' => array(

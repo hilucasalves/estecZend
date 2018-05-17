@@ -1,0 +1,63 @@
+<div class="pull-right">
+    <a class="btn alert-info" href= "<?php echo $_SERVER['HTTP_REFERER']; ?>">Voltar</a>
+</div>
+<legend>
+    <h3>
+        <?php echo $this->escapeHtml('Editar Produto'); ?>
+    </h3>
+</legend>
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('produto', array('action' => 'edit', 'key' => $form->get('produto')->get("idProduto")->getValue())));
+$form->prepare();
+echo $this->form()->openTag($form);
+$produto = $form->get('produto');
+echo $this->formHidden($produto->get("idProduto"));
+?>
+<div class="row">
+    <div class="col-md-3">
+        <div class="form-group">
+            <?php
+            echo $this->formLabel($produto->get('nome'));
+            echo $this->formInput($produto->get('nome'));
+            echo $this->formElementErrors()
+                    ->setMessageOpenFormat('<small class="text-danger">')
+                    ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                    ->setMessageCloseString('</small>')
+                    ->render($produto->get('nome'));
+            ?>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <?php
+            echo $this->formLabel($produto->get('qtd'));
+            echo $this->formInput($produto->get('qtd'));
+            echo $this->formElementErrors()
+                    ->setMessageOpenFormat('<small class="text-danger">')
+                    ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                    ->setMessageCloseString('</small>')
+                    ->render($produto->get('qtd'));
+            ?>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <div class="form-group">
+            <?php
+            echo $this->formLabel($produto->get('statusProduto'));
+            echo $this->formSelect($produto->get('statusProduto'));
+            echo $this->formElementErrors()
+                    ->setMessageOpenFormat('<small class="text-danger">')
+                    ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                    ->setMessageCloseString('</small>')
+                    ->render($produto->get('statusProduto'));
+            ?>   
+        </div>
+    </div>
+</div>
+<?php
+echo $this->formSubmit($form->get('enviar'));
+echo $this->form()->closeTag();
+?>

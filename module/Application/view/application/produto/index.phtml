@@ -1,0 +1,83 @@
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('produto', array('action' => 'index')));
+$form->prepare();
+echo $this->form()->openTag($form);
+?>
+<div class="row">
+    <legend>
+        <h3>
+            <span class="glyphicon glyphicon-th-list"></span> <?php echo $this->title; ?>
+        </h3>
+    </legend>
+    <div class="panel panel-info"> 
+        <div class="panel-heading"><b>Localizar Produtos</b></div>
+        <div class="panel-body">         
+            <div class="form-group">
+                <label><?php echo $this->formLabel($form->get('produto')); ?></label>
+                <?php
+                echo $this->formSelect($form->get('produto'));
+                echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<small class="text-danger">')
+                        ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                        ->setMessageCloseString('</small>')
+                        ->render($form->get('produto'));
+                ?>
+            </div>
+            <div class="form-group">
+                <label><?php echo $this->formLabel($form->get('statusProduto')); ?></label>
+                <?php
+                echo $this->formSelect($form->get('statusProduto'));
+                echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<small class="text-danger">')
+                        ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                        ->setMessageCloseString('</small>')
+                        ->render($form->get('statusProduto'));
+                ?>
+            </div>
+        </div>
+        <div class="panel-footer text-right">
+            <?php echo $this->formSubmit($form->get('enviar')); ?>
+            <a class="btn btn-success" href="<?php echo $this->url('produto', array('controller' => 'Produto', 'action' => 'add')) ?>">Novo Produto</a>
+        </div>
+    </div>
+</div>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Quantidade</th>
+            <th>Status</th>
+            <th>Data Criação</th>
+            <th>Data Atualização</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($this->paginator as $model) : ?>
+            <tr>
+                <td><?php echo $model->__get('nome'); ?></td>
+                <td><?php echo $model->__get('qtd'); ?></td>
+                <td><?php
+                    if ($model->__get('statusProduto') == 'A') {
+                        echo "Ativo";
+                    } else {
+                        echo "Inativo";
+                    }
+                    ?></td>
+                <td><?php echo $model->__get('dataInsercao')->format('d/m/Y h:i:s'); ?></td>
+                <td><?php if ($model->__get('dataAtualizacao')) echo $model->__get('dataAtualizacao')->format('d/m/Y h:i:s'); ?></td>
+                <td>
+                    <a class="btn btn-info" href="<?php echo $this->url('produto', array('controller' => 'Produto', 'action' => 'view', 'key' => $model->__get('idProduto'))) ?>">Ver</a>
+                    <a class="btn btn-primary" href="<?php echo $this->url('produto', array('controller' => 'Produto', 'action' => 'edit', 'key' => $model->__get('idProduto'))) ?>">Editar</a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+<?php
+$methodGet = "?" . $_SERVER['QUERY_STRING'];
+echo $this->paginationControl(
+        $this->paginator, 'sliding', array('partials/pagination/paginatorRelatorio.phtml', 'Produto'), array('controller' => 'Produto', 'action' => 'index', 'route' => 'produto', 'methodGet' => $methodGet)
+);
+?>
