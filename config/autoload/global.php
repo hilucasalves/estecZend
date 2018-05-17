@@ -15,7 +15,7 @@ return array(
     'doctrine_config' => array(
         'driver' => 'pdo_mysql',
         'user' => 'root',
-        'password' => 'estec2',
+        'password' => 'InfoLuck79',
         'dbname' => 'estec2',
         'charset' => 'utf8',
         'driverOptions' => array(

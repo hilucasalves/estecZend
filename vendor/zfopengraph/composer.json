@@ -1,0 +1,46 @@
+{
+    "name": "nikolaposa/zf-open-graph",
+    "description": "ZF2 module which facilitates insertion and utilization of OpenGraph meta tags",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "zf2",
+        "zend",
+        "module",
+        "open graph"
+    ],
+    "homepage": "https://github.com/nikolaposa/ZfOpenGraph",
+    "authors": [
+        {
+            "name": "Nikola Poša",
+            "email": "posa.nikola@gmail.com",
+            "homepage": "http://www.nikolaposa.in.rs"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zend-view": "2.*",
+        "zendframework/zend-modulemanager": "2.*",
+        "zendframework/zend-servicemanager": "2.*"
+    },
+    "require-dev": {
+        "zendframework/zend-mvc": "2.*",
+        "zendframework/zend-config": "2.*",
+        "zendframework/zend-loader": "2.*",
+        "zendframework/zend-stdlib": "2.*",
+        "zendframework/zend-serializer": "2.*",
+        "zendframework/zend-log": "2.*",
+        "zendframework/zend-i18n": "2.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "ZfOpenGraph": "src/"
+        },
+        "classmap": [
+            "src/"
+        ]
+    },
+    "autoload-dev": {
+        "psr-0": { "ZfOpenGraphTest": "tests/" }
+    }
+}
