@@ -1,6 +1,6 @@
 <?php
 $form = $this->form;
-$form->setAttribute('action', $this->url('turma', array('action' => 'index')));
+$form->setAttribute('action', $this->url('tipoServico', array('action' => 'index')));
 $form->prepare();
 echo $this->form()->openTag($form);
 ?>
@@ -11,34 +11,34 @@ echo $this->form()->openTag($form);
         </h3>
     </legend>
     <div class="panel panel-info"> 
-        <div class="panel-heading"><b>Localizar Turmas</b></div>
+        <div class="panel-heading"><b>Localizar Serviços</b></div>
         <div class="panel-body">         
             <div class="form-group">
-                <label><?php echo $this->formLabel($form->get('turma')); ?></label>
+                <label><?php echo $this->formLabel($form->get('servico')); ?></label>
                 <?php
-                echo $this->formSelect($form->get('turma'));
+                echo $this->formSelect($form->get('servico'));
                 echo $this->formElementErrors()
                         ->setMessageOpenFormat('<small class="text-danger">')
                         ->setMessageSeparatorString('</small><br/><small class="text-danger">')
                         ->setMessageCloseString('</small>')
-                        ->render($form->get('turma'));
+                        ->render($form->get('servico'));
                 ?>
             </div>
             <div class="form-group">
-                <label><?php echo $this->formLabel($form->get('statusTurma')); ?></label>
+                <label><?php echo $this->formLabel($form->get('statusTipoServico')); ?></label>
                 <?php
-                echo $this->formSelect($form->get('statusTurma'));
+                echo $this->formSelect($form->get('statusTipoServico'));
                 echo $this->formElementErrors()
                         ->setMessageOpenFormat('<small class="text-danger">')
                         ->setMessageSeparatorString('</small><br/><small class="text-danger">')
                         ->setMessageCloseString('</small>')
-                        ->render($form->get('statusTurma'));
+                        ->render($form->get('statusTipoServico'));
                 ?>
             </div>
         </div>
         <div class="panel-footer text-right">
             <?php echo $this->formSubmit($form->get('enviar')); ?>
-            <a class="btn btn-success" href="<?php echo $this->url('turma', array('controller' => 'turma', 'action' => 'add')) ?>">Nova Turma</a>
+            <a class="btn btn-success" href="<?php echo $this->url('tipoServico', array('controller' => 'TipoServico', 'action' => 'add')) ?>">Novo Serviço</a>
         </div>
     </div>
 </div>
@@ -57,7 +57,7 @@ echo $this->form()->openTag($form);
             <tr>
                 <td><?php echo $model->__get('nome'); ?></td>
                 <td><?php
-                    if ($model->__get('statusTurma') == 'A') {
+                    if ($model->__get('statusTipoServico') == 'A') {
                         echo "Ativo";
                     } else {
                         echo "Inativo";
@@ -66,16 +66,16 @@ echo $this->form()->openTag($form);
                 <td><?php echo $model->__get('dataInsercao')->format('d/m/Y h:i:s'); ?></td>
                 <td><?php if ($model->__get('dataAtualizacao')) echo $model->__get('dataAtualizacao')->format('d/m/Y h:i:s'); ?></td>
                 <td>
-                    <a class="btn btn-info" href="<?php echo $this->url('turma', array('controller' => 'turma', 'action' => 'view', 'key' => $model->__get('idTurma'))) ?>">Ver</a>
-                    <a class="btn btn-primary" href="<?php echo $this->url('turma', array('controller' => 'turma', 'action' => 'edit', 'key' => $model->__get('idTurma'))) ?>">Editar</a>
+                    <a class="btn btn-info" href="<?php echo $this->url('tipoServico', array('controller' => 'TipoServico', 'action' => 'view', 'key' => $model->__get('idTipoServico'))) ?>">Ver</a>
+                    <a class="btn btn-primary" href="<?php echo $this->url('tipoServico', array('controller' => 'TipoServico', 'action' => 'edit', 'key' => $model->__get('idTipoServico'))) ?>">Editar</a>
                 </td>
             </tr>
-<?php endforeach; ?>
+        <?php endforeach; ?>
     </tbody>
 </table>
 <?php
 $methodGet = "?" . $_SERVER['QUERY_STRING'];
 echo $this->paginationControl(
-        $this->paginator, 'sliding', array('partials/pagination/paginatorRelatorio.phtml', 'Turma'), array('controller' => 'Turma', 'action' => 'index', 'route' => 'turma', 'methodGet' => $methodGet)
+        $this->paginator, 'sliding', array('partials/pagination/paginatorRelatorio.phtml', 'TipoServico'), array('controller' => 'TipoServico', 'action' => 'index', 'route' => 'tipoServico', 'methodGet' => $methodGet)
 );
 ?>

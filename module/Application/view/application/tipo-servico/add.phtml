@@ -1,0 +1,49 @@
+<div class="pull-right">
+    <a class="btn alert-info" href= "<?php echo $_SERVER['HTTP_REFERER']; ?>">Voltar</a>
+</div>
+<legend>
+    <h3>
+        <?php echo $this->escapeHtml('Cadastrar Serviço'); ?>
+    </h3>
+</legend>
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('tipoServico', array('action' => 'add')));
+$form->prepare();
+echo $this->form()->openTag($form);
+$tipoServico = $form->get('tiposervico');
+echo $this->formHidden($tipoServico->get("idTipoServico"));
+echo $this->formHidden($tipoServico->get("statusTipoServico")->setValue("A"));
+?>
+<div class="row">
+    <div class="col-md-3">
+        <div class="form-group">
+            <?php
+            echo $this->formLabel($tipoServico->get('nome'));
+            echo $this->formInput($tipoServico->get('nome'));
+            echo $this->formElementErrors()
+                    ->setMessageOpenFormat('<small class="text-danger">')
+                    ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                    ->setMessageCloseString('</small>')
+                    ->render($tipoServico->get('nome'));
+            ?>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <?php
+            echo $this->formLabel($tipoServico->get('descricao'));
+            echo $this->formInput($tipoServico->get('descricao'));
+            echo $this->formElementErrors()
+                    ->setMessageOpenFormat('<small class="text-danger">')
+                    ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                    ->setMessageCloseString('</small>')
+                    ->render($tipoServico->get('descricao'));
+            ?>
+        </div>
+    </div>
+</div>
+<?php
+    echo $this->formSubmit($form->get('enviar'));
+    echo $this->form()->closeTag();
+?>
