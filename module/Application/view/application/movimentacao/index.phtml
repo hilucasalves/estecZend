@@ -1,0 +1,101 @@
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('movimentacao', array('action' => 'index')));
+$form->prepare();
+echo $this->form()->openTag($form);
+?>
+<div class="row">
+    <legend>
+        <h3>
+            <span class="glyphicon glyphicon-th-list"></span> <?php echo $this->title; ?>
+        </h3>
+    </legend>
+    <div class="panel panel-info"> 
+        <div class="panel-heading"><b>Localizar Movimentações</b></div>
+        <div class="panel-body">         
+            <div class="form-group">
+                <label><?php echo $this->formLabel($form->get('produto')); ?></label>
+                <?php
+                echo $this->formSelect($form->get('produto'));
+                echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<small class="text-danger">')
+                        ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                        ->setMessageCloseString('</small>')
+                        ->render($form->get('produto'));
+                ?>
+            </div>
+            <div class="form-group">
+                <label><?php echo $this->formLabel($form->get('tipoMovimentacao')); ?></label>
+                <?php
+                echo $this->formSelect($form->get('tipoMovimentacao'));
+                echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<small class="text-danger">')
+                        ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                        ->setMessageCloseString('</small>')
+                        ->render($form->get('tipoMovimentacao'));
+                ?>
+            </div>
+            <div class="form-group">
+                <label><?php echo $this->formLabel($form->get('statusMovimentacao')); ?></label>
+                <?php
+                echo $this->formSelect($form->get('statusMovimentacao'));
+                echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<small class="text-danger">')
+                        ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                        ->setMessageCloseString('</small>')
+                        ->render($form->get('statusMovimentacao'));
+                ?>
+            </div>
+        </div>
+        <div class="panel-footer text-right">
+            <?php echo $this->formSubmit($form->get('enviar')); ?>
+            <a class="btn btn-success" href="<?php echo $this->url('movimentacao', array('controller' => 'Movimentacao', 'action' => 'add')) ?>">Nova Movimentação</a>
+        </div>
+    </div>
+</div>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Produto</th>
+            <th>Movimentação</th>
+            <th>Quantidade</th>
+            <th>Status</th>
+            <th>Data Criação</th>
+            <th>Data Atualização</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($this->paginator as $model) : ?>
+            <tr>
+                <td><?php echo $model->produto->__get('nome'); ?></td>
+                <td><?php
+                    if ($model->__get('tipoMovimentacao') == 'E') {
+                        echo "Entrada";
+                    } else {
+                        echo "Saída";
+                    }
+                    ?></td>
+                <td><?php echo $model->__get('qtd'); ?></td>
+                <td><?php
+                    if ($model->__get('statusMovimentacao') == 'A') {
+                        echo "Ativo";
+                    } else {
+                        echo "Inativo";
+                    }
+                    ?></td>
+                <td><?php echo $model->__get('dataInsercao')->format('d/m/Y h:i:s'); ?></td>
+                <td><?php if ($model->__get('dataAtualizacao')) echo $model->__get('dataAtualizacao')->format('d/m/Y h:i:s'); ?></td>
+                <td>
+                    <a class="btn btn-info" href="<?php echo $this->url('movimentacao', array('controller' => 'Movimentacao', 'action' => 'view', 'key' => $model->__get('idMovimentacao'))) ?>">Ver</a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+<?php
+$methodGet = "?" . $_SERVER['QUERY_STRING'];
+echo $this->paginationControl(
+        $this->paginator, 'sliding', array('partials/pagination/paginatorRelatorio.phtml', 'Movimentacao'), array('controller' => 'Movimentacao', 'action' => 'index', 'route' => 'movimentacao', 'methodGet' => $methodGet)
+);
+?>

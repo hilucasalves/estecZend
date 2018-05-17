@@ -1,0 +1,75 @@
+<div class="pull-right">
+    <a class="btn alert-info" href= "<?php echo $_SERVER['HTTP_REFERER']; ?>">Voltar</a>
+</div>
+<legend>
+    <h3>
+        <?php echo $this->escapeHtml('Cadastrar Movimentação'); ?>
+    </h3>
+</legend>
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('movimentacao', array('action' => 'add')));
+$form->prepare();
+echo $this->form()->openTag($form);
+$movimentacao = $form->get('movimentacao');
+echo $this->formHidden($movimentacao->get("idMovimentacao"));
+echo $this->formHidden($movimentacao->get("statusMovimentacao")->setValue("A"));
+?>
+<div class="row">
+    <div class="col-md-3">
+        <div class="form-group">
+            <?php
+            echo $this->formLabel($movimentacao->get('produto'));
+            echo $this->formSelect($movimentacao->get('produto'));
+            echo $this->formElementErrors()
+                    ->setMessageOpenFormat('<small class="text-danger">')
+                    ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                    ->setMessageCloseString('</small>')
+                    ->render($movimentacao->get('produto'));
+            ?>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <?php
+            echo $this->formLabel($movimentacao->get('qtd'));
+            echo $this->formInput($movimentacao->get('qtd'));
+            echo $this->formElementErrors()
+                    ->setMessageOpenFormat('<small class="text-danger">')
+                    ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                    ->setMessageCloseString('</small>')
+                    ->render($movimentacao->get('qtd'));
+            ?>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <?php
+            echo $this->formLabel($movimentacao->get('tipoMovimentacao'));
+            echo $this->formSelect($movimentacao->get('tipoMovimentacao'));
+            echo $this->formElementErrors()
+                    ->setMessageOpenFormat('<small class="text-danger">')
+                    ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                    ->setMessageCloseString('</small>')
+                    ->render($movimentacao->get('tipoMovimentacao'));
+            ?>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <?php
+            echo $this->formLabel($movimentacao->get('dataValidade'));
+            echo $this->formInput($movimentacao->get('dataValidade'));
+            echo $this->formElementErrors()
+                    ->setMessageOpenFormat('<small class="text-danger">')
+                    ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                    ->setMessageCloseString('</small>')
+                    ->render($movimentacao->get('dataValidade'));
+            ?>
+        </div>
+    </div>
+</div>
+<?php
+echo $this->formSubmit($form->get('enviar'));
+echo $this->form()->closeTag();
+?>

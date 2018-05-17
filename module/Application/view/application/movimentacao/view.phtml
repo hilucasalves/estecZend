@@ -1,0 +1,33 @@
+<div class="row">   
+    <div class="panel panel-info">
+        <div class="panel-heading"><h3>Produto: <b><?php echo $model->produto->__get('nome'); ?></b></h3></div>
+        <div class="panel-body">
+            <label>Tipo de movimentação: </label>
+            <?php
+            if ($model->__get('tipoMovimentacao') == 'E') {
+                echo "Entrada";
+            } else {
+                echo "Saída";
+            }
+            ?>
+            <br>
+            <label>Quantidade em movimentação: </label><?php echo $model->__get('qtd'); ?>
+            <br>
+            <label>Data de Validade: </label><?php if ($model->__get('dataValidade')) echo $model->__get('dataValidade')->format('d/m/Y'); ?>
+            <br>
+            <label>Status: </label>
+            <?php
+            if ($model->__get('statusMovimentacao') == 'A') {
+                echo "Ativo";
+            } else {
+                echo "Inativo";
+            }
+            ?>
+            <br>
+            <label>Data de Criação: </label> <?php echo $model->__get('dataInsercao')->format('d/m/Y h:i:s'); ?>
+            <br>
+            <label>Data de Atualização: </label> <?php if ($model->__get('dataAtualizacao')) echo $model->__get('dataAtualizacao')->format('d/m/Y h:i:s'); ?>
+        </div>
+    </div>
+</div>
+<a class="btn alert-info" href="<?php echo $_SERVER['HTTP_REFERER']; ?>">Voltar</a>

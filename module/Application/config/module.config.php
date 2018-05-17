@@ -22,6 +22,24 @@ return array(
                     ),
                 ),
             ),
+            'movimentacao' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/movimentacao[/:action[/pagina/:page][/:key][/:slug]]',
+                    'constraints' => array(
+                        'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'page' => '[0-9]*',
+                        'key' => '[0-9]*',
+                    ),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Movimentacao',
+                        'action' => 'index',
+                        'page' => '1',
+                    ),
+                ),
+            ),
             'produto' => array(
                 'type' => 'Segment',
                 'options' => array(
@@ -187,6 +205,7 @@ return array(
             'Application\Controller\Turma' => 'Application\Controller\TurmaController',
             'Application\Controller\TipoServico' => 'Application\Controller\TipoServicoController',
             'Application\Controller\Produto' => 'Application\Controller\ProdutoController',
+            'Application\Controller\Movimentacao' => 'Application\Controller\MovimentacaoController',
         ),
     ),
     'module_layouts' => array(

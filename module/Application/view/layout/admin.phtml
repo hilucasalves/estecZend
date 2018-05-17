@@ -74,9 +74,13 @@
                             </a>
                         </li>
                         <li class="dropdown">
-                            <a href="<?php echo $this->url('produto', array('action' => 'index')) ?>">
-                                <p style="color:#fff">Produto</p>
+                            <a class="dropdown-toggle" data-toggle="dropdown" >
+                                <p style="color:#fff">Produto<b class="caret"></b></p>
                             </a>
+                            <ul class="dropdown-menu">
+                                <li> <a href="<?php echo $this->url('produto', array('action' => 'index')) ?>">Estoque</a></li>
+                                <li> <a href="<?php echo $this->url('movimentacao', array('action' => 'index')) ?>">Movimentação</a></li>
+                            </ul>
                         </li>
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" >
