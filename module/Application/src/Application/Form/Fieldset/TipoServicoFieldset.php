@@ -39,7 +39,7 @@ class TipoServicoFieldset extends Fieldset implements InputFilterProviderInterfa
             'name' => 'descricao',
             'attributes' => array(
                 'class' => 'form-control',
-                'type' => 'text',
+                'type' => 'textarea',
             ),
             'options' => array(
                 'label' => 'Descrição do Serviço:',

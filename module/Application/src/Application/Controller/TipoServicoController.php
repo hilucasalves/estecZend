@@ -72,10 +72,14 @@ class TipoServicoController extends AbstractCrudController {
         $em = $GLOBALS['entityManager'];
         $model = $em->getRepository($this->modelClass)->find($key);
 
-        return array(
-            'urlView' => $this->back(),
-            'model' => $model
-        );
+        if ($model) {
+            return array(
+                'urlView' => $this->back(),
+                'model' => $model
+            );
+        } else {
+            return $this->redirect()->toRoute('tipoServico', array('action' => 'acesso-negado'));
+        }
     }
 
     public function addAction() {
@@ -116,23 +120,28 @@ class TipoServicoController extends AbstractCrudController {
 
         $model = $em->getRepository($this->modelClass)->find($key);
 
-        $form = new TipoServicoForm($em);
-        $form->bind($model);
-        $form->get('enviar')->setValue('Salvar');
+        if ($model) {
 
-        if ($this->getRequest()->isPost()) {
-            $form->setData($this->getRequest()->getPost());
-            if ($form->isValid()) {
-                $em->persist($model);
-                $em->flush();
-                $this->flashMessenger()->addSuccessMessage('Alterado com sucesso.');
-                return $this->redirect()->toRoute($this->route);
+            $form = new TipoServicoForm($em);
+            $form->bind($model);
+            $form->get('enviar')->setValue('Salvar');
+
+            if ($this->getRequest()->isPost()) {
+                $form->setData($this->getRequest()->getPost());
+                if ($form->isValid()) {
+                    $em->persist($model);
+                    $em->flush();
+                    $this->flashMessenger()->addSuccessMessage('Alterado com sucesso.');
+                    return $this->redirect()->toRoute($this->route);
+                }
+                $this->flashMessenger()->addErrorMessage('Erro. Não foi possível alterar.');
             }
-            $this->flashMessenger()->addErrorMessage('Erro. Não foi possível alterar.');
+            return array(
+                'form' => $form,
+            );
+        } else {
+            return $this->redirect()->toRoute('tipoServico', array('action' => 'acesso-negado'));
         }
-        return array(
-            'form' => $form,
-        );
     }
 
 }

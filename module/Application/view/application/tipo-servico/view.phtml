@@ -11,10 +11,10 @@
                 }
             ?>
             <br>
-            <label>Data de Criação: </label> <?php echo $model->__get('dataInsercao')->format('d/m/Y h:i:s'); ?>
+            <label>Data de Criação: </label> <?php echo $model->__get('dataInsercao')->format('d/m/Y H:i:s'); ?>
             <br>
-            <label>Data de Atualização: </label> <?php if ($model->__get('dataAtualizacao')) echo $model->__get('dataAtualizacao')->format('d/m/Y h:i:s'); ?>
+            <label>Data de Atualização: </label> <?php if ($model->__get('dataAtualizacao')) echo $model->__get('dataAtualizacao')->format('d/m/Y H:i:s'); ?>
         </div>
     </div>
 </div>
-<a class="btn alert-info" href="<?php echo $_SERVER['HTTP_REFERER']; ?>">Voltar</a>
+<a class="btn alert-info" href="<?php echo $this->url('tipoServico', array('action' => 'index')); ?>">Voltar</a>

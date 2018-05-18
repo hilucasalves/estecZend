@@ -1,5 +1,5 @@
 <div class="pull-right">
-    <a class="btn alert-info" href= "<?php echo $_SERVER['HTTP_REFERER']; ?>">Voltar</a>
+    <a class="btn alert-info" href= "<?php echo $this->url('tipoServico', array('action' => 'index')); ?>">Voltar</a>
 </div>
 <legend>
     <h3>
@@ -33,7 +33,7 @@ echo $this->formHidden($tipoServico->get("statusTipoServico")->setValue("A"));
         <div class="form-group">
             <?php
             echo $this->formLabel($tipoServico->get('descricao'));
-            echo $this->formInput($tipoServico->get('descricao'));
+            echo $this->formTextarea($tipoServico->get('descricao'));
             echo $this->formElementErrors()
                     ->setMessageOpenFormat('<small class="text-danger">')
                     ->setMessageSeparatorString('</small><br/><small class="text-danger">')
