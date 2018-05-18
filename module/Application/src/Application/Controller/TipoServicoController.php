@@ -98,7 +98,7 @@ class TipoServicoController extends AbstractCrudController {
             if ($form->isValid()) {
                 $em->persist($model);
                 $em->flush();
-                $this->flashMessenger()->addSuccessMessage('Cadastrado com sucesso.');
+                $this->flashMessenger()->addInfoMessage('Cadastrado com sucesso.');
                 return $this->redirect()->toRoute($this->route);
             }
             $this->flashMessenger()->addErrorMessage('Erro. Não foi possível cadastrar.');
@@ -131,7 +131,7 @@ class TipoServicoController extends AbstractCrudController {
                 if ($form->isValid()) {
                     $em->persist($model);
                     $em->flush();
-                    $this->flashMessenger()->addSuccessMessage('Alterado com sucesso.');
+                    $this->flashMessenger()->addInfoMessage('Alterado com sucesso.');
                     return $this->redirect()->toRoute($this->route);
                 }
                 $this->flashMessenger()->addErrorMessage('Erro. Não foi possível alterar.');
