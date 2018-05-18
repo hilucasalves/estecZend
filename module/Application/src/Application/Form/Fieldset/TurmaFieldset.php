@@ -33,7 +33,7 @@ class TurmaFieldset extends Fieldset implements InputFilterProviderInterface {
             ),
             'options' => array(
                 'label' => 'Professor: ',
-                'empty_option' => 'Todos',
+                'empty_option' => 'Selecione',
                 'value_options' => $this->getProfessor(),
             )
         ));
@@ -48,12 +48,15 @@ class TurmaFieldset extends Fieldset implements InputFilterProviderInterface {
                 'label' => 'Nome da Turma:',
             ),
         ));
-
+        
         $this->add(array(
             'name' => 'dataInicio',
             'type' => 'Date',
             'attributes' => array(
                 'class' => 'form-control',
+                'min' => '2018-05-01',
+                'max' => date('Y-m-d', strtotime('+1 years')),
+                'step' => '1',
             ),
             'options' => array(
                 'label' => 'Data Início: ',
@@ -65,6 +68,9 @@ class TurmaFieldset extends Fieldset implements InputFilterProviderInterface {
             'type' => 'Date',
             'attributes' => array(
                 'class' => 'form-control',
+                'min' => date('Y-m-d', strtotime('+1 day')),
+                'max' => date('Y-m-d', strtotime('+1 years')),
+                'step' => '1',
             ),
             'options' => array(
                 'label' => 'Data Fim: ',
@@ -105,7 +111,10 @@ class TurmaFieldset extends Fieldset implements InputFilterProviderInterface {
         return array(
             'nome' => array(
                 'required' => true,
-            )
+            ),
+            'professor' => array(
+                'required' => true,
+            ),
         );
     }
 

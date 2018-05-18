@@ -49,7 +49,7 @@ class LocalizarTurmaForm extends AbstractForm {
             'name' => 'enviar',
             'attributes' => array(
                 'class' => 'btn btn-info',
-                'value' => 'Enviar'
+                'value' => 'Localizar'
             ),
         ));
     }

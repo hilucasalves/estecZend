@@ -72,10 +72,14 @@ class TurmaController extends AbstractCrudController {
         $em = $GLOBALS['entityManager'];
         $model = $em->getRepository($this->modelClass)->find($key);
 
-        return array(
-            'urlView' => $this->back(),
-            'model' => $model
-        );
+        if ($model) {
+            return array(
+                'urlView' => $this->back(),
+                'model' => $model
+            );
+        } else {
+            return $this->redirect()->toRoute('turma', array('action' => 'acesso-negado'));
+        }
     }
 
     public function addAction() {
@@ -91,10 +95,11 @@ class TurmaController extends AbstractCrudController {
         if ($this->getRequest()->isPost()) {
 
             $form->setData($this->getRequest()->getPost());
+
             if ($form->isValid()) {
                 $em->persist($model);
                 $em->flush();
-                $this->flashMessenger()->addSuccessMessage('Cadastrado com sucesso.');
+                $this->flashMessenger()->addInfoMessage('Cadastrado com sucesso.');
                 return $this->redirect()->toRoute($this->route);
             }
             $this->flashMessenger()->addErrorMessage('Erro. Não foi possível cadastrar.');
@@ -115,21 +120,24 @@ class TurmaController extends AbstractCrudController {
         $em = $GLOBALS['entityManager'];
 
         $model = $em->getRepository($this->modelClass)->find($key);
+        if ($model) {
+            $form = new TurmaForm($em);
+            $form->bind($model);
+            $form->get('enviar')->setValue('Salvar');
 
-        $form = new TurmaForm($em);
-        $form->bind($model);
-        $form->get('enviar')->setValue('Salvar');
-        $form->get('turma')->get("professor")->setValue($model->professor->idUsuario);
-
-        if ($this->getRequest()->isPost()) {
-            $form->setData($this->getRequest()->getPost());
-            if ($form->isValid()) {
-                $em->persist($model);
-                $em->flush();
-                $this->flashMessenger()->addSuccessMessage('Alterado com sucesso.');
-                return $this->redirect()->toRoute($this->route);
+            if ($this->getRequest()->isPost()) {
+                $form->setData($this->getRequest()->getPost());
+                if ($form->isValid()) {
+                    $model->__set('dataAtualizacao', new \DateTime());
+                    $em->persist($model);
+                    $em->flush();
+                    $this->flashMessenger()->addInfoMessage('Alterado com sucesso.');
+                    return $this->redirect()->toRoute($this->route);
+                }
+                $this->flashMessenger()->addErrorMessage('Erro. Não foi possível alterar.');
             }
-            $this->flashMessenger()->addErrorMessage('Erro. Não foi possível alterar.');
+        } else {
+            return $this->redirect()->toRoute('turma', array('action' => 'acesso-negado'));
         }
         return array(
             'form' => $form,
