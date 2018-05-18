@@ -12,7 +12,6 @@ class LoginForm extends AbstractForm {
         $this->setAttribute('method', 'post');
         $this->setAttribute('role', 'form');
 
-
         $this->add(array(
             'type' => 'Text',
             'name' => 'email',

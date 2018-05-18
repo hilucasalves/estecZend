@@ -23,22 +23,19 @@ class AuthController extends AbstractActionController {
         if ($resquest->isPost()) {
 
             $form->setData($resquest->getPost());
-
-            if ($form->isValid()) {
-                $data = $resquest->getPost()->toArray();
+            
+            $validator = new \Zend\Validator\EmailAddress();
+            
+            if ($form->isValid() && $validator->isValid($form->getData()['email'])) {
                 
-                
-
                 //Criando o armazem para gravar sessão da autenticação
                 $sessionStorage = new Session("usuario");
                 $auth = new AuthenticationService;
                 $auth->setStorage($sessionStorage);
-
+                
                 $authAdpter = $this->getServiceLocator()->get('Application\Auth\DoctrineAdpter');
                 $authAdpter->setEmail($form->getData()['email']);
                 $authAdpter->setSenha($form->getData()['senha']);
-
-                $em = $GLOBALS['entityManager'];
 
                 $result = $auth->authenticate($authAdpter);
                 
@@ -55,7 +52,7 @@ class AuthController extends AbstractActionController {
                     $messages = "Email ou Senha ínválido(s).";
                 }
             } else {
-                $messages = "Você não pode acessar essa aplicação de fora da CA.";
+                $messages = "Email ou Senha incorreto(s).";
             }
         }
 
