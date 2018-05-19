@@ -41,6 +41,7 @@ class ProdutoFieldset extends Fieldset implements InputFilterProviderInterface {
                 'class' => 'form-control',
                 'type' => 'number',
                 'min' => '0',
+                'max' => '100',
                 'step' => '1'
             ),
             'options' => array(

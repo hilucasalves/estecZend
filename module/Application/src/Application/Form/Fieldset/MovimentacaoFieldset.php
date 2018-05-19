@@ -43,6 +43,7 @@ class MovimentacaoFieldset extends Fieldset implements InputFilterProviderInterf
                 'class' => 'form-control',
                 'type' => 'number',
                 'min' => '1',
+                'max' => '100',
                 'step' => '1'
             ),
             'options' => array(
