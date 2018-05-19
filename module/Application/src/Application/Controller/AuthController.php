@@ -24,9 +24,7 @@ class AuthController extends AbstractActionController {
 
             $form->setData($resquest->getPost());
             
-            $validator = new \Zend\Validator\EmailAddress();
-            
-            if ($form->isValid() && $validator->isValid($form->getData()['email'])) {
+            if ($form->isValid()) {
                 
                 //Criando o armazem para gravar sessão da autenticação
                 $sessionStorage = new Session("usuario");

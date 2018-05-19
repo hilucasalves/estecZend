@@ -13,7 +13,7 @@ class LoginForm extends AbstractForm {
         $this->setAttribute('role', 'form');
 
         $this->add(array(
-            'type' => 'Text',
+            'type' => 'Zend\Form\Element\Email',
             'name' => 'email',
             'attributes' => array(
                 'class' => 'form-control',
