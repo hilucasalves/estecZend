@@ -1,5 +1,5 @@
 <div class="pull-right">
-    <a class="btn alert-info" href= "<?php echo $_SERVER['HTTP_REFERER']; ?>">Voltar</a>
+    <a class="btn alert-info" href= "<?php echo $this->url('produto', array('action' => 'index')); ?>">Voltar</a>
 </div>
 <legend>
     <h3>
@@ -41,8 +41,6 @@ echo $this->formHidden($produto->get("idProduto"));
             ?>
         </div>
     </div>
-</div>
-<div class="row">
     <div class="col-md-3">
         <div class="form-group">
             <?php

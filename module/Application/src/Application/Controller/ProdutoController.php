@@ -70,12 +70,17 @@ class ProdutoController extends AbstractCrudController {
         }
 
         $em = $GLOBALS['entityManager'];
+
         $model = $em->getRepository($this->modelClass)->find($key);
 
-        return array(
-            'urlView' => $this->back(),
-            'model' => $model
-        );
+        if ($model) {
+            return array(
+                'urlView' => $this->back(),
+                'model' => $model
+            );
+        } else {
+            return $this->redirect()->toRoute('produto', array('action' => 'acesso-negado'));
+        }
     }
 
     public function addAction() {
@@ -94,7 +99,7 @@ class ProdutoController extends AbstractCrudController {
             if ($form->isValid()) {
                 $em->persist($model);
                 $em->flush();
-                $this->flashMessenger()->addSuccessMessage('Cadastrado com sucesso.');
+                $this->flashMessenger()->addInfoMessage('Cadastrado com sucesso.');
                 return $this->redirect()->toRoute($this->route);
             }
             $this->flashMessenger()->addErrorMessage('Erro. Não foi possível cadastrar.');
@@ -115,24 +120,28 @@ class ProdutoController extends AbstractCrudController {
         $em = $GLOBALS['entityManager'];
 
         $model = $em->getRepository($this->modelClass)->find($key);
+        if ($model) {
 
-        $form = new ProdutoForm($em);
-        $form->bind($model);
-        $form->get('enviar')->setValue('Salvar');
+            $form = new ProdutoForm($em);
+            $form->bind($model);
+            $form->get('enviar')->setValue('Salvar');
 
-        if ($this->getRequest()->isPost()) {
-            $form->setData($this->getRequest()->getPost());
-            if ($form->isValid()) {
-                $em->persist($model);
-                $em->flush();
-                $this->flashMessenger()->addSuccessMessage('Alterado com sucesso.');
-                return $this->redirect()->toRoute($this->route);
+            if ($this->getRequest()->isPost()) {
+                $form->setData($this->getRequest()->getPost());
+                if ($form->isValid()) {
+                    $em->persist($model);
+                    $em->flush();
+                    $this->flashMessenger()->addInfoMessage('Alterado com sucesso.');
+                    return $this->redirect()->toRoute($this->route);
+                }
+                $this->flashMessenger()->addErrorMessage('Erro. Não foi possível alterar.');
             }
-            $this->flashMessenger()->addErrorMessage('Erro. Não foi possível alterar.');
+            return array(
+                'form' => $form,
+            );
+        } else {
+            return $this->redirect()->toRoute('produto', array('action' => 'acesso-negado'));
         }
-        return array(
-            'form' => $form,
-        );
     }
 
 }

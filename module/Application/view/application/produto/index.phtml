@@ -38,7 +38,7 @@ echo $this->form()->openTag($form);
         </div>
         <div class="panel-footer text-right">
             <?php echo $this->formSubmit($form->get('enviar')); ?>
-            <a class="btn btn-success" href="<?php echo $this->url('produto', array('controller' => 'Produto', 'action' => 'add')) ?>">Novo Produto</a>
+            <a class="btn btn-primary" href="<?php echo $this->url('produto', array('controller' => 'Produto', 'action' => 'add')) ?>">Novo Produto</a>
         </div>
     </div>
 </div>
@@ -65,8 +65,8 @@ echo $this->form()->openTag($form);
                         echo "Inativo";
                     }
                     ?></td>
-                <td><?php echo $model->__get('dataInsercao')->format('d/m/Y h:i:s'); ?></td>
-                <td><?php if ($model->__get('dataAtualizacao')) echo $model->__get('dataAtualizacao')->format('d/m/Y h:i:s'); ?></td>
+                <td><?php echo $model->__get('dataInsercao')->format('d/m/Y H:i:s'); ?></td>
+                <td><?php if ($model->__get('dataAtualizacao')) echo $model->__get('dataAtualizacao')->format('d/m/Y H:i:s'); ?></td>
                 <td>
                     <a class="btn btn-info" href="<?php echo $this->url('produto', array('controller' => 'Produto', 'action' => 'view', 'key' => $model->__get('idProduto'))) ?>">Ver</a>
                     <a class="btn btn-primary" href="<?php echo $this->url('produto', array('controller' => 'Produto', 'action' => 'edit', 'key' => $model->__get('idProduto'))) ?>">Editar</a>

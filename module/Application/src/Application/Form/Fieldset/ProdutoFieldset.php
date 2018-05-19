@@ -40,6 +40,8 @@ class ProdutoFieldset extends Fieldset implements InputFilterProviderInterface {
             'attributes' => array(
                 'class' => 'form-control',
                 'type' => 'number',
+                'min' => '0',
+                'step' => '1'
             ),
             'options' => array(
                 'label' => 'Quantidade em estoque:',
