@@ -42,6 +42,8 @@ class MovimentacaoFieldset extends Fieldset implements InputFilterProviderInterf
             'attributes' => array(
                 'class' => 'form-control',
                 'type' => 'number',
+                'min' => '1',
+                'step' => '1'
             ),
             'options' => array(
                 'label' => 'Quantidade:',
@@ -64,12 +66,15 @@ class MovimentacaoFieldset extends Fieldset implements InputFilterProviderInterf
                 ),
             )
         ));
-        
+
         $this->add(array(
             'name' => 'dataValidade',
             'attributes' => array(
                 'class' => 'form-control',
                 'type' => 'date',
+                'min' => '2018-05-01',
+                'max' => date('Y-m-d', strtotime('+5 years')),
+                'step' => '1',
             ),
             'options' => array(
                 'label' => 'Data de Validade:',

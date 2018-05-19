@@ -49,7 +49,15 @@ echo $this->form()->openTag($form);
         </div>
         <div class="panel-footer text-right">
             <?php echo $this->formSubmit($form->get('enviar')); ?>
-            <a class="btn btn-success" href="<?php echo $this->url('movimentacao', array('controller' => 'Movimentacao', 'action' => 'add')) ?>">Nova Movimentação</a>
+            <?php echo $this->form()->closeTag($form); ?>
+            <a class="btn btn-primary" href="<?php echo $this->url('movimentacao', array('controller' => 'Movimentacao', 'action' => 'add')) ?>">Nova Movimentação</a>
+            <br><br>
+            <form name="teste" method="post" action="<?php echo $this->url('movimentacao', array('controller' => 'Movimentacao', 'action' => 'excel')); ?>">
+                <input type="hidden" name="produto" value="<?php echo $form->get('produto')->getValue(); ?>"/>
+                <input type="hidden" name="statusMovimentacao" value="<?php echo $form->get('statusMovimentacao')->getValue(); ?>"/>
+                <input type="hidden" name="tipoMovimentacao" value="<?php echo $form->get('tipoMovimentacao')->getValue(); ?>"/>
+                <button class="btn btn-primary" type="submit">Gerar Excel</button>
+            </form>
         </div>
     </div>
 </div>
@@ -84,8 +92,8 @@ echo $this->form()->openTag($form);
                         echo "Inativo";
                     }
                     ?></td>
-                <td><?php echo $model->__get('dataInsercao')->format('d/m/Y h:i:s'); ?></td>
-                <td><?php if ($model->__get('dataAtualizacao')) echo $model->__get('dataAtualizacao')->format('d/m/Y h:i:s'); ?></td>
+                <td><?php echo $model->__get('dataInsercao')->format('d/m/Y H:i:s'); ?></td>
+                <td><?php if ($model->__get('dataAtualizacao')) echo $model->__get('dataAtualizacao')->format('d/m/Y H:i:s'); ?></td>
                 <td>
                     <a class="btn btn-info" href="<?php echo $this->url('movimentacao', array('controller' => 'Movimentacao', 'action' => 'view', 'key' => $model->__get('idMovimentacao'))) ?>">Ver</a>
                 </td>
