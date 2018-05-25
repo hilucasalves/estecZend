@@ -22,6 +22,7 @@ return array(
                     ),
                 ),
             ),
+
             'movimentacao' => array(
                 'type' => 'Segment',
                 'options' => array(
@@ -94,6 +95,24 @@ return array(
                     ),
                 ),
             ),
+            'usuarios' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/usuarios[/:action[/pagina/:page][/:key][/:slug]]',
+                    'constraints' => array(
+                        'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'page' => '[0-9]*',
+                        'key' => '[0-9]*',
+                    ),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Usuario',
+                        'action' => 'index',
+                        'page' => '1',
+                    ),
+                ),
+            ),
             'application' => array(
                 'type' => 'Literal',
                 'options' => array(
@@ -118,29 +137,6 @@ return array(
                             ),
                         ),
                     ),
-                    //rota ver fale conosco.
-                    'atualizaPonto' => array(
-                        'type' => 'Literal',
-                        'options' => array(
-                            'route' => '/atualizaPonto',
-                            'defaults' => array(
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller' => 'Index',
-                                'action' => 'atualizaPonto',
-                            ),
-                        ),
-                    ),
-                    'atualizaListaFechamentoBolsista' => array(
-                        'type' => 'Literal',
-                        'options' => array(
-                            'route' => '/atualizaListaFechamentoBolsista',
-                            'defaults' => array(
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller' => 'Index',
-                                'action' => 'atualizaListaFechamentoBolsista',
-                            ),
-                        ),
-                    ),
                     'auth' => array(
                         'type' => 'Segment',
                         'options' => array(
@@ -153,39 +149,6 @@ return array(
                                 '__NAMESPACE__' => 'Application\Controller',
                                 'controller' => 'Auth',
                                 'action' => 'index',
-                            ),
-                        ),
-                    ),
-                    'validarDocumento' => array(
-                        'type' => 'Segment',
-                        'options' => array(
-                            'route' => '/validarDocumento[/:action][/:hash]',
-                            'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                            'defaults' => array(
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller' => 'Auth',
-                                'action' => 'validarDocumento',
-                            ),
-                        ),
-                    ),
-                    'usuario' => array(
-                        'type' => 'Segment',
-                        'options' => array(
-                            'route' => '/usuario[/:action[/pagina/:page][/:key][/:slug]]',
-                            'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'page' => '[0-9]*',
-                                'key' => '[0-9]*',
-                            ),
-                            'defaults' => array(
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller' => 'Usuario',
-                                'action' => 'index',
-                                'page' => '1',
                             ),
                         ),
                     ),
@@ -206,6 +169,7 @@ return array(
             'Application\Controller\TipoServico' => 'Application\Controller\TipoServicoController',
             'Application\Controller\Produto' => 'Application\Controller\ProdutoController',
             'Application\Controller\Movimentacao' => 'Application\Controller\MovimentacaoController',
+            'Application\Controller\Usuario' => 'Application\Controller\UsuarioController',
         ),
     ),
     'module_layouts' => array(

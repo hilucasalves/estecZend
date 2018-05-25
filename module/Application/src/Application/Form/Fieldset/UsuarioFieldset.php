@@ -1,71 +1,145 @@
 <?php
 
-namespace Application\Form;
+namespace Application\Form\Fieldset;
 
-use Uaitec\Form\AbstractForm;
+use Zend\Form\Fieldset;
+use Zend\InputFilter\InputFilterProviderInterface;
+use Application\Entity\Usuario;
+use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
+use Doctrine\Common\Persistence\ObjectManager;
 
-class UsuarioForm extends AbstractForm
-{
+class UsuarioFieldset extends Fieldset implements InputFilterProviderInterface {
 
-    public function __construct($name = null)
-    {
+    public function __construct(ObjectManager $objectManager) {
 
-        parent::__construct('usuarioForm');
+        parent::__construct('usuario');
 
-        $this->setAttribute('method', 'post');
+        $this->setHydrator(new DoctrineHydrator($objectManager))->setObject(new Usuario());
 
         $this->add(array(
             'name' => 'idUsuario',
             'attributes' => array(
+                'class' => 'form-control',
                 'type' => 'hidden',
             ),
         ));
 
         $this->add(array(
-            'name' => 'login',
-            'attributes' => array(
-                'type' => 'hidden',
-            ),
-        ));
-
-        $this->add(array(
+            'type' => 'Zend\Form\Element\Select',
             'name' => 'usuarioTipo',
             'attributes' => array(
-                'type' => 'hidden',
+                'id' => 'usuarioTipo',
+                'class' => 'form-control',
             ),
+            'options' => array(
+                'label' => 'Tipo de Usuário: ',
+                'empty_option' => 'Selecione',
+                'value_options' => $this->getUsuarioTipo(),
+            )
         ));
 
         $this->add(array(
-            'type' => 'Text',
             'name' => 'nome',
             'attributes' => array(
                 'class' => 'form-control',
-                'id' => 'inputNome',
-                'placeholder' => 'Nome Completo',
+                'type' => 'text',
+            ),
+            'options' => array(
+                'label' => 'Nome: ',
             ),
         ));
 
+        $this->add(array(
+            'name' => 'dataNascimento',
+            'type' => 'Date',
+            'attributes' => array(
+                'class' => 'form-control',
+                'min' => '1900-01-01',
+                'max' => date('Y-m-d'),
+                'step' => '1',
+            ),
+            'options' => array(
+                'label' => 'Data de Nascimento: ',
+            ),
+        ));
+
+        $this->add(array(
+            'name' => 'email',
+            'attributes' => array(
+                'class' => 'form-control',
+                'type' => 'email',
+            ),
+            'options' => array(
+                'label' => 'E-mail: ',
+            ),
+        ));
+
+        $this->add(array(
+            'name' => 'telefoneFixo',
+            'attributes' => array(
+                'class' => 'form-control',
+                'type' => 'text',
+            ),
+            'options' => array(
+                'label' => 'Telefone Fixo: ',
+            ),
+        ));
 
         $this->add(array(
             'name' => 'telefoneCelular',
-            'type' => 'Text',
             'attributes' => array(
                 'class' => 'form-control',
-                'id' => 'inputNome',
+                'type' => 'text',
             ),
             'options' => array(
-                'label' => 'Celular:',
+                'label' => 'Telefone Celular: ',
             ),
         ));
 
         $this->add(array(
-            'type' => 'submit',
-            'name' => 'enviar',
+            'type' => 'Zend\Form\Element\Select',
+            'name' => 'statusUsuario',
             'attributes' => array(
-                'class' => 'btn btn-primary',
-                'value' => 'Enviar'
+                'id' => 'statusUsuario',
+                'class' => 'form-control',
             ),
+            'options' => array(
+                'label' => 'Status: ',
+                'value_options' => array(
+                    'A' => 'Ativo',
+                    'I' => 'Inativo',
+                ),
+            )
         ));
+    }
+
+    private function getUsuarioTipo() {
+        $valueOptions = array();
+
+        $em = $GLOBALS['entityManager'];
+        $usuarios = $em->getRepository('Application\Entity\UsuarioTipo')->findAll();
+
+        foreach ($usuarios as $usuario) {
+            $valueOptions[$usuario->__get('idUsuarioTipo')] = $usuario->__get('nome');
+        }
+        return $valueOptions;
+    }
+
+    public function getInputFilterSpecification() {
+        return array(
+            'nome' => array(
+                'required' => true,
+            ),
+            'dataNascimento' => array(
+                'required' => true,
+            ),
+            'email' => array(
+                'required' => true,
+            ),
+            'usuarioTipo' => array(
+                'required' => true,
+            ),
+        );
     }
 
 }

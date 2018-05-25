@@ -1,6 +1,6 @@
 <?php
 
-namespace Usuario\Entity;
+namespace Application\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Uaitec\Model\AbstractModel;
@@ -11,8 +11,7 @@ use Uaitec\Model\AbstractModel;
  * @ORM\Table(name="usuariotipo")
  * 
  */
-class UsuarioTipo extends AbstractModel
-{
+class UsuarioTipo extends AbstractModel {
 
     /**
      * @ORM\Id
@@ -30,5 +29,29 @@ class UsuarioTipo extends AbstractModel
      * @ORM\Column(type="string")
      */
     protected $dataAtualizacao;
+
+    public function getIdUsuarioTipo() {
+        return $this->idUsuarioTipo;
+    }
+
+    public function getNome() {
+        return $this->nome;
+    }
+
+    public function getDataAtualizacao() {
+        return $this->dataAtualizacao;
+    }
+
+    public function setIdUsuarioTipo($idUsuarioTipo) {
+        $this->idUsuarioTipo = $idUsuarioTipo;
+    }
+
+    public function setNome($nome) {
+        $this->nome = $nome;
+    }
+
+    public function setDataAtualizacao($dataAtualizacao) {
+        $this->dataAtualizacao = $dataAtualizacao;
+    }
 
 }

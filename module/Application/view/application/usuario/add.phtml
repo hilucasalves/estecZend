@@ -1,15 +1,101 @@
-<h1><?php echo $this->escapeHtml($this->title); ?></h1>
+<div class="pull-right">
+    <a class="btn alert-info" href= "<?php echo $this->url('usuarios', array('action' => 'index')); ?>">Voltar</a>
+</div>
+<legend>
+    <h3>
+        <?php echo $this->escapeHtml('Cadastrar Usuário'); ?>
+    </h3>
+</legend>
 <?php
 $form = $this->form;
-$form->setAttribute('action', $this->url('usuario', array('action' => 'add')));
+$form->setAttribute('action', $this->url('usuarios', array('action' => 'add')));
 $form->prepare();
-
 echo $this->form()->openTag($form);
-echo $this->formHidden($form->get('idUsuario'));
-echo $this->formRow($form->get('nome'));
-
-echo $this->formSubmit($form->get('enviar'));
-echo $this->form()->closeTag();
+$usuario = $form->get('usuario');
+echo $this->formHidden($usuario->get("idUsuario"));
+echo $this->formHidden($usuario->get("statusUsuario")->setValue("A"));
 ?>
-
-<a class="btn alert-info" href= "<?php echo $this->urlView ?>">Voltar</a>
+<div class="row">
+    <div class="col-md-3">
+        <div class="form-group">
+            <?php
+            echo $this->formLabel($usuario->get('nome'));
+            echo $this->formInput($usuario->get('nome'));
+            echo $this->formElementErrors()
+                    ->setMessageOpenFormat('<small class="text-danger">')
+                    ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                    ->setMessageCloseString('</small>')
+                    ->render($usuario->get('nome'));
+            ?>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <?php
+            echo $this->formLabel($usuario->get('usuarioTipo'));
+            echo $this->formSelect($usuario->get('usuarioTipo'));
+            echo $this->formElementErrors()
+                    ->setMessageOpenFormat('<small class="text-danger">')
+                    ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                    ->setMessageCloseString('</small>')
+                    ->render($usuario->get('usuarioTipo'));
+            ?>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <?php
+            echo $this->formLabel($usuario->get('dataNascimento'));
+            echo $this->formInput($usuario->get('dataNascimento'));
+            echo $this->formElementErrors()
+                    ->setMessageOpenFormat('<small class="text-danger">')
+                    ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                    ->setMessageCloseString('</small>')
+                    ->render($usuario->get('dataNascimento'));
+            ?>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <?php
+            echo $this->formLabel($usuario->get('email'));
+            echo $this->formInput($usuario->get('email'));
+            echo $this->formElementErrors()
+                    ->setMessageOpenFormat('<small class="text-danger">')
+                    ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                    ->setMessageCloseString('</small>')
+                    ->render($usuario->get('email'));
+            ?>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <?php
+            echo $this->formLabel($usuario->get('telefoneFixo'));
+            echo $this->formInput($usuario->get('telefoneFixo'));
+            echo $this->formElementErrors()
+                    ->setMessageOpenFormat('<small class="text-danger">')
+                    ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                    ->setMessageCloseString('</small>')
+                    ->render($usuario->get('telefoneFixo'));
+            ?>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <?php
+            echo $this->formLabel($usuario->get('telefoneCelular'));
+            echo $this->formInput($usuario->get('telefoneCelular'));
+            echo $this->formElementErrors()
+                    ->setMessageOpenFormat('<small class="text-danger">')
+                    ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                    ->setMessageCloseString('</small>')
+                    ->render($usuario->get('telefoneCelular'));
+            ?>
+        </div>
+    </div>
+</div>
+<?php
+    echo $this->formSubmit($form->get('enviar'));
+    echo $this->form()->closeTag();
+?>

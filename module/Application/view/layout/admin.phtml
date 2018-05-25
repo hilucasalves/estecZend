@@ -61,8 +61,12 @@
                     </a>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
                     <ul class="nav navbar-nav pull-right">
+                        <li class="dropdown">
+                            <a href="<?php echo $this->url('usuarios', array('action' => 'index')) ?>">
+                                <p style="color:#fff">Usuário</p>
+                            </a>
+                        </li>
                         <li class="dropdown">
                             <a href="<?php echo $this->url('turma', array('action' => 'index')) ?>">
                                 <p style="color:#fff">Turma</p>

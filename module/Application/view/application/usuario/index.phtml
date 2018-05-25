@@ -1,47 +1,97 @@
-<div class="topo-table">
-    <h1><?php echo $this->escapeHtml($this->title); ?></h1>
-
-    <a class="btn btn-success" href="<?php echo $this->placeholder('url')->add ;?>" style="margin-left: 4px;">Novo usuario</a> <!-- Criar nova categoria -->
-
-
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('usuarios', array('action' => 'index')));
+$form->prepare();
+echo $this->form()->openTag($form);
+?>
+<div class="row">
+    <legend>
+        <h3>
+            <span class="glyphicon glyphicon-th-list"></span> <?php echo $this->title; ?>
+        </h3>
+    </legend>
+    <div class="panel panel-info"> 
+        <div class="panel-heading"><b>Localizar Usuários</b></div>
+        <div class="panel-body">         
+            <div class="form-group">
+                <label><?php echo $this->formLabel($form->get('usuario')); ?></label>
+                <?php
+                echo $this->formSelect($form->get('usuario'));
+                echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<small class="text-danger">')
+                        ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                        ->setMessageCloseString('</small>')
+                        ->render($form->get('usuario'));
+                ?>
+            </div>
+            <div class="form-group">
+                <label><?php echo $this->formLabel($form->get('usuarioTipo')); ?></label>
+                <?php
+                echo $this->formSelect($form->get('usuarioTipo'));
+                echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<small class="text-danger">')
+                        ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                        ->setMessageCloseString('</small>')
+                        ->render($form->get('usuarioTipo'));
+                ?>
+            </div>
+            <div class="form-group">
+                <label><?php echo $this->formLabel($form->get('statusUsuario')); ?></label>
+                <?php
+                echo $this->formSelect($form->get('statusUsuario'));
+                echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<small class="text-danger">')
+                        ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                        ->setMessageCloseString('</small>')
+                        ->render($form->get('statusUsuario'));
+                ?>
+            </div>
+        </div>
+        <div class="panel-footer text-right">
+            <?php echo $this->formSubmit($form->get('enviar')); ?>
+            <a class="btn btn-primary" href="<?php echo $this->url('usuarios', array('controller' => 'usuario', 'action' => 'add')) ?>">Novo Usuário</a>
+        </div>
+    </div>
 </div>
 <div class="corpo-table">
-    <table  class="table table-striped table-bordered">
-        <thead>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Data Criação</th>
+            <th>Data Atualização</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($this->paginator as $model) : ?>
             <tr>
-               
-                <th>Nome</th>
-                <th>Tipo</th>
-                <th>Ação</th>
+                <td><?php echo $model->__get('nome'); ?></td>
+                <td><?php echo $model->__get('email'); ?></td>
+                <td><?php
+                    if ($model->__get('statusUsuario') == 'A') {
+                        echo "Ativo";
+                    } else {
+                        echo "Inativo";
+                    }
+                    ?></td>
+                <td><?php echo $model->__get('dataInsercao')->format('d/m/Y H:i:s'); ?></td>
+                <td><?php if ($model->__get('dataAtualizacao')) echo $model->__get('dataAtualizacao')->format('d/m/Y H:i:s'); ?></td>
+                <td>
+                    <a class="btn btn-info" href="<?php echo $this->url('usuarios', array('controller' => 'usuario', 'action' => 'view', 'key' => $model->__get('idUsuario'))) ?>">Ver</a>
+                    <a class="btn btn-primary" href="<?php echo $this->url('usuarios', array('controller' => 'usuario', 'action' => 'edit', 'key' => $model->__get('idUsuario'))) ?>">Editar</a>
+                </td>
             </tr>
-
-        </thead>
-        <tbody>
-            <?php foreach ($this->paginator as $model) : ?>
-                <tr>
-                   <td><?php echo $model->nome; ?></td> <!-- pegando o registro do banco -->
-                   <td><?php echo $model->usuarioTipo->nome;?></td>   
-                   
-                    <td>
-                        <a class="btn btn-info" href="<?php echo $this->placeholder('url')->view . '/' . $model->__get('idUsuario') ?>">Ver</a>
-                        <a class="btn btn-warning" href="<?php echo $this->placeholder('url')->edit . '/' . $model->__get('idUsuario') ?>">Editar</a>
-                        <a class="btn btn-danger" href="<?php echo $this->placeholder('url')->delete . '/' . $model->__get('idUsuario') ?>">Excluir</a>
-                        
-                       
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-
- 
+<?php endforeach; ?>
+    </tbody>
+</table>
 <?php
-    /* add at the end of the file after the table */
-    echo $this->paginationControl(
-            $this->paginator, 'sliding', array('partials/pagination/paginator.phtml', 'Usuario'), 
-             array('controller' => 'Usuario', 'route' => 'usuario/pagina')
-    );
-    ?>
-</div>
+$methodGet = "?" . $_SERVER['QUERY_STRING'];
+echo $this->paginationControl(
+        $this->paginator, 'sliding', array('partials/pagination/paginatorRelatorio.phtml', 'Usuarios'), array('controller' => 'Usuario', 'action' => 'index', 'route' => 'usuarios', 'methodGet' => $methodGet)
+);
+?>
 
 
