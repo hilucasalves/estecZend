@@ -22,7 +22,6 @@ return array(
                     ),
                 ),
             ),
-
             'movimentacao' => array(
                 'type' => 'Segment',
                 'options' => array(
@@ -72,6 +71,24 @@ return array(
                     'defaults' => array(
                         '__NAMESPACE__' => 'Application\Controller',
                         'controller' => 'Turma',
+                        'action' => 'index',
+                        'page' => '1',
+                    ),
+                ),
+            ),
+            'matricula' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/matricula[/:action[/pagina/:page][/:key][/:slug]]',
+                    'constraints' => array(
+                        'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'page' => '[0-9]*',
+                        'key' => '[0-9]*',
+                    ),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Matricula',
                         'action' => 'index',
                         'page' => '1',
                     ),
@@ -170,6 +187,7 @@ return array(
             'Application\Controller\Produto' => 'Application\Controller\ProdutoController',
             'Application\Controller\Movimentacao' => 'Application\Controller\MovimentacaoController',
             'Application\Controller\Usuario' => 'Application\Controller\UsuarioController',
+            'Application\Controller\Matricula' => 'Application\Controller\MatriculaController',
         ),
     ),
     'module_layouts' => array(

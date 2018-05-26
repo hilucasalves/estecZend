@@ -1,0 +1,98 @@
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('matricula', array('action' => 'index')));
+$form->prepare();
+echo $this->form()->openTag($form);
+?>
+<div class="row">
+    <legend>
+        <h3>
+            <span class="glyphicon glyphicon-th-list"></span> <?php echo $this->title; ?>
+        </h3>
+    </legend>
+    <div class="panel panel-info"> 
+        <div class="panel-heading"><b>Localizar Alunos Matriculados</b></div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label><?php echo $this->formLabel($form->get('aluno')); ?></label>
+                <?php
+                echo $this->formSelect($form->get('aluno'));
+                echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<small class="text-danger">')
+                        ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                        ->setMessageCloseString('</small>')
+                        ->render($form->get('aluno'));
+                ?>
+            </div>
+            <div class="form-group">
+                <label><?php echo $this->formLabel($form->get('turma')); ?></label>
+                <?php
+                echo $this->formSelect($form->get('turma'));
+                echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<small class="text-danger">')
+                        ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                        ->setMessageCloseString('</small>')
+                        ->render($form->get('turma'));
+                ?>
+            </div>
+            <div class="form-group">
+                <label><?php echo $this->formLabel($form->get('statusMatricula')); ?></label>
+                <?php
+                echo $this->formSelect($form->get('statusMatricula'));
+                echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<small class="text-danger">')
+                        ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                        ->setMessageCloseString('</small>')
+                        ->render($form->get('statusMatricula'));
+                ?>
+            </div>
+        </div>
+        <div class="panel-footer text-right">
+            <?php echo $this->formSubmit($form->get('enviar')); ?>
+            <a class="btn btn-primary" href="<?php echo $this->url('matricula', array('controller' => 'matricula', 'action' => 'add')) ?>">Inserir aluno em Turma</a>
+        </div>
+    </div>
+</div>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Aluno</th>
+            <th>Turma</th>
+            <th>Status</th>
+            <th>Data Criação</th>
+            <th>Data Atualização</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($this->paginator as $model) : ?>
+            <tr>
+                <td><?php echo $model->aluno->__get('nome'); ?></td>
+                <td><?php echo $model->turma->__get('nome'); ?></td>
+                <td><?php
+                    if ($model->__get('statusMatricula') == 'C') {
+                        echo "Cursando";
+                    } else if ($model->__get('statusMatricula') == 'A') {
+                        echo "Aprovado";
+                    } else if($model->__get('statusMatricula') == 'R') {
+                        echo "Reprovado";
+                    } else {
+                        echo "Inativo";
+                    }
+                    ?></td>
+                <td><?php echo $model->__get('dataInsercao')->format('d/m/Y H:i:s'); ?></td>
+                <td><?php if ($model->__get('dataAtualizacao')) echo $model->__get('dataAtualizacao')->format('d/m/Y H:i:s'); ?></td>
+                <td>
+                    <a class="btn btn-info" href="<?php echo $this->url('matricula', array('controller' => 'matricula', 'action' => 'view', 'key' => $model->__get('idMatricula'))) ?>">Ver</a>
+                    <a class="btn btn-primary" href="<?php echo $this->url('matricula', array('controller' => 'matricula', 'action' => 'edit', 'key' => $model->__get('idMatricula'))) ?>">Editar</a>
+                </td>
+            </tr>
+<?php endforeach; ?>
+    </tbody>
+</table>
+<?php
+$methodGet = "?" . $_SERVER['QUERY_STRING'];
+echo $this->paginationControl(
+        $this->paginator, 'sliding', array('partials/pagination/paginatorRelatorio.phtml', 'Matricula'), array('controller' => 'Matricula', 'action' => 'index', 'route' => 'matricula', 'methodGet' => $methodGet)
+);
+?>

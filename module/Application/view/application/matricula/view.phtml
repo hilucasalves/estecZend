@@ -1,0 +1,28 @@
+<div class="row">   
+    <div class="panel panel-info">
+        <div class="panel-heading"><h3>Mattrícula de: <b><?php echo $model->aluno->__get('nome'); ?></b></h3></div>
+        <div class="panel-body">
+            <label>Turma: </label> <?php echo $model->turma->__get('nome'); ?>
+            <br>
+            <label>Professor Responsável: </label> <?php echo $model->turma->professor->__get('nome'); ?>
+            <br>
+            <label>Status: </label>
+            <?php
+                    if ($model->__get('statusMatricula') == 'C') {
+                        echo "Cursando";
+                    } else if ($model->__get('statusMatricula') == 'A') {
+                        echo "Aprovado";
+                    } else if($model->__get('statusMatricula') == 'R') {
+                        echo "Reprovado";
+                    } else {
+                        echo "Inativo";
+                    }
+            ?>
+            <br>
+            <label>Data de Criação: </label> <?php echo $model->__get('dataInsercao')->format('d/m/Y H:i:s'); ?>
+            <br>
+            <label>Data de Atualização: </label> <?php if ($model->__get('dataAtualizacao')) echo $model->__get('dataAtualizacao')->format('d/m/Y H:i:s'); ?>
+        </div>
+    </div>
+</div>
+<a class="btn alert-info" href="<?php echo $this->url('matricula', array('action' => 'index')); ?>">Voltar</a>

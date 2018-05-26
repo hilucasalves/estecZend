@@ -1,0 +1,49 @@
+<div class="pull-right">
+    <a class="btn alert-info" href= "<?php echo $this->url('matricula', array('action' => 'index')); ?>">Voltar</a>
+</div>
+<legend>
+    <h3>
+        <?php echo $this->escapeHtml('Cadastrar Matricula'); ?>
+    </h3>
+</legend>
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('matricula', array('action' => 'add')));
+$form->prepare();
+echo $this->form()->openTag($form);
+$matricula = $form->get('matricula');
+echo $this->formHidden($matricula->get("idMatricula"));
+echo $this->formHidden($matricula->get("statusMatricula")->setValue("C"));
+?>
+<div class="row">
+    <div class="col-md-3">
+        <div class="form-group">
+            <?php
+            echo $this->formLabel($matricula->get('aluno'));
+            echo $this->formSelect($matricula->get('aluno'));
+            echo $this->formElementErrors()
+                    ->setMessageOpenFormat('<small class="text-danger">')
+                    ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                    ->setMessageCloseString('</small>')
+                    ->render($matricula->get('aluno'));
+            ?>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <?php
+            echo $this->formLabel($matricula->get('turma'));
+            echo $this->formSelect($matricula->get('turma'));
+            echo $this->formElementErrors()
+                    ->setMessageOpenFormat('<small class="text-danger">')
+                    ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                    ->setMessageCloseString('</small>')
+                    ->render($matricula->get('turma'));
+            ?>
+        </div>
+    </div>
+</div>
+<?php
+    echo $this->formSubmit($form->get('enviar'));
+    echo $this->form()->closeTag();
+?>
