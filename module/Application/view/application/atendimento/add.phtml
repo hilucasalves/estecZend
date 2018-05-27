@@ -1,0 +1,101 @@
+<div class="pull-right">
+    <a class="btn alert-info" href= "<?php echo $this->url('atendimento', array('action' => 'index')); ?>">Voltar</a>
+</div>
+<legend>
+    <h3>
+        <?php echo $this->escapeHtml('Cadastrar Atendimento'); ?>
+    </h3>
+</legend>
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('atendimento', array('action' => 'add')));
+$form->prepare();
+echo $this->form()->openTag($form);
+$atendimento = $form->get('atendimento');
+echo $this->formHidden($atendimento->get("idAtendimento"));
+echo $this->formHidden($atendimento->get("statusAtendimento")->setValue("A"));
+?>
+<div class="row">
+    <div class="col-md-3">
+        <div class="form-group">
+            <?php
+            echo $this->formLabel($atendimento->get('cliente'));
+            echo $this->formSelect($atendimento->get('cliente'));
+            echo $this->formElementErrors()
+                    ->setMessageOpenFormat('<small class="text-danger">')
+                    ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                    ->setMessageCloseString('</small>')
+                    ->render($atendimento->get('cliente'));
+            ?>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <?php
+            echo $this->formLabel($atendimento->get('turma'));
+            echo $this->formSelect($atendimento->get('turma'));
+            echo $this->formElementErrors()
+                    ->setMessageOpenFormat('<small class="text-danger">')
+                    ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                    ->setMessageCloseString('</small>')
+                    ->render($atendimento->get('turma'));
+            ?>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <?php
+            echo $this->formLabel($atendimento->get('tipoServico'));
+            echo $this->formSelect($atendimento->get('tipoServico'));
+            echo $this->formElementErrors()
+                    ->setMessageOpenFormat('<small class="text-danger">')
+                    ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                    ->setMessageCloseString('</small>')
+                    ->render($atendimento->get('tipoServico'));
+            ?>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <?php
+            echo $this->formLabel($atendimento->get('matricula'));
+            echo $this->formSelect($atendimento->get('matricula'));
+            echo $this->formElementErrors()
+                    ->setMessageOpenFormat('<small class="text-danger">')
+                    ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                    ->setMessageCloseString('</small>')
+                    ->render($atendimento->get('matricula'));
+            ?>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <?php
+            echo $this->formLabel($atendimento->get('descricao'));
+            echo $this->formTextarea($atendimento->get('descricao'));
+            echo $this->formElementErrors()
+                    ->setMessageOpenFormat('<small class="text-danger">')
+                    ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                    ->setMessageCloseString('</small>')
+                    ->render($atendimento->get('descricao'));
+            ?>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <?php
+            echo $this->formLabel($atendimento->get('dataPrevisao'));
+            echo $this->formInput($atendimento->get('dataPrevisao'));
+            echo $this->formElementErrors()
+                    ->setMessageOpenFormat('<small class="text-danger">')
+                    ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                    ->setMessageCloseString('</small>')
+                    ->render($atendimento->get('dataPrevisao'));
+            ?>
+        </div>
+    </div>
+</div>
+<?php
+    echo $this->formSubmit($form->get('enviar'));
+    echo $this->form()->closeTag();
+?>

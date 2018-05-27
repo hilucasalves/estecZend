@@ -1,0 +1,117 @@
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('atendimento', array('action' => 'index')));
+$form->prepare();
+echo $this->form()->openTag($form);
+?>
+<div class="row">
+    <legend>
+        <h3>
+            <span class="glyphicon glyphicon-th-list"></span> <?php echo $this->title; ?>
+        </h3>
+    </legend>
+    <div class="panel panel-info"> 
+        <div class="panel-heading"><b>Localizar Atendimentos</b></div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label><?php echo $this->formLabel($form->get('cliente')); ?></label>
+                <?php
+                echo $this->formSelect($form->get('cliente'));
+                echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<small class="text-danger">')
+                        ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                        ->setMessageCloseString('</small>')
+                        ->render($form->get('cliente'));
+                ?>
+            </div>
+            <div class="form-group">
+                <label><?php echo $this->formLabel($form->get('turma')); ?></label>
+                <?php
+                echo $this->formSelect($form->get('turma'));
+                echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<small class="text-danger">')
+                        ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                        ->setMessageCloseString('</small>')
+                        ->render($form->get('turma'));
+                ?>
+            </div>
+            <div class="form-group">
+                <label><?php echo $this->formLabel($form->get('dataPrevisao')); ?></label>
+                <?php
+                echo $this->formInput($form->get('dataPrevisao'));
+                echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<small class="text-danger">')
+                        ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                        ->setMessageCloseString('</small>')
+                        ->render($form->get('dataPrevisao'));
+                ?>
+            </div>
+            <div class="form-group">
+                <label><?php echo $this->formLabel($form->get('statusAtendimento')); ?></label>
+                <?php
+                echo $this->formSelect($form->get('statusAtendimento'));
+                echo $this->formElementErrors()
+                        ->setMessageOpenFormat('<small class="text-danger">')
+                        ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                        ->setMessageCloseString('</small>')
+                        ->render($form->get('statusAtendimento'));
+                ?>
+            </div>
+        </div>
+        <div class="panel-footer text-right">
+            <?php echo $this->formSubmit($form->get('enviar')); ?>
+            <a class="btn btn-primary" href="<?php echo $this->url('atendimento', array('controller' => 'atendimento', 'action' => 'add')) ?>">Inserir atendimento</a>
+            <br><br>
+            <form name="teste" method="post" action="<?php echo $this->url('atendimento', array('controller' => 'Atendimento', 'action' => 'excel')); ?>">
+                <input type="hidden" name="cliente" value="<?php echo $form->get('cliente')->getValue(); ?>"/>
+                <input type="hidden" name="turma" value="<?php echo $form->get('turma')->getValue(); ?>"/>
+                <input type="hidden" name="dataPrevisao" value="<?php echo $form->get('dataPrevisao')->getValue(); ?>"/>
+                <input type="hidden" name="statusAtendimento" value="<?php echo $form->get('statusAtendimento')->getValue(); ?>"/>
+                <button class="btn btn-primary" type="submit">Gerar Excel</button>
+            </form>
+        </div>
+    </div>
+</div>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Cliente</th>
+            <th>Turma</th>
+            <th>Serviço</th>
+            <th>Status</th>
+            <th>Data Criação</th>
+            <th>Data Atualização</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($this->paginator as $model) : ?>
+            <tr>
+                <td><?php echo $model->cliente->__get('nome'); ?></td>
+                <td><?php echo $model->turma->__get('nome'); ?></td>
+                <td><?php echo $model->tipoServico->__get('nome'); ?></td>
+                <td><?php
+                    if ($model->__get('statusAtendimento') == 'A') {
+                        echo "Ativo";
+                    } else if ($model->__get('statusAtendimento') == 'F') {
+                        echo "Finalizado";
+                    } else {
+                        echo "Inativo";
+                    }
+                    ?></td>
+                <td><?php echo $model->__get('dataInsercao')->format('d/m/Y H:i:s'); ?></td>
+                <td><?php if ($model->__get('dataAtualizacao')) echo $model->__get('dataAtualizacao')->format('d/m/Y H:i:s'); ?></td>
+                <td>
+                    <a class="btn btn-info" href="<?php echo $this->url('atendimento', array('controller' => 'atendimento', 'action' => 'view', 'key' => $model->__get('idAtendimento'))) ?>">Ver</a>
+                    <a class="btn btn-primary" href="<?php echo $this->url('atendimento', array('controller' => 'atendimento', 'action' => 'edit', 'key' => $model->__get('idAtendimento'))) ?>">Editar</a>
+                </td>
+            </tr>
+<?php endforeach; ?>
+    </tbody>
+</table>
+<?php
+$methodGet = "?" . $_SERVER['QUERY_STRING'];
+echo $this->paginationControl(
+        $this->paginator, 'sliding', array('partials/pagination/paginatorRelatorio.phtml', 'Atendimento'), array('controller' => 'Atendimento', 'action' => 'index', 'route' => 'atendimento', 'methodGet' => $methodGet)
+);
+?>

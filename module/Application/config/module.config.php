@@ -22,6 +22,24 @@ return array(
                     ),
                 ),
             ),
+            'atendimento' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/atendimento[/:action[/pagina/:page][/:key][/:slug]]',
+                    'constraints' => array(
+                        'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'page' => '[0-9]*',
+                        'key' => '[0-9]*',
+                    ),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Atendimento',
+                        'action' => 'index',
+                        'page' => '1',
+                    ),
+                ),
+            ),
             'movimentacao' => array(
                 'type' => 'Segment',
                 'options' => array(
@@ -188,6 +206,7 @@ return array(
             'Application\Controller\Movimentacao' => 'Application\Controller\MovimentacaoController',
             'Application\Controller\Usuario' => 'Application\Controller\UsuarioController',
             'Application\Controller\Matricula' => 'Application\Controller\MatriculaController',
+            'Application\Controller\Atendimento' => 'Application\Controller\AtendimentoController',
         ),
     ),
     'module_layouts' => array(

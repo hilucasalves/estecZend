@@ -1,0 +1,42 @@
+<div class="row">   
+    <div class="panel panel-info">
+        <div class="panel-heading"><h3>Atendimento de: <b><?php echo $model->cliente->__get('nome'); ?></b></h3></div>
+        <div class="panel-body">
+            <label>Turma: </label> <?php echo $model->turma->__get('nome'); ?>
+            <br>
+            <label>Professor Responsável: </label> <?php echo $model->turma->professor->__get('nome'); ?>
+            <br>
+            <label>Aluno: </label> <?php echo $model->matricula->aluno->__get('nome'); ?>
+            <br>
+            <label>Serviço: </label> <?php echo $model->tipoServico->__get('nome'); ?>
+            <br>
+            <label>Descrição: </label> <?php echo $model->__get('descricao'); ?>
+            <br>
+            <label>Data de Previsão: </label> <?php echo $model->__get('dataPrevisao')->format('d/m/Y'); ?>
+            <br>
+            <label>Data de Finalização: </label> <?php if ($model->__get('dataFim')) echo $model->__get('dataFim')->format('d/m/Y H:i:s'); ?>
+            <br>
+            <label>FeedBack: </label> <?php echo $model->__get('feedback'); ?>
+            <br>
+            <label>Nota: </label> <?php echo $model->__get('nota'); ?>
+            <br>
+            <label>Observação: </label> <?php echo $model->__get('observacao'); ?>
+            <br>
+            <label>Status: </label>
+            <?php
+                if ($model->__get('statusAtendimento') == 'A') {
+                    echo "Ativo";
+                } else if ($model->__get('statusAtendimento') == 'F') {
+                    echo "Finalizado";
+                } else {
+                    echo "Inativo";
+                }
+            ?>
+            <br>
+            <label>Data de Criação: </label> <?php echo $model->__get('dataInsercao')->format('d/m/Y H:i:s'); ?>
+            <br>
+            <label>Data de Atualização: </label> <?php if ($model->__get('dataAtualizacao')) echo $model->__get('dataAtualizacao')->format('d/m/Y H:i:s'); ?>
+        </div>
+    </div>
+</div>
+<a class="btn alert-info" href="<?php echo $this->url('atendimento', array('action' => 'index')); ?>">Voltar</a>

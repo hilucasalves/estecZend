@@ -68,7 +68,7 @@ class Atendimento extends AbstractModel {
     protected $feedback;
 
     /**
-     * @ORM\Column(type="double")
+     * @ORM\Column(type="decimal")
      */
     protected $nota;
 
