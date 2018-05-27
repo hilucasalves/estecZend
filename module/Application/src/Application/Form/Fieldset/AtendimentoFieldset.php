@@ -175,7 +175,7 @@ class AtendimentoFieldset extends Fieldset implements InputFilterProviderInterfa
         $valueOptions = array();
 
         $em = $GLOBALS['entityManager'];
-        $matriculas = $em->getRepository('Application\Entity\matricula')->findAll();
+        $matriculas = $em->getRepository('Application\Entity\Matricula')->findAll();
 
         foreach ($matriculas as $matricula) {
             $valueOptions[$matricula->__get('idMatricula')] = $matricula->aluno->__get('nome');
