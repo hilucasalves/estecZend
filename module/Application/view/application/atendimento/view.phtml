@@ -8,19 +8,22 @@
             <br>
             <label>Aluno: </label> <?php echo $model->matricula->aluno->__get('nome'); ?>
             <br>
-            <label>Serviço: </label> <?php echo $model->tipoServico->__get('nome'); ?>
+            <label>Serviço: </label><?php echo $model->tipoServico->__get('nome'); ?>
             <br>
-            <label>Descrição: </label> <?php echo $model->__get('descricao'); ?>
+            <label>Descrição: </label>
+            <textarea readonly class="form-control" rows="3" id="comment"><?php echo $model->__get('descricao'); ?></textarea>
             <br>
             <label>Data de Previsão: </label> <?php echo $model->__get('dataPrevisao')->format('d/m/Y'); ?>
             <br>
             <label>Data de Finalização: </label> <?php if ($model->__get('dataFim')) echo $model->__get('dataFim')->format('d/m/Y H:i:s'); ?>
             <br>
-            <label>FeedBack: </label> <?php echo $model->__get('feedback'); ?>
+            <label>FeedBack: </label>
+            <textarea readonly class="form-control" rows="3" id="comment"><?php echo $model->__get('feedback'); ?></textarea>
             <br>
             <label>Nota: </label> <?php echo $model->__get('nota'); ?>
             <br>
-            <label>Observação: </label> <?php echo $model->__get('observacao'); ?>
+            <label>Observação: </label>
+            <textarea readonly class="form-control" rows="3" id="comment"><?php echo $model->__get('observacao'); ?></textarea>
             <br>
             <label>Status: </label>
             <?php
