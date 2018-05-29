@@ -56,7 +56,7 @@ echo $this->formHidden($movimentacao->get("statusMovimentacao")->setValue("A"));
         </div>
     </div>
     <div class="col-md-3">
-        <div class="form-group">
+        <div class="form-group" id="dataValidade">
             <?php
             echo $this->formLabel($movimentacao->get('dataValidade'));
             echo $this->formInput($movimentacao->get('dataValidade'));
@@ -73,3 +73,14 @@ echo $this->formHidden($movimentacao->get("statusMovimentacao")->setValue("A"));
 echo $this->formSubmit($form->get('enviar'));
 echo $this->form()->closeTag();
 ?>
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#tipoMovimentacao").change(function() {
+        if($("#tipoMovimentacao").val() == "S"){
+            $("#dataValidade").hide();
+        } else {
+            $("#dataValidade").show();
+        }
+    });
+});
+</script>
