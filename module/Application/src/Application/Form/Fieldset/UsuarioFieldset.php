@@ -78,7 +78,7 @@ class UsuarioFieldset extends Fieldset implements InputFilterProviderInterface {
             'name' => 'telefoneFixo',
             'attributes' => array(
                 'class' => 'form-control',
-                'type' => 'text',
+                'type' => 'number',
             ),
             'options' => array(
                 'label' => 'Telefone Fixo: ',
@@ -89,7 +89,7 @@ class UsuarioFieldset extends Fieldset implements InputFilterProviderInterface {
             'name' => 'telefoneCelular',
             'attributes' => array(
                 'class' => 'form-control',
-                'type' => 'text',
+                'type' => 'number',
             ),
             'options' => array(
                 'label' => 'Telefone Celular: ',
