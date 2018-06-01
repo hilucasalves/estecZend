@@ -8,6 +8,8 @@ use Application\Form\AtendimentoForm;
 use Application\Entity\Atendimento;
 use Zend\Paginator\Adapter\ArrayAdapter;
 use Zend\Paginator\Paginator;
+use PHPExcel;
+use PHPExcel_IOFactory;
 
 class AtendimentoController extends AbstractCrudController {
 
@@ -177,7 +179,6 @@ class AtendimentoController extends AbstractCrudController {
                 ->setKeywords("As Palavras Chave")
                 ->setCategory("A Categoria");
 
-
         $objPHPExcel->setActiveSheetIndex(0)
                 ->setCellValue('A1', 'Cliente')
                 ->setCellValue('B1', 'Turma')
@@ -217,10 +218,10 @@ class AtendimentoController extends AbstractCrudController {
         if ($data['statusAtendimento']) {
             $sql->andWhere('a.statusAtendimento = :statusAtendimento')->setParameter('statusAtendimento', $data['statusAtendimento']);
         }
-
+        
         $sql->AddOrderBy('a.cliente', 'ASC');
         $atendimentos = $sql->getQuery()->getResult();
-
+        
         foreach ($atendimentos as $data) {
 
             if ($data->statusAtendimento == "A") {

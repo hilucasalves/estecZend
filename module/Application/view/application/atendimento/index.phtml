@@ -60,6 +60,7 @@ echo $this->form()->openTag($form);
         </div>
         <div class="panel-footer text-right">
             <?php echo $this->formSubmit($form->get('enviar')); ?>
+            <?php echo $this->form()->closeTag($form); ?>
             <a class="btn btn-primary" href="<?php echo $this->url('atendimento', array('controller' => 'atendimento', 'action' => 'add')) ?>">Inserir atendimento</a>
             <br><br>
             <form name="teste" method="post" action="<?php echo $this->url('atendimento', array('controller' => 'Atendimento', 'action' => 'excel')); ?>">
