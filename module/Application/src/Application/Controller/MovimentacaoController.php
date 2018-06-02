@@ -108,11 +108,16 @@ class MovimentacaoController extends AbstractCrudController {
                 $em->persist($model);
 
                 $produto = $em->getRepository('Application\Entity\Produto')->find($model->produto->idProduto);
-                if ($model->tipoMovimentacao == "E")
+                if ($model->tipoMovimentacao == "E") {
                     $quantidade = $produto->__get('qtd') + $model->qtd;
-                else
+                } else {
+                    if($model->qtd >  $produto->__get('qtd')) {
+                       $this->flashMessenger()->addErrorMessage('Erro. Não é possível cadastrar saída com quantidade maior ao do estoque.'); 
+                       return $this->redirect()->toRoute($this->route);
+                    }
                     $quantidade = $produto->__get('qtd') - $model->qtd;
-
+                }
+                
                 $produto->__set('qtd', $quantidade);
                 $em->persist($produto);
 
