@@ -111,18 +111,18 @@ class MovimentacaoController extends AbstractCrudController {
                 if ($model->tipoMovimentacao == "E") {
                     $quantidade = $produto->__get('qtd') + $model->qtd;
                 } else {
-                    if($model->qtd >  $produto->__get('qtd')) {
-                       $this->flashMessenger()->addErrorMessage('Erro. Não é possível cadastrar saída com quantidade maior ao do estoque.'); 
-                       return $this->redirect()->toRoute($this->route);
-                    }
                     $quantidade = $produto->__get('qtd') - $model->qtd;
                 }
-                
-                $produto->__set('qtd', $quantidade);
-                $em->persist($produto);
+                    
+                if($model->tipoMovimentacao == "S" && $model->qtd > $produto->__get('qtd')) {
+                    $this->flashMessenger()->addErrorMessage('Erro. Não é possível cadastrar saída com quantidade maior ao do estoque.'); 
+                } else {
+                    $produto->__set('qtd', $quantidade);
+                    $em->persist($produto);
 
-                $em->flush();
-                $this->flashMessenger()->addSuccessMessage('Cadastrado com sucesso.');
+                    $em->flush();
+                    $this->flashMessenger()->addSuccessMessage('Cadastrado com sucesso.');
+                }
                 return $this->redirect()->toRoute($this->route);
             }
             $this->flashMessenger()->addErrorMessage('Erro. Não foi possível cadastrar.');
