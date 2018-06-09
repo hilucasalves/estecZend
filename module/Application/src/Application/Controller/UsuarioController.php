@@ -6,7 +6,6 @@ use Uaitec\Controller\AbstractCrudController;
 use Application\Form\LocalizarUsuarioForm;
 use Application\Form\UsuarioForm;
 use Application\Entity\Usuario;
-use Zend\View\Model\ViewModel;
 use Zend\Paginator\Adapter\ArrayAdapter;
 use Zend\Paginator\Paginator;
 
@@ -148,6 +147,44 @@ class UsuarioController extends AbstractCrudController {
             }
         } else {
             return $this->redirect()->toRoute('usuarios', array('action' => 'acesso-negado'));
+        }
+        return array(
+            'form' => $form,
+        );
+    }
+    
+    public function meusDadosAction() {
+        
+        $em = $GLOBALS['entityManager'];
+        $usuario = new \Application\Controller\AuthController();
+        $model = $em->getRepository($this->modelClass)->find($usuario->usuarioAutenticado()['usuario']);
+        
+        return array(
+            'model' => $model
+        );
+    }
+    
+    public function alterarSenhaAction() {
+        
+        $form = new \Application\Form\AlterarSenhaForm();
+        $form->get('enviar')->setValue('Alterar');
+        
+        if ($this->getRequest()->isPost()) {
+            $form->setData($this->getRequest()->getPost());
+            
+            if ($form->isValid()) {
+                $em = $GLOBALS['entityManager'];
+                $usuario = new \Application\Controller\AuthController();
+                $model = $em->getRepository($this->modelClass)->find($usuario->usuarioAutenticado()['usuario']);
+                $bcrypt = new \Zend\Crypt\Password\Bcrypt();
+                $model->__set('senha', $bcrypt->create($this->getRequest()->getPost()['senha']));
+                $em->persist($model);
+                $em->flush();
+                
+                $this->flashMessenger()->addInfoMessage('Senha alterada com sucesso!');
+                
+                return $this->redirect()->toRoute('usuarios', array('controller' => 'usuario', 'action' => 'alterar-senha'));
+            }
         }
         return array(
             'form' => $form,

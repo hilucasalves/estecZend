@@ -3,16 +3,12 @@
 namespace Application\Form\Filter;
 
 use Zend\InputFilter\InputFilter;
-use Zend\Db\Adapter\Adapter;
-use Uaitec\Filter\Capitalise;
 
-class AlterarSenhaFilter extends InputFilter
-{
+class AlterarSenhaFilter extends InputFilter {
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->add(array(
-            'name' => 'idLogin',
+            'name' => 'idUsuario',
             'required' => true,
             'filters' => array(
                 array(

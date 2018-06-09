@@ -1,0 +1,29 @@
+<div class="row">   
+    <div class="panel panel-info">
+        <div class="panel-heading"><h3>Usuário: <b><?php echo $model->__get('nome'); ?></b></h3></div>
+        <div class="panel-body">
+            <label>Tipo: </label> <?php echo $model->usuarioTipo->__get('nome'); ?>
+            <br>
+            <label>Data de Nascimento: </label> <?php echo $model->__get('dataNascimento')->format('d/m/Y'); ?>
+            <br>
+            <label>Email: </label> <?php echo $model->__get('email'); ?>
+            <br>
+            <label>Telefone Fixo: </label> <?php echo $model->__get('telefoneFixo'); ?>
+            <br>
+            <label>Telefone Celular: </label> <?php echo $model->__get('telefoneCelular'); ?>
+            <br>
+            <label>Status: </label>
+            <?php
+                if ($model->__get('statusUsuario') == 'A') {
+                    echo "Ativo";
+                } else {
+                    echo "Inativo";
+                }
+            ?>
+            <br>
+            <label>Data de Criação: </label> <?php echo $model->__get('dataInsercao')->format('d/m/Y H:i:s'); ?>
+            <br>
+            <label>Data de Atualização: </label> <?php if ($model->__get('dataAtualizacao')) echo $model->__get('dataAtualizacao')->format('d/m/Y H:i:s'); ?>
+        </div>
+    </div>
+</div>

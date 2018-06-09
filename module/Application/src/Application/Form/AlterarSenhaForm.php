@@ -4,21 +4,19 @@ namespace Application\Form;
 
 use Uaitec\Form\AbstractForm;
 
-class AlterarSenhaForm extends AbstractForm
-{
+class AlterarSenhaForm extends AbstractForm {
 
-    public function __construct($name = null)
-    {
+    public function __construct($name = null) {
         parent::__construct('alterarSenha'); //nome formulario
-
+        
         $this->setInputFilter(new Filter\AlterarSenhaFilter());
-
+        
         $this->setAttribute('method', 'post');
         $this->setAttribute('role', 'form');
-
+        
         /* Paramentros 'nome', tipo, 'label' */
-        $this->addElement('idLogin', 'hidden', 'idLogin');
-
+        $this->addElement('idUsuario', 'hidden', 'idUsuario');
+        
         $this->add(array(
             'type' => 'Password',
             'name' => 'senha',
@@ -28,7 +26,7 @@ class AlterarSenhaForm extends AbstractForm
                 'placeholder' => 'Senha',
             ),
         ));
-
+        
         $this->add(array(
             'type' => 'Password',
             'name' => 'senhaConfirmacao',
@@ -38,8 +36,7 @@ class AlterarSenhaForm extends AbstractForm
                 'placeholder' => 'Confirmação senha',
             ),
         ));
-
-
+        
         $this->add(array(
             'type' => 'submit',
             'name' => 'enviar',

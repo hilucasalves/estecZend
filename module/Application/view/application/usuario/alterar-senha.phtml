@@ -1,0 +1,48 @@
+<div class="col-md-12">
+    <?php
+    $form = $this->form;
+    $form->setAttribute('action', $this->url('usuarios', array('controller' => 'usuario', 'action' => 'alterar-senha')));
+    $form->prepare();
+    ?>
+    <?php echo $this->form()->openTag($form); ?> <br>
+    <?php echo $this->formHidden($form->get('idUsuario')); ?> <br>
+    <div class="alert alert-info">
+        <h3>Atenção! Você está alterando sua senha.</h3>
+    </div>
+    <div class="col-md-12">
+    <div class="form-group">
+        <label for="inputSenha">Senha*:</label>
+        <?php
+        // renderiza html input
+        echo $this->formInput($form->get('senha'));
+
+        // renderiza elemento de erro
+        echo $this->formElementErrors()
+                ->setMessageOpenFormat('<small class="text-danger">')
+                ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                ->setMessageCloseString('</small>')
+                ->render($form->get('senha'));
+        ?>
+    </div>
+    </div>
+    <div class="col-md-12">
+    <div class="form-group">
+        <label for="inputSenhaConf">Senha Confirmação*:</label>
+        <?php
+        // renderiza html input
+        echo $this->formInput($form->get('senhaConfirmacao'));
+
+        // renderiza elemento de erro
+        echo $this->formElementErrors()
+                ->setMessageOpenFormat('<small class="text-danger">')
+                ->setMessageSeparatorString('</small><br/><small class="text-danger">')
+                ->setMessageCloseString('</small>')
+                ->render($form->get('senhaConfirmacao'));
+        ?>
+    </div>
+    </div>
+    <div class="col-md-12">
+    <?php echo $this->formSubmit($form->get('enviar')); ?>
+    </div>
+    <?php echo $this->form()->closeTag(); ?>
+</div>

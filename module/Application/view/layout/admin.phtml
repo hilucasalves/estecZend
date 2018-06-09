@@ -56,8 +56,8 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand link-white" href="<?php echo $this->url('usuario') ?>">
-                        <img src="<?php echo $this->basePath('img/logo-estec.png') ?>" alt="ESTEC" style="width:60px; height: 30px;"/>                      
+                    <a class="navbar-brand link-white" href="#">
+                        <img src="<?php echo $this->basePath('img/logo-estec.png') ?>" alt="ESTEC" style="width:60px; height: 30px;"/>
                     </a>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -101,8 +101,8 @@
                                 <p style="color:#fff">Logado como: <?php echo $this->usuarioAutenticado()['usuario']->nome; ?><b class="caret"></b></p>
                             </a>
                             <ul class="dropdown-menu">
-                                <li> <a href="<?php echo $this->url('usuario/default', array('controller' => 'usuario', 'action' => 'view')) ?>">Dados pessoais</a></li>
-                                <li> <a href="<?php echo $this->url('usuario/default', array('action' => 'alterar-senha')) ?>">Alterar Senha</a></li>
+                                <li> <a href="<?php echo $this->url('usuarios', array('action' => 'meus-dados')) ?>">Meus dados</a></li>
+                                <li> <a href="<?php echo $this->url('usuarios', array('action' => 'alterar-senha')) ?>">Alterar Senha</a></li>
                             </ul>
                         </li>
                         <li><a style="color: #FF0000 !important" href="<?php echo $this->url('application/auth', array('action' => 'logout')) ?>">Sair</a></li>

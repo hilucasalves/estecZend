@@ -336,36 +336,7 @@ class UsuarioController extends AbstractCrudController {
             'form' => $form,
         );
     }
-// M�todo para o pr�prio usu�rio alterar sua senha
-    public function alterarSenhaAction() {
-        $em = $GLOBALS['entityManager'];
 
-        $form = new \Usuario\Form\AlterarSenhaForm();
-        $form->get('enviar')->setValue('Alterar');
-
-        $request = $this->getRequest();
-
-        if ($request->isPost()) {
-            $form->setData($request->getPost());
-
-
-            if ($form->isValid()) {
-                $idLoginAutenticado = $this->usuarioAutenticado()['idLogin'];
-                $model = $em->getRepository('Usuario\Entity\UsuarioLogin')->find($idLoginAutenticado);
-                $bcrypt = new \Zend\Crypt\Password\Bcrypt();
-                $model->__set('senha', $bcrypt->create($request->getPost()['senha']));
-                $em->persist($model);
-                $em->flush();
-
-                $this->flashMessenger()->addSuccessMessage('Senha alterada com sucesso!');
-
-                return $this->redirect()->toRoute('usuario/default', array('controller' => 'usuario', 'action' => 'alterar-senha'));
-            }
-        }
-        return array(
-            'form' => $form,
-        );
-    }
     public function permissaoAction() {
 
         $form = new \Usuario\Form\PermissaoForm();
