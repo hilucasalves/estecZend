@@ -11,9 +11,9 @@
             }
             ?>
             <br>
-            <label>Quantidade em movimentação: </label><?php echo $model->__get('qtd'); ?>
+            <label>Quantidade em movimentação: </label> <?php echo $model->__get('qtd'); ?>
             <br>
-            <label>Data de Validade: </label><?php if ($model->__get('dataValidade')) echo $model->__get('dataValidade')->format('d/m/Y'); ?>
+            <label>Data de Validade: </label> <?php if ($model->__get('dataValidade')) echo $model->__get('dataValidade')->format('d/m/Y'); ?>
             <br>
             <label>Status: </label>
             <?php

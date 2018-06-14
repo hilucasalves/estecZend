@@ -15,7 +15,7 @@ class MatriculaController extends AbstractCrudController {
         $this->formClass = 'Application\Form\MatriculaForm';
         $this->modelClass = 'Application\Entity\Matricula';
         $this->route = 'matricula';
-        $this->title = 'Matriculas';
+        $this->title = 'Matrículas';
         $this->label['yes'] = 'Sim';
         $this->label['no'] = 'Não';
         $this->label['add'] = 'Cadastrar';
