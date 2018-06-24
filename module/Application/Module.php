@@ -12,17 +12,13 @@ namespace Application;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
-use Zend\I18n\Translator\Translator;
-use Zend\Validator\AbstractValidator;
 use Application\Auth\DoctrineAdapter;
 use Zend\Authentication\AuthenticationService;
 use Zend\Authentication\Storage\Session;
 
-class Module
-{
+class Module {
 
-    public function onBootstrap(MvcEvent $e)
-    {
+    public function onBootstrap(MvcEvent $e) {
         $eventManager = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
@@ -33,8 +29,7 @@ class Module
             $controllerClass = get_class($controller);
             $moduleNamespace = substr($controllerClass, 0, strpos($controllerClass, '\\'));
             $config = $e->getApplication()->getServiceManager()->get('config');
-            if (isset($config['module_layouts'][$moduleNamespace]))
-            {
+            if (isset($config['module_layouts'][$moduleNamespace])) {
                 $controller->layout($config['module_layouts'][$moduleNamespace]);
             }
         }
@@ -59,50 +54,44 @@ class Module
         \Zend\Validator\AbstractValidator::setDefaultTranslator($translator);
     }
 
-    public function validaAuth($event)
-    {
+    public function validaAuth($event) {
         $di = $event->getTarget()->getServiceLocator();
 
         $auth = new AuthenticationService;
         $auth->setStorage(new Session('usuario'));
 
         $routeMatch = $event->getRouteMatch();
-        
+
         $route = explode('\\', $routeMatch->getParam('controller'));
 
         $module = $route[0];
         $controller = $route[2];
         $action = $routeMatch->getParam('action');
 
-        $em = $GLOBALS['entityManager'];
-
-
-        if ("Application" != $module)
-        {
-            if (!$auth->hasIdentity())
-            {
+        if ($controller == "Auth" && $action == "index") {
+            return true;
+        } else {
+            if (!$auth->hasIdentity()) {
                 return $event->getTarget()->redirect()->toRoute('application/auth');
-            } else
-            {
+            } else {
+
+                $em = $GLOBALS['entityManager'];
                 $perfis = $em->getRepository('Application\Entity\Usuario')->findOneBy(array('email' => $auth->getIdentity()->__get('email')));
                 $acl = $di->get('Usuario\Permissoes\Acl');
                 $permitido = $acl->isAllowed($perfis->usuarioTipo->nome, $controller, $action) ? 1 : 0;
 
-                if (0 == $permitido)
-                {
+                if (0 == $permitido) {
                     return $event->getTarget()->redirect()->toRoute('usuario/default', array('action' => 'acesso-negado'));
                 }
             }
         }
     }
 
-    public function getConfig()
-    {
+    public function getConfig() {
         return include __DIR__ . '/config/module.config.php';
     }
 
-    public function getAutoloaderConfig()
-    {
+    public function getAutoloaderConfig() {
         return array(
             'Zend\Loader\StandardAutoloader' => array(
                 'namespaces' => array(
@@ -113,20 +102,19 @@ class Module
         );
     }
 
-    public function getViewHelperConfig()
-    {
+    public function getViewHelperConfig() {
         return array(
             'factories' => array(
                 'flashMessages' => function($sm) {
-            $flashmessenger = $sm->getServiceLocator()
-                    ->get('ControllerPluginManager')
-                    ->get('flashmessenger');
+                    $flashmessenger = $sm->getServiceLocator()
+                            ->get('ControllerPluginManager')
+                            ->get('flashmessenger');
 
-            $messages = new \Uaitec\Helper\FlashMessages();
-            $messages->setFlashMessenger($flashmessenger);
+                    $messages = new \Uaitec\Helper\FlashMessages();
+                    $messages->setFlashMessenger($flashmessenger);
 
-            return $messages;
-        },
+                    return $messages;
+                },
             ),
             'invokables' => array(
                 'usuarioAutenticado' => new View\Helper\UsuarioAutenticado(),
@@ -135,21 +123,20 @@ class Module
         );
     }
 
-    public function getServiceConfig()
-    {
+    public function getServiceConfig() {
         return array(
             'factories' => array(
                 'Application\Auth\DoctrineAdpter' => function($sm) {
-            return new DoctrineAdapter();
-        },
+                    return new DoctrineAdapter();
+                },
                 'Usuario\Permissoes\Acl' => function($sm) {
-            $em = $GLOBALS['entityManager'];
-            $perfis = $em->getRepository('Application\Entity\UsuarioTipo')->findAll();
-            $recursos = $em->getRepository('Usuario\Entity\PerfilControle')->findAll();
-            $permissoes = $em->getRepository('Usuario\Entity\PerfilPermissao')->findAll();
+                    $em = $GLOBALS['entityManager'];
+                    $perfis = $em->getRepository('Application\Entity\UsuarioTipo')->findAll();
+                    $recursos = $em->getRepository('Usuario\Entity\PerfilControle')->findAll();
+                    $permissoes = $em->getRepository('Usuario\Entity\PerfilPermissao')->findAll();
 
-            return new \Usuario\Permissoes\Acl($perfis, $recursos, $permissoes);
-        }
+                    return new \Usuario\Permissoes\Acl($perfis, $recursos, $permissoes);
+                }
             )
         );
     }

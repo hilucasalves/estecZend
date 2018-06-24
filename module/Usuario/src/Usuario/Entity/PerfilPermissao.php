@@ -37,7 +37,7 @@ class PerfilPermissao extends AbstractModel {
     protected $recurso;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Usuario\Entity\UsuarioTipo", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Application\Entity\UsuarioTipo", cascade={"persist"})
      * @ORM\JoinColumn(name="idUsuarioTipo", referencedColumnName="idUsuarioTipo")
      * */
     protected $usuarioTipo;

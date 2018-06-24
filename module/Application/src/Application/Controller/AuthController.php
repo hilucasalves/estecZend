@@ -60,7 +60,7 @@ class AuthController extends AbstractActionController {
 
     public function logoutAction() {
         $auth = new AuthenticationService;
-        $auth->setStorage(new Session('login'));
+        $auth->setStorage(new Session('usuario'));
         $auth->clearIdentity();
 
         return $this->redirect()->toRoute('home');

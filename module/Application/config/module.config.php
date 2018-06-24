@@ -17,7 +17,7 @@ return array(
                 'options' => array(
                     'route' => '/',
                     'defaults' => array(
-                        'controller' => 'Application\Controller\Index',
+                        'controller' => 'Application\Controller\Auth',
                         'action' => 'index',
                     ),
                 ),
@@ -154,7 +154,7 @@ return array(
                     'route' => '/application',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Application\Controller',
-                        'controller' => 'Index',
+                        'controller' => 'Auth',
                         'action' => 'index',
                     ),
                 ),
@@ -197,8 +197,6 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index' => 'Application\Controller\AuthController',
-            'Application\Controller\Cron' => 'Application\Controller\CronController',
             'Application\Controller\Auth' => 'Application\Controller\AuthController',
             'Application\Controller\Turma' => 'Application\Controller\TurmaController',
             'Application\Controller\TipoServico' => 'Application\Controller\TipoServicoController',
@@ -212,11 +210,10 @@ return array(
     'module_layouts' => array(
         'Application' => 'layout/admin.phtml',
         'Usuario' => 'layout/admin.phtml',
-        'Comunicacao' => 'layout/admin.phtml',
     ),
     'view_manager' => array(
-        'display_not_found_reason' => true,
-        'display_exceptions' => true,
+        'display_not_found_reason' => false,
+        'display_exceptions' => false,
         'doctype' => 'HTML5',
         'not_found_template' => 'error/404',
         'exception_template' => 'error/index',
@@ -247,4 +244,3 @@ return array(
         )
     )
 );
-/*teste*/
