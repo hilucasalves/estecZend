@@ -11,8 +11,7 @@ use Uaitec\Model\AbstractModel;
  * @ORM\Table(name="perfilcontrole")
  * 
  */
-class PerfilControle extends AbstractModel
-{
+class PerfilControle extends AbstractModel {
 
     /**
      * @ORM\Id
@@ -36,48 +35,39 @@ class PerfilControle extends AbstractModel
      */
     protected $dataAtualizacao;
 
-    public function getIdPerfilControle()
-    {
+    public function getIdPerfilControle() {
         return $this->idPerfilControle;
     }
 
-    public function getNome()
-    {
+    public function getNome() {
         return $this->nome;
     }
 
-    public function getApelido()
-    {
+    public function getApelido() {
         return $this->apelido;
     }
 
-    public function setIdPerfilControle($idPerfilControle)
-    {
+    public function setIdPerfilControle($idPerfilControle) {
         $this->idPerfilControle = $idPerfilControle;
         return $this->idPerfilControle;
     }
 
-    public function setNome($nome)
-    {
+    public function setNome($nome) {
         $this->nome = $nome;
         return $this->nome;
     }
 
-    public function setApelido($apelido)
-    {
+    public function setApelido($apelido) {
         $this->apelido = $apelido;
         return $this->apelido;
     }
 
-    public function exchangeArray($array)
-    {
-        if (is_array($array))
-        {
+    public function exchangeArray($array) {
+        if (is_array($array)) {
             $this->idPerfilControle = $array['idPerfilControle'];
             $this->nome = $array['nome'];
             $this->apelido = $array['apelido'];
-        } else
-        {
+        } else {
             $this->idPerfilControle = $array->idPerfilControle;
             $this->nome = $array->nome;
             $this->apelido = $array->apelido;

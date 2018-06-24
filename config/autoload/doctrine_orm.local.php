@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 // config/autoload/doctrine_orm.local.php
 return array(

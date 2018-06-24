@@ -67,7 +67,7 @@ class Module
         $auth->setStorage(new Session('usuario'));
 
         $routeMatch = $event->getRouteMatch();
-
+        
         $route = explode('\\', $routeMatch->getParam('controller'));
 
         $module = $route[0];
@@ -90,7 +90,6 @@ class Module
 
                 if (0 == $permitido)
                 {
-
                     return $event->getTarget()->redirect()->toRoute('usuario/default', array('action' => 'acesso-negado'));
                 }
             }
@@ -145,7 +144,7 @@ class Module
         },
                 'Usuario\Permissoes\Acl' => function($sm) {
             $em = $GLOBALS['entityManager'];
-            $perfis = $em->getRepository('Usuario\Entity\UsuarioTipo')->findAll();
+            $perfis = $em->getRepository('Application\Entity\UsuarioTipo')->findAll();
             $recursos = $em->getRepository('Usuario\Entity\PerfilControle')->findAll();
             $permissoes = $em->getRepository('Usuario\Entity\PerfilPermissao')->findAll();
 

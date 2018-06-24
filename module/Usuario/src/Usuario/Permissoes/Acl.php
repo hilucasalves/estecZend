@@ -28,7 +28,6 @@ class Acl extends ClassAcl
     {
         foreach ($this->papeis as $papel)
         {
-
             $this->addRole(new Papel($papel->__get('nome')));
         }
     }
@@ -43,10 +42,8 @@ class Acl extends ClassAcl
 
     protected function loadPermissao()
     {
-
         foreach ($this->permissoes as $permissao)
         {
-            
             if ($permissao->__get('permitido') == 1)
             {
                 $this->allow($permissao->getUsuarioTipo()->__get('nome'), $permissao->__get('recurso')->__get('controle')->__get('nome'), $permissao->getRecurso()->__get('acao')->__get('nome'));

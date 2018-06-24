@@ -11,8 +11,7 @@ use Uaitec\Model\AbstractModel;
  * @ORM\Table(name="perfilpermissao")
  * 
  */
-class PerfilPermissao extends AbstractModel
-{
+class PerfilPermissao extends AbstractModel {
 
     /**
      * @ORM\Id
@@ -42,60 +41,48 @@ class PerfilPermissao extends AbstractModel
      * @ORM\JoinColumn(name="idUsuarioTipo", referencedColumnName="idUsuarioTipo")
      * */
     protected $usuarioTipo;
-    
-    
-    public function getIdPerfilPermissao()
-    {
+
+    public function getIdPerfilPermissao() {
         return $this->idPerfilPermissao;
     }
 
-    public function getPermitido()
-    {
+    public function getPermitido() {
         return $this->permitido;
     }
 
-    public function getRecurso()
-    {
+    public function getRecurso() {
         return $this->recurso;
     }
 
-    public function getUsuarioTipo()
-    {
+    public function getUsuarioTipo() {
         return $this->usuarioTipo;
     }
 
-    public function setIdPerfilPermissao($idPerfilPermissao)
-    {
+    public function setIdPerfilPermissao($idPerfilPermissao) {
         $this->idPerfilPermissao = $idPerfilPermissao;
     }
 
-    public function setPermitido($permitido)
-    {
+    public function setPermitido($permitido) {
         $this->permitido = $permitido;
     }
 
-    public function setRecurso($recurso)
-    {
+    public function setRecurso($recurso) {
         $this->recurso = $recurso;
     }
 
-    public function setUsuarioTipo($usuarioTipo)
-    {
+    public function setUsuarioTipo($usuarioTipo) {
         $this->usuarioTipo = $usuarioTipo;
     }
 
-        public function exchangeArray($array)
-    {
-        if (is_array($array))
-        {
+    public function exchangeArray($array) {
+        if (is_array($array)) {
             $this->idPerfilPermissao = $array['idPerfilPermissao'];
             $this->permitido = $array['permitido'];
 
             $em = $GLOBALS['entityManager'];
             $this->recurso = $em->getRepository('Usuario\Entity\PerfilRecurso')->find($array['recurso']);
             $this->usuarioTipo = $em->getRepository('Usuario\Entity\UsuarioTipo')->find($array['usuarioTipo']);
-        } else
-        {
+        } else {
             $this->idPerfilPermissao = $array->idPerfilPermissao;
             $this->permitido = $array['permitido'];
         }

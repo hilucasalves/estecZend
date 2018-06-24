@@ -11,8 +11,7 @@ use Uaitec\Model\AbstractModel;
  * @ORM\Table(name="perfilacao")
  * 
  */
-class PerfilAcao extends AbstractModel
-{
+class PerfilAcao extends AbstractModel {
 
     /**
      * @ORM\Id

@@ -7,7 +7,7 @@ ini_set('default_charset', 'utf-8');
 setlocale(LC_ALL, 'pt_BR');
 //echo '<pre>';
 //error_reporting(0); 
-error_reporting(1); 
+error_reporting(1);
 return array(
     // This should be an array of module namespaces used in the application.
     'modules' => array(

@@ -11,8 +11,7 @@ use Uaitec\Model\AbstractModel;
  * @ORM\Table(name="perfilrecurso")
  * 
  */
-class PerfilRecurso extends AbstractModel
-{
+class PerfilRecurso extends AbstractModel {
 
     /**
      * @ORM\Id
@@ -21,27 +20,21 @@ class PerfilRecurso extends AbstractModel
      */
     protected $idPerfilRecurso;
 
-  
     /**
      * @ORM\Column(type="string")
      */
     protected $dataAtualizacao;
-    
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Usuario\Entity\PerfilControle")
      * @ORM\JoinColumn(name="idPerfilControle", referencedColumnName="idPerfilControle")
      */
-    
     protected $controle;
-    
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Usuario\Entity\PerfilAcao")
      * @ORM\JoinColumn(name="idPerfilAcao", referencedColumnName="idPerfilAcao")
      */
-    
     protected $acao;
-    
-   
+
 }

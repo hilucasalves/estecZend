@@ -10,7 +10,7 @@
  * @NOTE: In practice, this file will typically be INCLUDED in your source
  * control, so do not include passwords or other sensitive information in this
  * file.
- */ 
+ */
 return array(
     'doctrine_config' => array(
         'driver' => 'pdo_mysql',
@@ -22,13 +22,10 @@ return array(
             1002 => 'SET NAMES utf8'
         )
     ),
-    
     'service_manager' => array(
-         'factories' => array(
-             'Zend\Db\Adapter\Adapter'
-                     => 'Zend\Db\Adapter\AdapterServiceFactory',
-         ),
-        
-      
+        'factories' => array(
+            'Zend\Db\Adapter\Adapter'
+            => 'Zend\Db\Adapter\AdapterServiceFactory',
+        ),
     ),
 );
