@@ -113,6 +113,6 @@ echo $this->form()->openTag($form);
 <?php
 $methodGet = "?" . $_SERVER['QUERY_STRING'];
 echo $this->paginationControl(
-        $this->paginator, 'sliding', array('partials/pagination/paginatorRelatorio.phtml', 'Atendimento'), array('controller' => 'Atendimento', 'action' => 'index', 'route' => 'atendimento', 'methodGet' => $methodGet)
+        $this->paginator, 'sliding', array('partials/pagination/paginator.phtml', 'Atendimento'), array('controller' => 'Atendimento', 'action' => 'index', 'route' => 'atendimento', 'methodGet' => $methodGet)
 );
 ?>

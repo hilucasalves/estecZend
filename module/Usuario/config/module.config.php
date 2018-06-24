@@ -68,99 +68,9 @@ return array(
                         ),
                     ),
                 ),
-            ),           
-            'usuarioLogin' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route' => '/usuarioLogin[/:action[/pagina/:page][/:key]]',
-                    'constraints' => array(
-                        'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'page' => '[0-9]*',
-                        'key' => '[0-9]*',
-                    ),
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Usuario\Controller',
-                        'controller' => 'usuarioLogin',
-                        'action' => 'index',
-                        'page' => '1',
-                    ),
-                ),
-            ),
-            'usuarioTipo' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route' => '/usuarioTipo[/:action[/pagina/:page][/:key]]',
-                    'constraints' => array(
-                        'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'page' => '[0-9]*',
-                        'key' => '[0-9]*',
-                    ),
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Usuario\Controller',
-                        'controller' => 'UsuarioTipo',
-                        'action' => 'index',
-                        'page' => '1',
-                    ),
-                ),
-            ),
-            'usuarioPerfil' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route' => '/usuarioPerfil[/:action[/pagina/:page][/:key]]',
-                    'constraints' => array(
-                        'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'page' => '[0-9]*',
-                        'key' => '[0-9]*',
-                    ),
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Usuario\Controller',
-                        'controller' => 'Perfil',
-                        'action' => 'index',
-                        'page' => '1',
-                    ),
-                ),
-            ),
-            'usuarioPermissao' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route' => '/usuarioPermissao[/:action[/pagina/:page][/:key]]',
-                    'constraints' => array(
-                        'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'page' => '[0-9]*',
-                        'key' => '[0-9]*',
-                    ),
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Usuario\Controller',
-                        'controller' => 'PerfilPermissao',
-                        'action' => 'index',
-                        'page' => '1',
-                    ),
-                ),
             ),
         ),
     ),
-    'documentos' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route' => '/documentos[/:action[/pagina/:page][/:key]]',
-                    'constraints' => array(
-                        'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'page' => '[0-9]*',
-                        'key' => '[0-9]*',
-                    ),
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Usuario\Controller',
-                        'controller' => 'Documentos',
-                        'action' => 'index',
-                        'page' => '1',
-                    ),
-                ),
-            ),
     'service_manager' => array(
         'abstract_factories' => array(
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
@@ -182,13 +92,6 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Usuario\Controller\Usuario' => 'Usuario\Controller\UsuarioController',
-            'Usuario\Controller\UsuarioLogin' => 'Usuario\Controller\UsuarioLoginController',
-            'Usuario\Controller\UsuarioEscolaridade' => 'Usuario\Controller\UsuarioEscolaridadeController',
-            'Usuario\Controller\UsuarioTipo' => 'Usuario\Controller\UsuarioTipoController',
-            'Usuario\Controller\Perfil' => 'Usuario\Controller\PerfilController',
-            'Usuario\Controller\PerfilPermissao' => 'Usuario\Controller\PerfilPermissaoController',
-            'Usuario\Controller\Documentos' => 'Usuario\Controller\DocumentosController',
         ),
     ),
     'view_manager' => array(

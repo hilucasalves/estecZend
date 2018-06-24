@@ -3,7 +3,6 @@
 namespace Application\View\Helper;
 
 use Zend\View\Helper\AbstractHelper;
-use Zend\Permissions\Acl\Acl;
 
 class UsuarioPermissao extends AbstractHelper implements \Zend\ServiceManager\ServiceLocatorAwareInterface
 {
@@ -20,11 +19,7 @@ class UsuarioPermissao extends AbstractHelper implements \Zend\ServiceManager\Se
 
     public function __invoke($usuarioTipo, $controller, $action, $namespace = null)
     {
-
-        //$acl = new Acl();
-        //$acl = new \Usuario\Permissoes\Acl($papeis, $recursos, $permissoes);
         $acl = $this->getServiceLocator()->get('Usuario\Permissoes\Acl');
-
         $permissao = $acl->isAllowed($usuarioTipo, $controller, $action) ? true : false;
 
         return $permissao;

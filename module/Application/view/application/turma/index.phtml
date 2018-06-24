@@ -76,6 +76,6 @@ echo $this->form()->openTag($form);
 <?php
 $methodGet = "?" . $_SERVER['QUERY_STRING'];
 echo $this->paginationControl(
-        $this->paginator, 'sliding', array('partials/pagination/paginatorRelatorio.phtml', 'Turma'), array('controller' => 'Turma', 'action' => 'index', 'route' => 'turma', 'methodGet' => $methodGet)
+        $this->paginator, 'sliding', array('partials/pagination/paginator.phtml', 'Turma'), array('controller' => 'Turma', 'action' => 'index', 'route' => 'turma', 'methodGet' => $methodGet)
 );
 ?>
