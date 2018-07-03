@@ -74,7 +74,10 @@ class LocalizarMatriculaForm extends AbstractForm {
         $valueOptions = array();
 
         $em = $GLOBALS['entityManager'];
-        $alunos = $em->getRepository('Application\Entity\Usuario')->findAll();
+        
+        $usuarioTipo = $em->getRepository('Application\Entity\UsuarioTipo')->find(3);
+        
+        $alunos = $em->getRepository('Application\Entity\Usuario')->findBy(array('usuarioTipo' => $usuarioTipo));
 
         foreach ($alunos as $aluno) {
 

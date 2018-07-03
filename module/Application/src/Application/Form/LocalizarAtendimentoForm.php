@@ -101,7 +101,10 @@ class LocalizarAtendimentoForm extends AbstractForm {
         $valueOptions = array();
         
         $em = $GLOBALS['entityManager'];
-        $clientes = $em->getRepository('Application\Entity\Usuario')->findAll();
+        
+        $usuarioTipo = $em->getRepository('Application\Entity\UsuarioTipo')->find(4);
+        
+        $clientes = $em->getRepository('Application\Entity\Usuario')->findBy(array('usuarioTipo' => $usuarioTipo));
         
         foreach ($clientes as $cliente) {
             $valueOptions[$cliente->__get('idUsuario')] = $cliente->__get('nome');

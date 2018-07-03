@@ -104,7 +104,7 @@ class MovimentacaoFieldset extends Fieldset implements InputFilterProviderInterf
 
         $em = $GLOBALS['entityManager'];
 
-        $produtos = $em->getRepository('Application\Entity\Produto')->findAll();
+        $produtos = $em->getRepository('Application\Entity\Produto')->findby(array('statusProduto' => 'A'));
 
         foreach ($produtos as $produto) {
 

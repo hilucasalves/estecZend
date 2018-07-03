@@ -75,7 +75,9 @@ class MatriculaFieldset extends Fieldset implements InputFilterProviderInterface
         $valueOptions = array();
 
         $em = $GLOBALS['entityManager'];
-        $alunos = $em->getRepository('Application\Entity\Usuario')->findAll();
+        $usuarioTipo = $em->getRepository('Application\Entity\UsuarioTipo')->find(3);
+        
+        $alunos = $em->getRepository('Application\Entity\Usuario')->findBy(array('usuarioTipo' => $usuarioTipo, 'statusUsuario' => 'A'));
 
         foreach ($alunos as $aluno) {
 

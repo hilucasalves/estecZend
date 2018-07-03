@@ -98,7 +98,10 @@ class TurmaFieldset extends Fieldset implements InputFilterProviderInterface {
         $valueOptions = array();
 
         $em = $GLOBALS['entityManager'];
-        $professores = $em->getRepository('Application\Entity\Usuario')->findAll();
+        
+        $usuarioTipo = $em->getRepository('Application\Entity\UsuarioTipo')->find(2);
+        
+        $professores = $em->getRepository('Application\Entity\Usuario')->findBy(array('usuarioTipo' => $usuarioTipo, 'statusUsuario' => 'A'));
 
         foreach ($professores as $professor) {
 
